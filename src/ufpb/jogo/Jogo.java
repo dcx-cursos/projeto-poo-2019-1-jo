@@ -9,18 +9,13 @@ public class Jogo {
 	private static final Scanner input = new Scanner(System.in);
 	private int numeroDeJogadores;
 	private LinkedList<Jogador> listaJogadores;
+	private int cont = 0;
 	private Dado dado = new Dado();
 	
-	
-	//private ListJogadores jogadores;
-	
-	
-	
 	public Jogo() {
-		//jogadores = new ListJogadores();
 		listaJogadores = new LinkedList<Jogador>();
 	}
-	
+
 	public void iniciarJogo() {
 		nJogadores();
 		criarJogadores();
@@ -28,56 +23,67 @@ public class Jogo {
 		partida();
 
 	}
-	
+
 	private void nJogadores() {
 		System.out.println("Digite o numero de jogadores [2 - 8]: ");
 		int numero = Integer.parseInt(input.nextLine());
-		if(numero > 8 || numero < 2) {
+		if (numero > 8 || numero < 2) {
 			nJogadores();
-		}else {
-			this.numeroDeJogadores = numero;	
+		} else {
+			this.numeroDeJogadores = numero;
 		}
 	}
-	
+
 	private void criarJogadores() {
 		int cont = 0;
-		while(cont < numeroDeJogadores) {
-			System.out.println("Digite o nome do jogador"+(cont+1)+":");
+		while (cont < numeroDeJogadores) {
+			System.out.println("Digite o nome do jogador" + (cont + 1) + ":");
 			String nome = input.nextLine();
 			System.out.println("Digite a cor:");
-			String cor = input.nextLine();			
-			this.listaJogadores.add(new Jogador(nome,cor));
+			String cor = input.nextLine();
+			this.listaJogadores.add(new Jogador(nome, cor));
 			cont += 1;
 		}
 	}
-	
-	private void opcoes(Jogador j){
-		System.out.println("A jogada de "+j.getNome()+"("+j.getCor()+") começou:");
-		System.out.println("Comandos disponíveis: [jogar][sair]/n Entre com um comando:" );
+
+	private void opcoes(Jogador j) {
+		System.out.println("A jogada de " + j.getNome() + "(" + j.getCor() + ") come�ou:");
+		System.out.println("Comandos dispon�veis: [jogar][sair]/n Entre com um comando:");
 		String opcao = input.nextLine();
 		switch (opcao) {
-			case "jogar":
-				j.jogada(dado);
-				break;
-			//IMPLEMENTAR ENCERRANDO QUANDO FICAR APENAS 1 JOGADOR
-			case "sair":				
-				System.out.println("sim/nao");
-				String sair = input.nextLine();
-				if(sair.equals("sim") || sair.equals("s")) {
+		case "jogar":
+			j.jogada();
+			break;
+		case "sair":
+			System.out.println("sim/nao");
+			String sair = input.nextLine();
+			if (sair.equals("sim") || sair.equals("s")) {
+				if (this.listaJogadores.size() > 2) {
+					this.numeroDeJogadores -= 1;
+					listaJogadores.remove(this.cont);
+					partida();
+					break;
+				} else {
 					System.out.println("Jogo encerrado.");
 					System.exit(0);
 				}
+			} else {
 				opcoes(j);
 				break;
+			}
+
 		}
 	}
-	
+
 	private void partida() {
-		for(Jogador x: this.listaJogadores) {
-			opcoes(x);
+		while (this.cont < this.numeroDeJogadores) {
+			System.out.println(this.cont);
+			opcoes(listaJogadores.get(this.cont));
+			cont += 1;
 		}
+		this.cont = 0;
 		partida();
+
 	}
-	
-	
+
 }
