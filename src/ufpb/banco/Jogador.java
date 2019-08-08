@@ -1,7 +1,5 @@
 package ufpb.banco;
 
-import java.util.Scanner;
-
 public class Jogador {
 	private String nome;
 	private String cor;

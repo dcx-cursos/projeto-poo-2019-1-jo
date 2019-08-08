@@ -1,4 +1,4 @@
-package ufpb.banco;
+package ufpb.exceptions;
 
 public class JogadorNaoExisteException extends Exception {
 
