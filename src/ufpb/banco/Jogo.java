@@ -9,6 +9,7 @@ public class Jogo {
 	private static final Scanner input = new Scanner(System.in);
 	private int numeroDeJogadores;
 	private LinkedList<Jogador> listaJogadores;
+	private Dado dado = new Dado();
 	
 	
 	//private ListJogadores jogadores;
@@ -51,16 +52,15 @@ public class Jogo {
 	}
 	
 	private void opcoes(Jogador j){
-		System.out.println("A jogada de "+j.getNome()+"("+j.getCor()+") começou:");
-		System.out.println("Comandos disponíveis: [jogar][sair]/n Entre com um comando:" );
+		System.out.println("A jogada de "+j.getNome()+"("+j.getCor()+") comeÃ§ou:");
+		System.out.println("Comandos disponÃ­veis: [jogar][sair]/n Entre com um comando:" );
 		String opcao = input.nextLine();
 		switch (opcao) {
 			case "jogar":
-				j.jogada();
+				j.jogada(dado);
 				break;
-			//IMPLEMENTAR ENCERRANDO QAUNDO FICAR APENAS 1 JOGADOR
-			case "sair":
-				
+			//IMPLEMENTAR ENCERRANDO QUANDO FICAR APENAS 1 JOGADOR
+			case "sair":				
 				System.out.println("sim/nao");
 				String sair = input.nextLine();
 				if(sair.equals("sim") || sair.equals("s")) {
