@@ -14,3 +14,7 @@ https://stackedit.io/app#
 
 ## [2. Arquivos](https://github.com/dcx-cursos/projeto-poo-2019-1-jo/tree/dev/src/ufpb)
 descrever como estar organizado (organizar pacote para Exceções, testes, implementação)
+
+
+
+## [User Stories](https://docs.google.com/spreadsheets/d/1KSF9BL9PsO5y2vtQ8D7LkHZp2QPZJVqmiv8jcgVsJPg/edit#gid=0)
