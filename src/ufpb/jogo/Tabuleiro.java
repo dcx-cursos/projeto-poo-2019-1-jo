@@ -19,11 +19,11 @@ public class Tabuleiro {
 	private Posicao[] posicoeDoTabuleiro;
 	private RecuperaDadosDoTXT recupera = new RecuperaDadosDoTXT();
 	
-	private static final String ARQUIVO_POSICOES_ESPECIAIS = "posicoesEspeciais.txt";
-	private static final String ARQUIVO_COMPANHIAS = "companhias.txt";
-	private static final String ARQUIVO_PRISAO = "prisao.txt";
-	private static final String ARQUIVO_TERRENOS = "terrenos.txt";
-	private static final String ARQUIVO_POSICOES_DE_SORTE_OU_REVES = "posicaoDeSorteOuReves.txt";
+	private static final String ARQUIVO_POSICOES_ESPECIAIS = "src/posicoesEspeciais.txt";
+	private static final String ARQUIVO_COMPANHIAS = "src/companhias.txt";
+	private static final String ARQUIVO_PRISAO = "src/prisao.txt";
+	private static final String ARQUIVO_TERRENOS = "src/terrenos.txt";
+	private static final String ARQUIVO_POSICOES_DE_SORTE_OU_REVES = "src/posicaoDeSorteOuReves.txt";
 
 	
 
@@ -44,8 +44,6 @@ public class Tabuleiro {
 
 				String[] linha = s.split(",");
 				
-
-
 				int posicao = Integer.parseInt(linha[0]);
 				String nome = linha[1];
 				int preco = Integer.parseInt(linha[2]);
@@ -156,11 +154,13 @@ public class Tabuleiro {
 	}
 	
 	
-	public Posicao [] getPosicoeDoTabuleiro() {
-		return this.getPosicoeDoTabuleiro();
+	public Posicao getPosicoeDoTabuleiro(int indice) {
+		return this.posicoeDoTabuleiro[indice];
 	}
 	
 	
+
+
 	public void imprimeTabuleiro() {
 		for (int k = 0; k < this.posicoeDoTabuleiro.length; k++) {
 			System.out.println(this.posicoeDoTabuleiro[k]);
@@ -174,6 +174,8 @@ public class Tabuleiro {
 			t.imprimeTabuleiro();
 		
 	}
+	
+	
 }
 
 

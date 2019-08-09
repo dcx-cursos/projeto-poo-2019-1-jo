@@ -1,10 +1,10 @@
 package ufpb.jogo;
 
-import java.util.Scanner;
 
 public class Jogador {
 	private String nome;
 	private String cor;
+	private int posicao;
 
 	public Jogador(String nome, String cor) {
 		this.nome = nome;
@@ -12,23 +12,30 @@ public class Jogador {
 	}
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 	public String getCor() {
-		return cor;
+		return this.cor;
+	}
+	
+	public int getPosicao() {
+		return this.posicao;
 	}
 
 	@Override
 	public String toString() {
-		return "O Jogador" + this.nome + "(" + this.cor + ")";
+		return this.nome + "(" + this.cor + ")";
 	}
 
 	// JOGADOR USA DADO, PORTANTO, DADO É UM PARAMETRO DO METODO JOGADA
-	public void jogada(Dado d) {
+	public void jogada(Dado d,Tabuleiro t) {
 		int dado1 = d.lancaDado();
 		int dado2 = d.lancaDado();
-		System.out.println(this.toString() + "tirou" + dado1 + "," + dado2 + " e o peão avançou");
+		this.posicao += dado1+dado2;
+	
+		
+		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "+t.getPosicoeDoTabuleiro(this.getPosicao()));
 	}
 
 	public void status() {
@@ -38,5 +45,7 @@ public class Jogador {
 	public void sair() {
 		System.exit(0);
 	}
+	
+	
 
 }

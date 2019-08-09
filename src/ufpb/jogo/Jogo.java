@@ -1,9 +1,11 @@
 package ufpb.jogo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
+
+//ENTRADA ACEITAR APENAS NÚMEROS INTEIROS SEM DÁ ERRO
+//ENTRADA DE CORES SO ACEITAR O NOME DAS CORES CORRETAS
+
 
 public class Jogo {
 	private static final Scanner input = new Scanner(System.in);
@@ -11,7 +13,8 @@ public class Jogo {
 	private LinkedList<Jogador> listaJogadores;
 	private int cont = 0;
 	private Dado dado = new Dado();
-	
+	private Tabuleiro tabuleiro = new Tabuleiro();
+
 	public Jogo() {
 		listaJogadores = new LinkedList<Jogador>();
 	}
@@ -47,12 +50,12 @@ public class Jogo {
 	}
 
 	private void opcoes(Jogador j) {
-		System.out.println("A jogada de " + j.getNome() + "(" + j.getCor() + ") come�ou:");
-		System.out.println("Comandos dispon�veis: [jogar][sair]/n Entre com um comando:");
+		System.out.println("A jogada de " + j.toString() + "começou:");
+		System.out.println("Comandos disponíveis: [jogar][sair]\n Entre com um comando:");
 		String opcao = input.nextLine();
 		switch (opcao) {
 		case "jogar":
-			j.jogada();
+			j.jogada(this.dado, this.tabuleiro);
 			break;
 		case "sair":
 			System.out.println("sim/nao");
