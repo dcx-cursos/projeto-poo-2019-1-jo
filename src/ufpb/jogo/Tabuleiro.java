@@ -19,11 +19,11 @@ public class Tabuleiro {
 	private Posicao[] posicoeDoTabuleiro;
 	private RecuperaDadosDoTXT recupera = new RecuperaDadosDoTXT();
 	
-	private static final String ARQUIVO_POSICOES_ESPECIAIS = "src/posicoesEspeciais.txt";
-	private static final String ARQUIVO_COMPANHIAS = "src/companhias.txt";
-	private static final String ARQUIVO_PRISAO = "src/prisao.txt";
-	private static final String ARQUIVO_TERRENOS = "src/terrenos.txt";
-	private static final String ARQUIVO_POSICOES_DE_SORTE_OU_REVES = "src/posicaoDeSorteOuReves.txt";
+	private static final String ARQUIVO_POSICOES_ESPECIAIS = "./Arquivos/posicoesEspeciais.txt";
+	private static final String ARQUIVO_COMPANHIAS = "./Arquivos/companhias.txt";
+	private static final String ARQUIVO_PRISAO = "./Arquivos/prisao.txt";
+	private static final String ARQUIVO_TERRENOS = "./Arquivos/terrenos.txt";
+	private static final String ARQUIVO_POSICOES_DE_SORTE_OU_REVES = "./Arquivos/posicaoDeSorteOuReves.txt";
 
 	
 
