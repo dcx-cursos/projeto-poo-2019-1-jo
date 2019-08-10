@@ -3,6 +3,10 @@ package ufpb.banco;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * Class that has the methods to starts and ends and other objects that make up the game.
+ * @author Clebson
+ */
 public class Jogo {
 	private static final Scanner input = new Scanner(System.in);
 	private int numeroDeJogadores;
@@ -13,6 +17,10 @@ public class Jogo {
 		listaJogadores = new LinkedList<Jogador>();
 	}
 
+	/**
+	 * Starts the game
+	 * @author Clebson
+	 */
 	public void iniciarJogo() {
 		nJogadores();
 		criarJogadores();
@@ -21,6 +29,10 @@ public class Jogo {
 
 	}
 
+	/**
+	 * Defines the number of players
+	 * @author Clebson
+	 */
 	private void nJogadores() {
 		System.out.println("Digite o numero de jogadores [2 - 8]: ");
 		int numero = Integer.parseInt(input.nextLine());
@@ -31,6 +43,10 @@ public class Jogo {
 		}
 	}
 
+	/**
+	 * Method that creates the player(name and color pawn/)
+	 * @author Clebson
+	 */
 	private void criarJogadores() {
 		int cont = 0;
 		while (cont < numeroDeJogadores) {
@@ -43,9 +59,13 @@ public class Jogo {
 		}
 	}
 
+	/**
+	 * Method that shows the options available to the player.
+	 * @author Joyce
+	 */
 	private void opcoes(Jogador j) {
-		System.out.println("A jogada de " + j.getNome() + "(" + j.getCor() + ") comeÃ§ou:");
-		System.out.println("Comandos disponÃ­veis: [jogar][sair]/n Entre com um comando:");
+		System.out.println("A jogada de " + j.getNome() + "(" + j.getCor() + ") começou:");
+		System.out.println("Comandos disponíveis: [jogar][sair]/n Entre com um comando:");
 		String opcao = input.nextLine();
 		switch (opcao) {
 		case "jogar":
@@ -64,6 +84,10 @@ public class Jogo {
 		}
 	}
 
+	/**
+	 * The match
+	 * @author Joyce
+	 */
 	private void partida() {
 		for (Jogador x : this.listaJogadores) {
 			opcoes(x);

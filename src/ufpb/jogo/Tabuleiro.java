@@ -27,6 +27,11 @@ public class Tabuleiro {
 
 	
 
+	/**
+	 * Constructor from class Tabuleiro, enables initialization of position on the board attribute. 
+	 * @author Clebson 
+	 * @param int posicoeDoTabuleiro - the player's position on the board
+	  */
 	public Tabuleiro() {
 		this.posicoeDoTabuleiro = new Posicao[40];
 		recuperaCompanhias();
@@ -37,6 +42,10 @@ public class Tabuleiro {
 
 	}
 
+	/**
+	 * Method to recover companies file. 
+	 * @author Clebson 
+	  */
 	public void recuperaCompanhias() {
 
 		try {
@@ -56,10 +65,14 @@ public class Tabuleiro {
 
 			}
 		} catch (IOException e) {
-			System.out.println("NÃ£o foi possÃ­vel recuperar o arquivo TXT de companhia");
+			System.out.println("Não foi possível recuperar o arquivo TXT de companhia");
 		}
 	}
 
+	/**
+	 * Method to recover the especial positions file 
+	 * @author Amanda
+	 * */
 	public void recuperaPosicoesEspeciais() {
 		try {
 			for (String s : recupera.recuperaTextoDeArquivo(ARQUIVO_POSICOES_ESPECIAIS)) {
@@ -83,11 +96,15 @@ public class Tabuleiro {
 
 			}
 		} catch (IOException e) {
-			System.out.println("NÃ£o foi possÃ­vel recuperar o arquivo TXT posiÃ§Ãµes especiais");
+			System.out.println("Não foi possível recuperar o arquivo TXT posições especiais");
 		}
 
 	}
 
+	/**
+	 * Method to recover prison file 
+	 * @author Joyce
+	 * */
 	public void recuperaPrisao() {
 		try {
 			for (String s : recupera.recuperaTextoDeArquivo(ARQUIVO_PRISAO)) {
@@ -100,11 +117,15 @@ public class Tabuleiro {
 
 			}
 		} catch (IOException e) {
-			System.out.println("NÃ£o foi possÃ­vel recuperar o arquivo TXT de prisÃ£o");
+			System.out.println("Não foi possível recuperar o arquivo TXT de prisão");
 		}
 
 	}
 
+	/**
+	 * Method to recover lands file 
+	 * @author Joana
+	 * */
 	public void recuperaTerrenos() {
 
 		try {
@@ -131,11 +152,15 @@ public class Tabuleiro {
 
 			}
 		} catch (IOException e) {
-			System.out.println("NÃ£o foi possÃ­vel recuperar o arquivo TXT de terrenos");
+			System.out.println("Não foi possível recuperar o arquivo TXT de terrenos");
 		}
 
 	}
 
+	/**
+	 * Method to recover luck or mischance file 
+	 * @author Clebson 
+	 */
 	public void recuperaPosicoesDeSorteOuReves() {
 		try {
 			for (String s : recupera
@@ -148,19 +173,26 @@ public class Tabuleiro {
 
 			}
 		} catch (IOException e) {
-			System.out.println("NÃ£o foi possÃ­vel recuperar o arquivo TXT de posiÃ§Ãµes de sorte ou revÃ©s");
+			System.out.println("NÃo foi possível recuperar o arquivo TXT de posições de sorte ou revés");
 		}
 
 	}
 	
 	
+	/**
+	 * Method to get the position on the board 
+	 * @author Clebson 
+	 */
 	public Posicao getPosicoeDoTabuleiro(int indice) {
 		return this.posicoeDoTabuleiro[indice];
 	}
 	
 	
 
-
+	/**
+	 * Method print the board 
+	 * @author Clebson 
+	 */
 	public void imprimeTabuleiro() {
 		for (int k = 0; k < this.posicoeDoTabuleiro.length; k++) {
 			System.out.println(this.posicoeDoTabuleiro[k]);
@@ -168,6 +200,7 @@ public class Tabuleiro {
 		}
 	}
 
+	
 	
 	public static void main(String[] args) {
 		Tabuleiro t = new Tabuleiro();

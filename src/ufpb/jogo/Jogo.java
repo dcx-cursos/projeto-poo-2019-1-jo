@@ -3,10 +3,14 @@ package ufpb.jogo;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-//ENTRADA ACEITAR APENAS NÚMEROS INTEIROS SEM DÁ ERRO
+//ENTRADA ACEITAR APENAS N�MEROS INTEIROS SEM D� ERRO
 //ENTRADA DE CORES SO ACEITAR O NOME DAS CORES CORRETAS
 
 
+/**
+ * Class that has the methods to starts and ends and other objects that make up the game.
+ * @author Clebson
+ */
 public class Jogo {
 	private static final Scanner input = new Scanner(System.in);
 	private int numeroDeJogadores;
@@ -19,6 +23,10 @@ public class Jogo {
 		listaJogadores = new LinkedList<Jogador>();
 	}
 
+	/**
+	 * Starts the game
+	 * @author Clebson
+	 */
 	public void iniciarJogo() {
 		nJogadores();
 		criarJogadores();
@@ -27,6 +35,10 @@ public class Jogo {
 
 	}
 
+	/**
+	 * Defines the number of players
+	 * @author Clebson
+	 */
 	private void nJogadores() {
 		System.out.println("Digite o numero de jogadores [2 - 8]: ");
 		int numero = Integer.parseInt(input.nextLine());
@@ -37,6 +49,10 @@ public class Jogo {
 		}
 	}
 
+	/**
+	 * Method that creates the player(name and color pawn/)
+	 * @author Clebson
+	 */
 	private void criarJogadores() {
 		int cont = 0;
 		while (cont < numeroDeJogadores) {
@@ -49,6 +65,10 @@ public class Jogo {
 		}
 	}
 
+	/**
+	 * Method that shows the options available to the player.
+	 * @author Joyce
+	 */
 	private void opcoes(Jogador j) {
 		System.out.println("A jogada de " + j.toString() + "começou:");
 		System.out.println("Comandos disponíveis: [jogar][sair]\n Entre com um comando:");
@@ -78,6 +98,10 @@ public class Jogo {
 		}
 	}
 
+	/**
+	 * The match
+	 * @author Joyce
+	 */
 	private void partida() {
 		while (this.cont < this.numeroDeJogadores) {
 			System.out.println(this.cont);
