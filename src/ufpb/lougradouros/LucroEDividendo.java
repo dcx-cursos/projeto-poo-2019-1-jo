@@ -1,9 +1,10 @@
 package ufpb.lougradouros;
 
-public class LucroEDividendo implements Posicao{
+import ufpb.jogo.Jogador;
+
+public class LucroEDividendo implements Posicao {
 
 	private int posicao;
-	
 	/**
 	 * Constructor from class LucroEDividendo, enables initialization of position attribute. 
 	 *@author Joana
@@ -23,6 +24,11 @@ public class LucroEDividendo implements Posicao{
 	public int getNumeroDePosicao() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	@Override
+	public void evento(Jogador j) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -1,4 +1,4 @@
-package ufpb.banco;
+package ufpb.lougradouros;
 
 public interface Titulo {
 

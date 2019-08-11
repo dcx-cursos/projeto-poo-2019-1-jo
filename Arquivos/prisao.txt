@@ -1,2 +1,2 @@
-9,Prisão (visitante)
-29,Vá para a prisão
+10,Prisï¿½o (visitante)
+30,Vï¿½ para a prisï¿½o

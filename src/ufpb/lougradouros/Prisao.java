@@ -1,9 +1,10 @@
  package ufpb.lougradouros;
 
+import ufpb.jogo.Jogador;
+
 public class Prisao implements Posicao {
 	private int posicao;
 	private String nome;
-
 	/**
 	 * Constructor from class Prisao, enables initialization of name and position attribute. 
 	 *@author Clebson
@@ -32,7 +33,12 @@ public class Prisao implements Posicao {
 	 */
 	@Override
 	public String toString() {
-		return this.posicao+" - Prisão \n Nada Aconteceu.";
+		return this.posicao+" - "+this.nome;
+	}
+
+	@Override
+	public void evento(Jogador j) {
+		System.out.println("Nada Aconteceu.");
 	}
 }
 

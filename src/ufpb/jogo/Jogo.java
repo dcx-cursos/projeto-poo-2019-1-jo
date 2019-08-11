@@ -3,23 +3,25 @@ package ufpb.jogo;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-//ENTRADA ACEITAR APENAS N�MEROS INTEIROS SEM D� ERRO
-//ENTRADA DE CORES SO ACEITAR O NOME DAS CORES CORRETAS
-
-
 /**
- * Class that has the methods to starts and ends and other objects that make up the game.
- * @author Clebson
+ * <h1>ENTRADA ACEITAR APENAS NÚMEROS INTEIROS SEM DÁ ERRO</h1> //ENTRADA DE
+ * CORES SO ACEITAR O NOME DAS CORES CORRETAS
  */
+
 public class Jogo {
 	private static final Scanner input = new Scanner(System.in);
 	private int numeroDeJogadores;
 	private LinkedList<Jogador> listaJogadores;
-	private int cont = 0;
+	private int jogadorAtual;
 	private Dado dado = new Dado();
 	private Tabuleiro tabuleiro = new Tabuleiro();
 
+	/**
+	 * Class that has the methods to starts and ends and other objects that make up the game.
+	 * @author Clebson
+	 */
 	public Jogo() {
+		this.jogadorAtual = 0;
 		listaJogadores = new LinkedList<Jogador>();
 	}
 
@@ -48,7 +50,7 @@ public class Jogo {
 			this.numeroDeJogadores = numero;
 		}
 	}
-
+	
 	/**
 	 * Method that creates the player(name and color pawn/)
 	 * @author Clebson
@@ -68,22 +70,27 @@ public class Jogo {
 	/**
 	 * Method that shows the options available to the player.
 	 * @author Joyce
+	 * @param j Jogador  
 	 */
 	private void opcoes(Jogador j) {
-		System.out.println("A jogada de " + j.toString() + "começou:");
-		System.out.println("Comandos disponíveis: [jogar][sair]\n Entre com um comando:");
+		System.out.println("Comandos disponíveis: [jogar][status][sair]\nEntre com um comando:");
 		String opcao = input.nextLine();
 		switch (opcao) {
 		case "jogar":
 			j.jogada(this.dado, this.tabuleiro);
 			break;
+		case "status":
+			j.status(this.tabuleiro);
+
+			this.opcoes(j);
+			break;
 		case "sair":
 			System.out.println("sim/nao");
 			String sair = input.nextLine();
 			if (sair.equals("sim") || sair.equals("s")) {
-				if (this.listaJogadores.size() > 2) {
+				if (this.numeroDeJogadores > 2) {
 					this.numeroDeJogadores -= 1;
-					listaJogadores.remove(this.cont);
+					listaJogadores.remove(this.jogadorAtual);
 					partida();
 					break;
 				} else {
@@ -103,12 +110,16 @@ public class Jogo {
 	 * @author Joyce
 	 */
 	private void partida() {
-		while (this.cont < this.numeroDeJogadores) {
-			System.out.println(this.cont);
-			opcoes(listaJogadores.get(this.cont));
-			cont += 1;
+		// To-do
+		// Chama as opções do jogador e depois troca o jogador atual
+		while (this.jogadorAtual < this.numeroDeJogadores) {
+			Jogador jAtual = this.listaJogadores.get(jogadorAtual);
+			System.out.println("A jogada de " + jAtual.toString() + "começou:");
+			opcoes(listaJogadores.get(this.jogadorAtual));
+			tabuleiro.getPosicoeDoTabuleiro(jAtual.getPosicao()).evento(jAtual);
+			jogadorAtual += 1;
 		}
-		this.cont = 0;
+		this.jogadorAtual = 0;
 		partida();
 
 	}

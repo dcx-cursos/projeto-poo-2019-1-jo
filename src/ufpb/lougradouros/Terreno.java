@@ -1,10 +1,10 @@
 package ufpb.lougradouros;
 
-import ufpb.banco.Titulo;
+import ufpb.exceptions.ValorInvalidoException;
 import ufpb.jogo.Jogador;
 
-public class Terreno implements Titulo, Posicao{
-	
+public class Terreno implements Titulo, Posicao {
+
 	private int numeroDePosicao;
 	private String nomeDoTerreno;
 	private int precoDaPropriedade;
@@ -14,10 +14,10 @@ public class Terreno implements Titulo, Posicao{
 	private int aluguelComTresCasa;
 	private int aluguelComQuatroCasa;
 	private int aluguelComHotel;
-	private String dono;
+	private int precoDaCasa;
 	private String cor;
-	
-	
+	private Jogador dono;
+
 	/**
 	 * Constructor from class Terreno, enables initialization of position number, land name,
 	 * property price, rent, rent with one house, rent with two houses,rent with three houses,
@@ -32,12 +32,12 @@ public class Terreno implements Titulo, Posicao{
 	 * @param int aluguelComTresCasas - rent with three houses
 	 * @param int aluguelComQuatroCasas - rent with four houses
 	 * @param int aluguelComHotel - rent with a hotel
-	 * @param String dono - company's owner
+	 * @param Jogador dono - company's owner
 	 * @param String color - the color of the land is on the board
 	  */
 	public Terreno(int numeroDePosicao, String nomeDoTerreno, int precoDaPropriedade, int aluguel,
 			int aluguelComUmaCasa, int aluguelComDuasCasas, int aluguelComTresCasas, int aluguelComQuatroCasas,
-			int aluguelComHotel, String dono, String cor) {
+			int aluguelComHotel, int precoDaCasa, String cor) {
 		this.numeroDePosicao = numeroDePosicao;
 		this.nomeDoTerreno = nomeDoTerreno;
 		this.precoDaPropriedade = precoDaPropriedade;
@@ -47,8 +47,9 @@ public class Terreno implements Titulo, Posicao{
 		this.aluguelComTresCasa = aluguelComTresCasas;
 		this.aluguelComQuatroCasa = aluguelComQuatroCasas;
 		this.aluguelComHotel = aluguelComHotel;
-		this.dono = dono;
+		this.precoDaCasa = precoDaCasa;
 		this.cor = cor;
+		this.dono = null;
 	}
 
 	/**
@@ -61,22 +62,22 @@ public class Terreno implements Titulo, Posicao{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
 	/**
 	 * @author Amanda
 	 * @return String - the number position
 	 */
 	@Override
 	public String toString() {
-		return this.numeroDePosicao+" Terreno";
+		return this.numeroDePosicao + " - " + this.nomeDoTerreno;
 	}
 
-	
-	
-	
-	
-	
-	
-	
+	@Override
+	public void evento(Jogador j) {
+		if(this.dono == null) {
+			try {
+				j.comprarTerreno(this.precoDaPropriedade,this);
+			} catch (ValorInvalidoException e) {}
+		}
+	}
 
 }

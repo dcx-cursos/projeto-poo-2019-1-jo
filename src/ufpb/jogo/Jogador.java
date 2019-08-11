@@ -1,5 +1,10 @@
 package ufpb.jogo;
 
+import java.util.LinkedList;
+
+import ufpb.exceptions.ValorInvalidoException;
+import ufpb.lougradouros.Terreno;
+import ufpb.lougradouros.Titulo;
 
 /**
  * Representing the player
@@ -9,6 +14,8 @@ public class Jogador {
 	private String nome;
 	private String cor;
 	private int posicao;
+	private Conta conta;
+	private LinkedList<Titulo> titulos;
 
 	/**
 	 * Constructor from class Jogador, enables initialization of name and color attributes. 
@@ -20,7 +27,8 @@ public class Jogador {
 	public Jogador(String nome, String cor) {
 		this.nome = nome;
 		this.cor = cor;
-		this.posicao = 0;
+		this.titulos = new LinkedList<Titulo>();
+		this.conta = new Conta();
 	}
 
 	/**
@@ -51,6 +59,18 @@ public class Jogador {
 	}
 
 	/**
+	 * Metodo para jogador comprar terreno
+	 * @param valor
+	 * @param t
+	 * @throws ValorInvalidoException
+	 */
+	
+	public void comprarTerreno(int valor, Terreno t) throws ValorInvalidoException {
+		this.conta.pagar(valor);
+		this.titulos.add(t);
+	}
+	
+	/**
 	 * @author Joana
 	 * @return String - the player's name and pawn color
 	 */
@@ -59,24 +79,35 @@ public class Jogador {
 		return this.nome + "(" + this.cor + ")";
 	}
 
-	// JOGADOR USA DADO, PORTANTO, DADO � UM PARAMETRO DO METODO JOGADA
-	public void jogada(Dado d,Tabuleiro t) {
+	/**
+	 * Jogada
+	 *
+	 * @param d Dado utilizado no jogo
+	 * @param t Tabuleiro utilizado no jogo
+	 * 
+	 */
+	// JOGADOR USA DADO, PORTANTO, DADO É UM PARAMETRO DO METODO JOGADA
+	public void jogada(Dado d, Tabuleiro t) {
 		int dado1 = d.lancaDado();
 		int dado2 = d.lancaDado();
-		this.posicao += dado1+dado2;
-	
-		
-		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "+t.getPosicoeDoTabuleiro(this.getPosicao()));
+		this.posicao += dado1 + dado2;
+		if (this.posicao > 39) {
+			this.posicao -= 39;
+		}
+		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "+ t.getPosicoeDoTabuleiro(this.getPosicao()));
 	}
 
-	public void status() {
-		// to do
+	public void status(Tabuleiro t) {
+		System.out.println("O status de"+this.toString()+" é o seguinte:");
+		System.out.println("Situado na posição "+t.getPosicoeDoTabuleiro(this.getPosicao()));
+		System.out.println("Titulos:");
+		for(Titulo c: titulos) {
+			System.out.println(c);
+		}
 	}
 
 	public void sair() {
 		System.exit(0);
 	}
-	
-	
 
 }

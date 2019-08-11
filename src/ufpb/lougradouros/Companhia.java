@@ -1,6 +1,5 @@
 package ufpb.lougradouros;
 
-import ufpb.banco.Titulo;
 import ufpb.jogo.Jogador;
 
 public class Companhia implements Titulo, Posicao {
@@ -45,6 +44,12 @@ public class Companhia implements Titulo, Posicao {
 	@Override
 	public String toString() {
 		return this.numeroDePosicao+" - "+ this.nomeDaCompanhia;
+	}
+
+	@Override
+	public void evento(Jogador j) {
+		// TODO Auto-generated method stub
+
 	}
 
 
