@@ -97,10 +97,8 @@ public class Jogo {
 					System.out.println("Jogo encerrado.");
 					System.exit(0);
 				}
-			} else {
+			} default:
 				opcoes(j);
-				break;
-			}
 
 		}
 	}

@@ -2,6 +2,7 @@ package ufpb.jogo;
 
 import java.util.LinkedList;
 
+import ufpb.exceptions.LimiteExcedidoException;
 import ufpb.exceptions.ValorInvalidoException;
 import ufpb.lougradouros.Terreno;
 import ufpb.lougradouros.Titulo;
@@ -60,18 +61,26 @@ public class Jogador {
 
 	/**
 	 * Metodo para jogador comprar terreno
+	 * @author joana
 	 * @param valor
 	 * @param t
-	 * @throws ValorInvalidoException
+	 * @throws ValorInvalidoException, LimiteExcedidoException
 	 */
 	
-	public void comprarTerreno(int valor, Terreno t) throws ValorInvalidoException {
-		this.conta.pagar(valor);
+	public void comprarTerreno(int valor, Terreno t) {
+		try {
+			this.conta.debita(valor);
+			System.out.println("Compra efetuada com sucesso!");
+		} catch (ValorInvalidoException e) {
+			System.err.println(e.getMessage());
+		} catch (LimiteExcedidoException e) {
+			System.err.println(e.getMessage() + ", saldo R$ " + this.conta.getSaldo());
+		}
 		this.titulos.add(t);
 	}
 	
 	/**
-	 * @author Joana
+	 * @author joana
 	 * @return String - the player's name and pawn color
 	 */
 	@Override
@@ -80,8 +89,8 @@ public class Jogador {
 	}
 
 	/**
-	 * Jogada
-	 *
+	 * Metodo para efetuar a Jogada
+	 *@author joana
 	 * @param d Dado utilizado no jogo
 	 * @param t Tabuleiro utilizado no jogo
 	 * 
@@ -96,9 +105,15 @@ public class Jogador {
 		}
 		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "+ t.getPosicoeDoTabuleiro(this.getPosicao()));
 	}
+	/**
+	 * Metodo para indicar o status do jogador
+	 * @author clebson
+	 * @param t Tabuleiro
+	 * 
+	 * */
 
 	public void status(Tabuleiro t) {
-		System.out.println("O status de"+this.toString()+" é o seguinte:");
+		System.out.println("O status de " +this.toString()+" é o seguinte:");
 		System.out.println("Situado na posição "+t.getPosicoeDoTabuleiro(this.getPosicao()));
 		System.out.println("Titulos:");
 		for(Titulo c: titulos) {
@@ -107,6 +122,7 @@ public class Jogador {
 	}
 
 	public void sair() {
+		//SAIR DA APLICAÇÃO
 		System.exit(0);
 	}
 
