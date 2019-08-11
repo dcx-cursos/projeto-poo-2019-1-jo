@@ -1,13 +1,12 @@
 package ufpb.exceptions;
 
-public class JogadorNaoExisteException extends Exception {
-
+public class CorValidaException  extends Exception{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public JogadorNaoExisteException(String msg) {
+	public CorValidaException(String msg) {
 		super(msg);
 	}
 }
