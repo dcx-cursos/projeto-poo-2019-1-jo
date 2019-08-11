@@ -7,7 +7,7 @@ import ufpb.exceptions.CorValidaException;
 import ufpb.exceptions.ExisteJogadorComEstaCorException;
 
 /**
- * <h1>ENTRADA ACEITAR APENAS NÃšMEROS INTEIROS SEM DÃ� ERRO</h1> //ENTRADA DE
+ * <h1>ENTRADA ACEITAR APENAS NÚMEROS INTEIROS SEM DÃ� ERRO</h1> //ENTRADA DE
  * CORES SO ACEITAR O NOME DAS CORES CORRETAS
  */
 
@@ -49,10 +49,12 @@ public class Jogo {
 	 * @author Clebson
 	 */
 	private void nJogadores() {
-		System.out.print("Digite o numero de jogadores [2 - 8]: ");
-		int numero = Integer.parseInt(input.nextLine());
-		if (numero < 2 || numero > 8) {
-			System.out.println("Não é possível iniciar um jogo com essa quantidade de jogadores. Tente novamente!");
+		System.out.print("Digite o número de jogadores [2 - 8]: ");
+		int numero = 0;
+		try {
+			numero = Integer.parseInt(input.nextLine());
+		} catch (NumberFormatException e) {
+			System.err.print("O valor deve ser um inteiro!\n");
 		}
 		if (numero > 8 || numero < 2) {
 			nJogadores();
@@ -60,36 +62,60 @@ public class Jogo {
 			this.numeroDeJogadores = numero;
 		}
 	}
+	/**
+	 * metodo
+	 * @author joana
+	 * @return nome 
+	 * */
+	private String escolheNomeJogador() {
+		System.out.print("Digite o nome do jogador " + (this.jogadorAtual + 1) + ": ");
+		String nome = input.nextLine().toLowerCase();
+		return nome;
+
+	}
+	/**
+	 * metodo
+	 * @author joana
+	 * @return cor 
+	 * */
+	private String escolheCorPeao() {
+		System.out.print("Escolha a cor do peão do jogador " + (this.jogadorAtual + 1) + " entre as opções seguintes:"
+				+ "[preto][branco][vermelho][verde][azul][amarelo][laranja][rosa]" + "\n:");
+		String cor = input.nextLine();
+		return cor;
+
+	}
 
 	/**
 	 * Method that creates the player(name and color pawn/)
 	 * 
 	 * @author Clebson
 	 */
-	private void criarJogadores() {
-		int cont = 0;
-		while (cont < numeroDeJogadores) {
-			System.out.print("Digite o nome do jogador " + (cont + 1) + ": ");
-			String nome = input.nextLine().toLowerCase();
-			System.out.print("Escolha a cor do peão do jogador " + (cont + 1) + " entre as opções seguintes:"
-					+ "[preto][branco][vermelho][verde][azul][amarelo][laranja][rosa]" + "\n:");
-			String cor = input.nextLine();
-
-			try {
-				verificaSeAhCorEhValida(cor);
-				verificaSeExisteJogadorComEstaCor(cor);
-				this.listaJogadores.add(new Jogador(nome, cor));
-				cont += 1;
-			} catch (ExisteJogadorComEstaCorException e) {
-				e.printStackTrace();
-			} catch (CorValidaException e) {
-				e.printStackTrace();
+	public void criarJogadores() {
+		for (int i = 0; i < this.numeroDeJogadores; i++) {
+			String nome = escolheNomeJogador();
+			boolean parar = false;
+			while (parar != true) {
+				String cor = escolheCorPeao();
+				try {
+					verificaSeAhCorEhValida(cor);
+					verificaSeExisteJogadorComEstaCor(cor);
+					this.listaJogadores.add(new Jogador(nome, cor));
+					this.jogadorAtual += 1;
+					parar = true;
+				} catch (ExisteJogadorComEstaCorException e) {
+					System.err.println("Já existe jogador com a cor escolhida, tente novamente!");
+				} catch (CorValidaException e) {
+					System.err.println("Cor Inválida, tente novamente!");
+				}
 			}
 		}
 	}
 
 	/**
-	 * This method checks if there is any other player using the color passed as a parameter. 
+	 * This method checks if there is any other player using the color passed as a
+	 * parameter.
+	 * 
 	 * @param cor
 	 * @throws ExisteJogadorComEstaCorException
 	 * @author Amanda Azevedo
