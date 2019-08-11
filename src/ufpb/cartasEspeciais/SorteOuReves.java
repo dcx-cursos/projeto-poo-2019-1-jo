@@ -5,7 +5,6 @@ import ufpb.lougradouros.Posicao;
 
 public class SorteOuReves implements Posicao {
 	private int posicaoNoTabuleiro;
-	
 	/**
 	 * Constructor from class SorteOuReves, enables initialization of position on the board attributes. 
 	 * @author Joyce
@@ -16,15 +15,20 @@ public class SorteOuReves implements Posicao {
 		
 	}
 
-	/**
-	 * Method that enables the access to number positon attribute
-	 * @author Joyce
-	 * @return int - number position attribute value
-	 */
 	@Override
 	public int getNumeroDePosicao() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public String toString() {
+		return this.posicaoNoTabuleiro+" Sorte ou Reves";
+	}
+
+	@Override
+	public void evento(Jogador j) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
