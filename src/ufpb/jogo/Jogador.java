@@ -154,9 +154,14 @@ public class Jogador {
 	public void status(Tabuleiro t) {
 		System.out.println("O status de " + this.toString() + " é o seguinte:");
 		System.out.println("Situado na posição " + t.getPosicoeDoTabuleiro(this.getPosicao()));
+		System.out.println("Possui $"+this.getSaldo());
 		System.out.println("Titulos:");
-		for (Titulo c : titulos) {
-			System.out.println(c);
+		if(this.titulos.size() > 0) {
+			for (Titulo c : titulos) {
+				System.out.println(c.mostrarTitulo());
+			}
+		} else {
+			System.out.println("N�o possui titulos");
 		}
 	}
 
