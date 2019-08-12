@@ -10,7 +10,7 @@ public class Conta {
 		this.saldo = 1500;
 	}
 
-	public int getSaldo() {
+	public double getSaldo() {
 		return this.saldo;
 	}
 	

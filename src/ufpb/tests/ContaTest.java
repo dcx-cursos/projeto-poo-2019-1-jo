@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import ufpb.exceptions.LimiteExcedidoException;
 import ufpb.exceptions.ValorInvalidoException;
@@ -11,6 +13,14 @@ import ufpb.jogo.Conta;
 
 class ContaTest {
 	private Conta conta;
+	
+	@Mock
+	Conta contaMock = null;
+	
+	@BeforeEach
+	void inicialize() {
+		MockitoAnnotations.initMocks(this);
+	}
 	
 	@BeforeEach
 	public void setUp() {
@@ -61,6 +71,9 @@ class ContaTest {
 		} catch (LimiteExcedidoException e) {
 			fail("Exceção errada");
 
+			
+			
+			
 		}	
 	}	
 
