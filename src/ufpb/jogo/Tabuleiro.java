@@ -169,12 +169,9 @@ public class Tabuleiro {
 	public void recuperaPosicoesDeSorteOuReves() {
 		try {
 			for (String s : recupera.recuperaTextoDeArquivo(ARQUIVO_POSICOES_DE_SORTE_OU_REVES)) {
-
 				int posicao = Integer.parseInt(s);
 				SorteOuReves r = new SorteOuReves(posicao);
-
 				this.posicoeDoTabuleiro[posicao] = r;
-
 			}
 		} catch (IOException e) {
 			System.out.println("Não foi possível recuperar o arquivo TXT de posições de sorte ou revés");
