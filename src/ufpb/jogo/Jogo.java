@@ -63,7 +63,7 @@ public class Jogo {
 		}
 	}
 	/**
-	 * metodo
+	 * methods
 	 * @author joana
 	 * @return nome 
 	 * */
@@ -74,7 +74,7 @@ public class Jogo {
 
 	}
 	/**
-	 * metodo
+	 * methods
 	 * @author joana
 	 * @return cor 
 	 * */
@@ -118,7 +118,7 @@ public class Jogo {
 	 * 
 	 * @param cor
 	 * @throws ExisteJogadorComEstaCorException
-	 * @author Amanda Azevedo
+	 * @author Amanda
 	 */
 	private void verificaSeExisteJogadorComEstaCor(String cor) throws ExisteJogadorComEstaCorException {
 		for (Jogador j : this.listaJogadores) {
@@ -133,7 +133,7 @@ public class Jogo {
 	 * @param String cor
 	 * @return true if the color passed as a parameter is within expected colors
 	 * @throws CorValidaException
-	 * @author Amanda Azevedo
+	 * @author Amanda 
 	 */
 	private boolean verificaSeAhCorEhValida(String cor) throws CorValidaException {
 		if (cor.equals("preto") || cor.equals("branco") || cor.equals("vermelho") || cor.equals("verde")

@@ -19,6 +19,13 @@ public class Conta {
 	public String toString() {
 		return "Possui: " + this.saldo;
 	}
+	
+	/**
+	 * Methods 
+	 * @author joana
+	 * @param valor
+	 * @throws ValorInvalidoException
+	 */
 
 	// OS VALORES TEM QUE SER POSITIVOS
 	public void deposita(double valor) throws ValorInvalidoException{		
@@ -28,6 +35,12 @@ public class Conta {
 		this.saldo += valor;
 
 	}
+	/**
+	 * Methods 
+	 * @author joana
+	 * @param valor
+	 * @throws ValorInvalidoException, LimiteExcedidoException
+	 */
 
 	// PARA DEBITAR O VALOR TEM QUE SER MENOR OU IGUAL AO SALDO
 	// VALORES TEM QUE SER POSITIVOS
