@@ -88,6 +88,7 @@ public class Jogador {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/**
 	 * Method that enables the access to account balance attribute
 	 * 
@@ -96,17 +97,24 @@ public class Jogador {
 	 */
 =======
 >>>>>>> parent of faaa86d... add javadoc
+=======
+>>>>>>> parent of faaa86d... add javadoc
 	public int getSaldo() {
 		return this.conta.getSaldo();
 	}
 	
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Method for the player to buy the land 
 =======
 	/**
 	 * Metodo para jogador comprar terreno
 >>>>>>> f4a56500a3215b22a817e55016611274b1797675
+=======
+	 * Metodo para jogador comprar terreno
+	 * 
+>>>>>>> parent of faaa86d... add javadoc
 =======
 	 * Metodo para jogador comprar terreno
 	 * 
@@ -141,6 +149,7 @@ public class Jogador {
 	/**
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Method to make the move
 	 * 
 	 * @author joana
@@ -152,6 +161,13 @@ public class Jogador {
 	 * @param d Dado utilizado no jogo
 	 * @param t Tabuleiro utilizado no jogo
 >>>>>>> f4a56500a3215b22a817e55016611274b1797675
+=======
+	 * Metodo para efetuar a Jogada
+	 * 
+	 * @author joana
+	 * @param d Dado utilizado no jogo
+	 * @param t Tabuleiro utilizado no jogo
+>>>>>>> parent of faaa86d... add javadoc
 =======
 	 * Metodo para efetuar a Jogada
 	 * 
@@ -172,6 +188,7 @@ public class Jogador {
 		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "+ t.getPosicoeDoTabuleiro(this.getPosicao()));
 	}
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	 * Method to indicate the player'status
@@ -195,6 +212,15 @@ public class Jogador {
 	 */
 
 >>>>>>> parent of faaa86d... add javadoc
+=======
+	 * Metodo para indicar o status do jogador
+	 * 
+	 * @author clebson
+	 * @param t Tabuleiro
+	 * 
+	 */
+
+>>>>>>> parent of faaa86d... add javadoc
 	public void status(Tabuleiro t) {
 		System.out.println("O status de " +this.toString()+" é o seguinte:");
 		System.out.println("Situado na posição "+t.getPosicoeDoTabuleiro(this.getPosicao()));
@@ -206,11 +232,15 @@ public class Jogador {
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			System.out.println("N�o possui titulos");
 =======
 		for(Titulo c: titulos) {
 			System.out.println(c);
 >>>>>>> f4a56500a3215b22a817e55016611274b1797675
+=======
+			System.out.println("N�o possui titulos");
+>>>>>>> parent of faaa86d... add javadoc
 =======
 			System.out.println("N�o possui titulos");
 >>>>>>> parent of faaa86d... add javadoc
