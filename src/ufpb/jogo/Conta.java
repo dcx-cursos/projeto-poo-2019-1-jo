@@ -13,12 +13,15 @@ public class Conta {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/**
 	 * Method that enables the access to account balance attribute
 	 * 
 	 * @author Joana
 	 * @return int - account balance attribute value
 	 */
+=======
+>>>>>>> parent of faaa86d... add javadoc
 =======
 >>>>>>> parent of faaa86d... add javadoc
 =======
