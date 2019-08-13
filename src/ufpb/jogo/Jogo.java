@@ -7,7 +7,7 @@ import ufpb.exceptions.CorValidaException;
 import ufpb.exceptions.ExisteJogadorComEstaCorException;
 
 /**
- * <h1>ENTRADA ACEITAR APENAS NÃšMEROS INTEIROS SEM DÃ� ERRO</h1> //ENTRADA DE
+ * <h1>ENTRADA ACEITAR APENAS NÚMEROS INTEIROS SEM DÃ� ERRO</h1> //ENTRADA DE
  * CORES SO ACEITAR O NOME DAS CORES CORRETAS
  */
 
@@ -49,19 +49,41 @@ public class Jogo {
 	 * @author Clebson
 	 */
 	private void nJogadores() {
-		System.out.println("Digite o numero de jogadores [2 - 8]: ");
-		
+		System.out.print("Digite o número de jogadores [2 - 8]: ");
 		int numero = 0;
-		try{
+		try {
 			numero = Integer.parseInt(input.nextLine());
-		}catch(NumberFormatException e) {
-			System.out.println("O valor deve ser um inteiro!");
+		} catch (NumberFormatException e) {
+			System.err.print("O valor deve ser um inteiro!\n");
 		}
 		if (numero > 8 || numero < 2) {
 			nJogadores();
 		} else {
 			this.numeroDeJogadores = numero;
 		}
+	}
+	/**
+	 * metodo
+	 * @author joana
+	 * @return nome 
+	 * */
+	private String escolheNomeJogador() {
+		System.out.print("Digite o nome do jogador " + (this.jogadorAtual + 1) + ": ");
+		String nome = input.nextLine().toLowerCase();
+		return nome;
+
+	}
+	/**
+	 * metodo
+	 * @author joana
+	 * @return cor 
+	 * */
+	private String escolheCorPeao() {
+		System.out.print("Escolha a cor do peão do jogador " + (this.jogadorAtual + 1) + " entre as opções seguintes:"
+				+ "[preto][branco][vermelho][verde][azul][amarelo][laranja][rosa]" + "\n:");
+		String cor = input.nextLine();
+		return cor;
+
 	}
 
 	/**
@@ -89,6 +111,7 @@ public class Jogo {
 			}
 		}
 	}
+
 	/**
 	 * This method checks if there is any other player using the color passed as a
 	 * parameter.
@@ -114,8 +137,10 @@ public class Jogo {
 	 * @author Amanda Azevedo
 	 */
 	private boolean verificaSeAhCorEhValida(String cor) throws CorValidaException {
-		if (cor.equals("preto") || cor.equals("branco") || cor.equals("vermelho") || cor.equals("verde")|| cor.equals("azul") || cor.equals("amarelo") || cor.equals("laranja") || cor.equals("rosa")) {
+		if (cor.equals("preto") || cor.equals("branco") || cor.equals("vermelho") || cor.equals("verde")
+				|| cor.equals("azul") || cor.equals("amarelo") || cor.equals("laranja") || cor.equals("rosa")) {
 			return true;
+<<<<<<< HEAD
 		}throw new CorValidaException("Esta cor não é válida. Tente novamente uma cor disponível!");
 	}
 	/**
@@ -139,8 +164,12 @@ public class Jogo {
 				+ "[preto][branco][vermelho][verde][azul][amarelo][laranja][rosa]:");
 		String cor = input.nextLine();
 		return cor;
-
+=======
+		}
+		throw new CorValidaException("Esta cor não é válida. Tente novamente uma cor disponível!");
 	}
+>>>>>>> f4a56500a3215b22a817e55016611274b1797675
+
 	/**
 	 * Method that shows the options available to the player.
 	 * 
@@ -148,8 +177,8 @@ public class Jogo {
 	 * @param j Jogador
 	 */
 	private void opcoes(Jogador j) {
-		System.out.println("Comandos disponÃ­veis: [jogar][status][sair]\nEntre com um comando:");
-		String opcao = input.nextLine();
+		System.out.print("Comandos disponíveis: [jogar][status][sair]\nEntre com um comando: ");
+		String opcao = input.nextLine().toLowerCase();
 		switch (opcao) {
 		case "jogar":
 			j.jogada(this.dado, this.tabuleiro);
@@ -160,9 +189,9 @@ public class Jogo {
 			this.opcoes(j);
 			break;
 		case "sair":
-			System.out.println("sim/nao");
-			String sair = input.nextLine();
-			if (sair.equals("sim") || sair.equals("s")) {
+			System.out.print("Você realmente quer sair (Sim/Nao)? ");
+			String sair = input.nextLine().toLowerCase();
+			if (sair.startsWith("s")) {
 				if (this.numeroDeJogadores > 2) {
 					this.numeroDeJogadores -= 1;
 					listaJogadores.remove(this.jogadorAtual);
@@ -172,10 +201,9 @@ public class Jogo {
 					System.out.println("Jogo encerrado.");
 					System.exit(0);
 				}
-			} else {
-				opcoes(j);
-				break;
 			}
+		default:
+			opcoes(j);
 
 		}
 	}

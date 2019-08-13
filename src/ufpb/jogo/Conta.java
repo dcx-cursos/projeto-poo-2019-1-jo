@@ -13,6 +13,7 @@ public class Conta {
 		this.saldo = 1500;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Method that enables the access to account balance attribute
 	 * 
@@ -20,6 +21,9 @@ public class Conta {
 	 * @return int - account balance attribute value
 	 */
 	public int getSaldo() {
+=======
+	public double getSaldo() {
+>>>>>>> f4a56500a3215b22a817e55016611274b1797675
 		return this.saldo;
 	}
 	

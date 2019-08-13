@@ -1,7 +1,5 @@
 package ufpb.lougradouros;
 
-import java.util.Scanner;
-
 import ufpb.exceptions.LimiteExcedidoException;
 import ufpb.exceptions.ValorInvalidoException;
 import ufpb.jogo.Jogador;
@@ -28,15 +26,15 @@ public class Terreno implements Titulo, Posicao {
 	 * owner and color attributes.
 	 * 
 	 * @author Amanda
-	 * @param int     numeroDePosicao - position name
+	 * @param         int numeroDePosicao - position name
 	 * @param String  nomeDaCompanhia - company name
-	 * @param int     precoDaPropriedade - property price
-	 * @param int     aluguel - rent
-	 * @param int     aluguelComUmaCasa - rent with one house
-	 * @param int     aluguelComDuasCasas - rent with two houses
-	 * @param int     aluguelComTresCasas - rent with three houses
-	 * @param int     aluguelComQuatroCasas - rent with four houses
-	 * @param int     aluguelComHotel - rent with a hotel
+	 * @param         int precoDaPropriedade - property price
+	 * @param         int aluguel - rent
+	 * @param         int aluguelComUmaCasa - rent with one house
+	 * @param         int aluguelComDuasCasas - rent with two houses
+	 * @param         int aluguelComTresCasas - rent with three houses
+	 * @param         int aluguelComQuatroCasas - rent with four houses
+	 * @param         int aluguelComHotel - rent with a hotel
 	 * @param Jogador dono - company's owner
 	 * @param String  color - the color of the land is on the board
 	 */
@@ -66,7 +64,7 @@ public class Terreno implements Titulo, Posicao {
 	@Override
 	public int getNumeroDePosicao() {
 		// TODO Auto-generated method stub
-		return this.numeroDePosicao;
+		return 0;
 	}
 
 	/**
@@ -79,38 +77,11 @@ public class Terreno implements Titulo, Posicao {
 	}
 
 	/**
-	 * @author
+	 * @author 
 	 **/
 
 	@Override
 	public void evento(Jogador j) {
-		if (this.dono == null) {
-			Scanner e = new Scanner(System.in);
-			System.out.println("O titulo de propriedade " + this.nomeDoTerreno + " está disponivel por $"
-					+ this.precoDaPropriedade);
-			System.out.println(j.getNome() + " possui $" + j.getSaldo());
-			System.out.print("Deseja comprar " + this.nomeDoTerreno + "?(Sim/nao)");
-			String escolha = e.nextLine().toLowerCase();
-			if (escolha.equals("sim")) {
-				j.comprarTerreno(this.precoDaPropriedade, this);
-				this.dono = j;
-			}
-		} else {
-			if (!this.dono.equals(j)) {
-				j.pagar(this.dono, this.aluguel);
-				System.out.println("Pagou $" + this.aluguel + " ao jogador " + this.dono);
-			}
-		}
-	}
-
-	@Override
-	public void venderAoBanco(Jogador j) {
-		this.dono = null;
-		j.receber(this.precoDaPropriedade);
-	}
-
-	@Override
-	public String mostrarTitulo() {
-		return "["+this.nomeDoTerreno+"] propriedade "+this.cor+" aluguel "+this.aluguel;
-	}
-}
+		if(this.dono == null) {			
+				j.comprarTerreno(this.precoDaPropriedade,this);				
+}}}
