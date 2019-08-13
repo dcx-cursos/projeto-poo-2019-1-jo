@@ -33,11 +33,6 @@ public class Jogador {
 	}
 <<<<<<< HEAD
 	
-	/**
-	 * Receive the deposited amount of money
-	 * @author Joana
-	 * @param int valor - the value
-	 */
 	public void receber(int valor) {
 		try {
 			this.conta.deposita(valor);
@@ -46,12 +41,6 @@ public class Jogador {
 		}
 	}
 	
-	/**
-	 * Pays the amount of money to be charged
-	 * @author Joana
-	 * @param Jogador j - the player
-	 * @param int valor - the value
-	 */
 	public void pagar(Jogador j, int valor) {
 		try {
 			this.conta.debita(valor);
@@ -98,25 +87,33 @@ public class Jogador {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/**
 	 * Method that enables the access to account balance attribute
 	 * 
 	 * @author Joana
 	 * @return int - account balance attribute value
 	 */
+=======
+>>>>>>> parent of faaa86d... add javadoc
 	public int getSaldo() {
 		return this.conta.getSaldo();
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * Method for the player to buy the land 
 =======
 	/**
 	 * Metodo para jogador comprar terreno
 >>>>>>> f4a56500a3215b22a817e55016611274b1797675
+=======
+	 * Metodo para jogador comprar terreno
+	 * 
+>>>>>>> parent of faaa86d... add javadoc
 	 * @author joana
-	 * @param int valor - the value
-	 * @param Tabuleiro t - the board
+	 * @param valor
+	 * @param t
 	 * @throws ValorInvalidoException, LimiteExcedidoException
 	 */
 	
@@ -143,6 +140,7 @@ public class Jogador {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Method to make the move
 	 * 
 	 * @author joana
@@ -154,6 +152,13 @@ public class Jogador {
 	 * @param d Dado utilizado no jogo
 	 * @param t Tabuleiro utilizado no jogo
 >>>>>>> f4a56500a3215b22a817e55016611274b1797675
+=======
+	 * Metodo para efetuar a Jogada
+	 * 
+	 * @author joana
+	 * @param d Dado utilizado no jogo
+	 * @param t Tabuleiro utilizado no jogo
+>>>>>>> parent of faaa86d... add javadoc
 	 * 
 	 */
 	// JOGADOR USA DADO, PORTANTO, DADO É UM PARAMETRO DO METODO JOGADA
@@ -168,6 +173,7 @@ public class Jogador {
 	}
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Method to indicate the player'status
 	 * @author Clebson
 	 * @param Tabuleiro t - the board
@@ -180,6 +186,15 @@ public class Jogador {
 	 * */
 
 >>>>>>> f4a56500a3215b22a817e55016611274b1797675
+=======
+	 * Metodo para indicar o status do jogador
+	 * 
+	 * @author clebson
+	 * @param t Tabuleiro
+	 * 
+	 */
+
+>>>>>>> parent of faaa86d... add javadoc
 	public void status(Tabuleiro t) {
 		System.out.println("O status de " +this.toString()+" é o seguinte:");
 		System.out.println("Situado na posição "+t.getPosicoeDoTabuleiro(this.getPosicao()));
@@ -190,18 +205,18 @@ public class Jogador {
 				System.out.println(c.mostrarTitulo());
 			}
 		} else {
+<<<<<<< HEAD
 			System.out.println("N�o possui titulos");
 =======
 		for(Titulo c: titulos) {
 			System.out.println(c);
 >>>>>>> f4a56500a3215b22a817e55016611274b1797675
+=======
+			System.out.println("N�o possui titulos");
+>>>>>>> parent of faaa86d... add javadoc
 		}
 	}
 
-	/**
-	 * To left the game 
-	 * @author Clebson
-	 */
 	public void sair() {
 		//SAIR DA APLICAÇÃO
 		System.exit(0);

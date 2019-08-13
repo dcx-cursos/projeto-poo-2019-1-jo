@@ -130,7 +130,6 @@ public class Jogo {
 	}
 
 	/**
-	 * This method verify if the chosen color is available
 	 * @param String cor
 	 * @return true if the color passed as a parameter is within expected colors
 	 * @throws CorValidaException
@@ -144,7 +143,7 @@ public class Jogo {
 		}throw new CorValidaException("Esta cor não é válida. Tente novamente uma cor disponível!");
 	}
 	/**
-	 * The player chooses his/her name
+	 * metodo
 	 * @author joana
 	 * @return nome 
 	 * */
@@ -155,7 +154,7 @@ public class Jogo {
 
 	}
 	/**
-	 * The player chooses his/her pawn color
+	 * metodo
 	 * @author joana
 	 * @return cor 
 	 * */
@@ -209,7 +208,7 @@ public class Jogo {
 	}
 
 	/**
-	 * This method shows the options to the player and then changes to another player
+	 * The match
 	 * 
 	 * @author Joyce
 	 */

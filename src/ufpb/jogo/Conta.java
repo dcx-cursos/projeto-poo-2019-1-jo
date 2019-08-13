@@ -6,13 +6,11 @@ import ufpb.exceptions.ValorInvalidoException;
 public class Conta {
 	private int saldo;
 
-	/**
-	 * The account
-	 */
 	public Conta() {
 		this.saldo = 1500;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/**
 	 * Method that enables the access to account balance attribute
@@ -20,6 +18,8 @@ public class Conta {
 	 * @author Joana
 	 * @return int - account balance attribute value
 	 */
+=======
+>>>>>>> parent of faaa86d... add javadoc
 	public int getSaldo() {
 =======
 	public double getSaldo() {
