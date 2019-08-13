@@ -57,6 +57,11 @@ public class Companhia implements Titulo, Posicao {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public String mostrarTitulo() {
+		// TODO Auto-generated method stub
+		return "["+this.nomeDaCompanhia+"] multiplicador de "+this.multiplicador;
+	}
 
 
 }
