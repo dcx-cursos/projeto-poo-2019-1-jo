@@ -6,10 +6,19 @@ import ufpb.exceptions.ValorInvalidoException;
 public class Conta {
 	private int saldo;
 
+	/**
+	 * The account
+	 */
 	public Conta() {
 		this.saldo = 1500;
 	}
 
+	/**
+	 * Method that enables the access to account balance attribute
+	 * 
+	 * @author Joana
+	 * @return int - account balance attribute value
+	 */
 	public int getSaldo() {
 		return this.saldo;
 	}

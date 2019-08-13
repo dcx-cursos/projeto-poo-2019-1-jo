@@ -36,6 +36,11 @@ public class Jogador {
 		this.conta = new Conta();
 	}
 	
+	/**
+	 * Receive the deposited amount of money
+	 * @author Joana
+	 * @param int valor - the value
+	 */
 	public void receber(int valor) {
 		try {
 			this.conta.deposita(valor);
@@ -44,6 +49,12 @@ public class Jogador {
 		}
 	}
 	
+	/**
+	 * Pays the amount of money to be charged
+	 * @author Joana
+	 * @param Jogador j - the player
+	 * @param int valor - the value
+	 */
 	public void pagar(Jogador j, int valor) {
 		try {
 			this.conta.debita(valor);
@@ -89,16 +100,21 @@ public class Jogador {
 		return this.posicao;
 	}
 
+	/**
+	 * Method that enables the access to account balance attribute
+	 * 
+	 * @author Joana
+	 * @return int - account balance attribute value
+	 */
 	public int getSaldo() {
 		return this.conta.getSaldo();
 	}
 	
 	/**
-	 * Metodo para jogador comprar terreno
-	 * 
+	 * Method for the player to buy the land 
 	 * @author joana
-	 * @param valor
-	 * @param t
+	 * @param int valor - the value
+	 * @param Tabuleiro t - the board
 	 * @throws ValorInvalidoException, LimiteExcedidoException
 	 */
 
@@ -124,11 +140,11 @@ public class Jogador {
 	}
 
 	/**
-	 * Metodo para efetuar a Jogada
+	 * Method to make the move
 	 * 
 	 * @author joana
-	 * @param d Dado utilizado no jogo
-	 * @param t Tabuleiro utilizado no jogo
+	 * @param Dado d - the dice
+	 * @param Tabuleiro t - the board
 	 * 
 	 */
 	// JOGADOR USA DADO, PORTANTO, DADO É UM PARAMETRO DO METODO JOGADA
@@ -144,13 +160,10 @@ public class Jogador {
 	}
 
 	/**
-	 * Metodo para indicar o status do jogador
-	 * 
-	 * @author clebson
-	 * @param t Tabuleiro
-	 * 
+	 * Method to indicate the player'status
+	 * @author Clebson
+	 * @param Tabuleiro t - the board
 	 */
-
 	public void status(Tabuleiro t) {
 		System.out.println("O status de " + this.toString() + " é o seguinte:");
 		System.out.println("Situado na posição " + t.getPosicoeDoTabuleiro(this.getPosicao()));
@@ -161,10 +174,14 @@ public class Jogador {
 				System.out.println(c.mostrarTitulo());
 			}
 		} else {
-			System.out.println("N�o possui titulos");
+			System.out.println("N�o possui titulos");
 		}
 	}
 
+	/**
+	 * To left the game 
+	 * @author Clebson
+	 */
 	public void sair() {
 		// SAIR DA APLICAÇÃO
 		System.exit(0);

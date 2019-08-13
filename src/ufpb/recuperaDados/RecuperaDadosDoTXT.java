@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *This class recover the data from TXT file
+ *@return textoLido - the file read
+ */
 public class RecuperaDadosDoTXT {
 	
 	public List<String> recuperaTextoDeArquivo(String nomeArquivo) throws IOException {
