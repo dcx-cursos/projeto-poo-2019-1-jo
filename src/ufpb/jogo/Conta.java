@@ -10,26 +10,7 @@ public class Conta {
 		this.saldo = 1500;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	/**
-	 * Method that enables the access to account balance attribute
-	 * 
-	 * @author Joana
-	 * @return int - account balance attribute value
-	 */
-=======
->>>>>>> parent of faaa86d... add javadoc
-=======
->>>>>>> parent of faaa86d... add javadoc
-=======
->>>>>>> parent of faaa86d... add javadoc
-	public int getSaldo() {
-=======
 	public double getSaldo() {
->>>>>>> f4a56500a3215b22a817e55016611274b1797675
 		return this.saldo;
 	}
 	

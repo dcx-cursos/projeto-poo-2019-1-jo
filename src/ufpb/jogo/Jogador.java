@@ -31,34 +31,7 @@ public class Jogador {
 		this.titulos = new LinkedList<Titulo>();
 		this.conta = new Conta();
 	}
-<<<<<<< HEAD
-	
-	public void receber(int valor) {
-		try {
-			this.conta.deposita(valor);
-		} catch (ValorInvalidoException e) {
-			// TODO Auto-generated catch block
-		}
-	}
-	
-	public void pagar(Jogador j, int valor) {
-		try {
-			this.conta.debita(valor);
-			j.conta.deposita(valor);
-		} catch (ValorInvalidoException e) {
-			
-		} catch (LimiteExcedidoException e) {
-			if(this.titulos.size() == 0) {
-				System.out.println("Falencia");	
-			}else {
-				this.titulos.getLast().venderAoBanco(j);;
-				pagar(j,valor);
-			}
-		}
-	}
-=======
 
->>>>>>> f4a56500a3215b22a817e55016611274b1797675
 	/**
 	 * Method that enables the access to name attribute. 
 	 * @author Joana
@@ -86,47 +59,8 @@ public class Jogador {
 		return this.posicao;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	/**
-	 * Method that enables the access to account balance attribute
-	 * 
-	 * @author Joana
-	 * @return int - account balance attribute value
-	 */
-=======
->>>>>>> parent of faaa86d... add javadoc
-=======
->>>>>>> parent of faaa86d... add javadoc
-=======
->>>>>>> parent of faaa86d... add javadoc
-	public int getSaldo() {
-		return this.conta.getSaldo();
-	}
-	
-	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * Method for the player to buy the land 
-=======
 	/**
 	 * Metodo para jogador comprar terreno
->>>>>>> f4a56500a3215b22a817e55016611274b1797675
-=======
-	 * Metodo para jogador comprar terreno
-	 * 
->>>>>>> parent of faaa86d... add javadoc
-=======
-	 * Metodo para jogador comprar terreno
-	 * 
->>>>>>> parent of faaa86d... add javadoc
-=======
-	 * Metodo para jogador comprar terreno
-	 * 
->>>>>>> parent of faaa86d... add javadoc
 	 * @author joana
 	 * @param valor
 	 * @param t
@@ -155,42 +89,10 @@ public class Jogador {
 	}
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * Method to make the move
-	 * 
-	 * @author joana
-	 * @param Dado d - the dice
-	 * @param Tabuleiro t - the board
-=======
 	 * Metodo para efetuar a Jogada
 	 *@author joana
 	 * @param d Dado utilizado no jogo
 	 * @param t Tabuleiro utilizado no jogo
->>>>>>> f4a56500a3215b22a817e55016611274b1797675
-=======
-	 * Metodo para efetuar a Jogada
-	 * 
-	 * @author joana
-	 * @param d Dado utilizado no jogo
-	 * @param t Tabuleiro utilizado no jogo
->>>>>>> parent of faaa86d... add javadoc
-=======
-	 * Metodo para efetuar a Jogada
-	 * 
-	 * @author joana
-	 * @param d Dado utilizado no jogo
-	 * @param t Tabuleiro utilizado no jogo
->>>>>>> parent of faaa86d... add javadoc
-=======
-	 * Metodo para efetuar a Jogada
-	 * 
-	 * @author joana
-	 * @param d Dado utilizado no jogo
-	 * @param t Tabuleiro utilizado no jogo
->>>>>>> parent of faaa86d... add javadoc
 	 * 
 	 */
 	// JOGADOR USA DADO, PORTANTO, DADO É UM PARAMETRO DO METODO JOGADA
@@ -204,76 +106,18 @@ public class Jogador {
 		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "+ t.getPosicoeDoTabuleiro(this.getPosicao()));
 	}
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * Method to indicate the player'status
-	 * @author Clebson
-	 * @param Tabuleiro t - the board
-	 */
-=======
 	 * Metodo para indicar o status do jogador
 	 * @author clebson
 	 * @param t Tabuleiro
 	 * 
 	 * */
 
->>>>>>> f4a56500a3215b22a817e55016611274b1797675
-=======
-	 * Metodo para indicar o status do jogador
-	 * 
-	 * @author clebson
-	 * @param t Tabuleiro
-	 * 
-	 */
-
->>>>>>> parent of faaa86d... add javadoc
-=======
-	 * Metodo para indicar o status do jogador
-	 * 
-	 * @author clebson
-	 * @param t Tabuleiro
-	 * 
-	 */
-
->>>>>>> parent of faaa86d... add javadoc
-=======
-	 * Metodo para indicar o status do jogador
-	 * 
-	 * @author clebson
-	 * @param t Tabuleiro
-	 * 
-	 */
-
->>>>>>> parent of faaa86d... add javadoc
 	public void status(Tabuleiro t) {
 		System.out.println("O status de " +this.toString()+" é o seguinte:");
 		System.out.println("Situado na posição "+t.getPosicoeDoTabuleiro(this.getPosicao()));
 		System.out.println("Titulos:");
-<<<<<<< HEAD
-		if(this.titulos.size() > 0) {
-			for (Titulo c : titulos) {
-				System.out.println(c.mostrarTitulo());
-			}
-		} else {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-			System.out.println("N�o possui titulos");
-=======
 		for(Titulo c: titulos) {
 			System.out.println(c);
->>>>>>> f4a56500a3215b22a817e55016611274b1797675
-=======
-			System.out.println("N�o possui titulos");
->>>>>>> parent of faaa86d... add javadoc
-=======
-			System.out.println("N�o possui titulos");
->>>>>>> parent of faaa86d... add javadoc
-=======
-			System.out.println("N�o possui titulos");
->>>>>>> parent of faaa86d... add javadoc
 		}
 	}
 

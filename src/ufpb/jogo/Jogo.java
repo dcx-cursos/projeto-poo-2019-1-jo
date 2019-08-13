@@ -139,35 +139,9 @@ public class Jogo {
 		if (cor.equals("preto") || cor.equals("branco") || cor.equals("vermelho") || cor.equals("verde")
 				|| cor.equals("azul") || cor.equals("amarelo") || cor.equals("laranja") || cor.equals("rosa")) {
 			return true;
-<<<<<<< HEAD
-		}throw new CorValidaException("Esta cor não é válida. Tente novamente uma cor disponível!");
-	}
-	/**
-	 * metodo
-	 * @author joana
-	 * @return nome 
-	 * */
-	private String escolheNomeJogador() {
-		System.out.print("Digite o nome do jogador " + (this.jogadorAtual + 1) + ": ");
-		String nome = input.nextLine().toLowerCase();
-		return nome;
-
-	}
-	/**
-	 * metodo
-	 * @author joana
-	 * @return cor 
-	 * */
-	private String escolheCorPeao() {
-		System.out.println("Escolha a cor do peão do jogador " + (this.jogadorAtual + 1) + " entre as opções seguintes:\n"
-				+ "[preto][branco][vermelho][verde][azul][amarelo][laranja][rosa]:");
-		String cor = input.nextLine();
-		return cor;
-=======
 		}
 		throw new CorValidaException("Esta cor não é válida. Tente novamente uma cor disponível!");
 	}
->>>>>>> f4a56500a3215b22a817e55016611274b1797675
 
 	/**
 	 * Method that shows the options available to the player.
