@@ -58,3 +58,6 @@ Até um momento não foi implementado nenhum padrão de projeto, visto que ainda
 ## 4. Testes
 Até o momento só foi possível implementar um teste, o da classe Conta.
 
+## 5. [Link para o relatório](https://github.com/dcx-cursos/projeto-poo-2019-1-jo/tree/dev/relatorio)
+
+## 6. Para rodar o jogo, por favor, clone o projeto, abra a sua workspace na pasta "projeto-poo-2019-1-jo" e abra o projeto no diretório src
