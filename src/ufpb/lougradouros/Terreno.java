@@ -1,5 +1,7 @@
 package ufpb.lougradouros;
 
+import java.util.Scanner;
+
 import ufpb.exceptions.LimiteExcedidoException;
 import ufpb.exceptions.ValorInvalidoException;
 import ufpb.jogo.Jogador;
@@ -64,7 +66,7 @@ public class Terreno implements Titulo, Posicao {
 	@Override
 	public int getNumeroDePosicao() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.numeroDePosicao;
 	}
 
 	/**
@@ -77,11 +79,30 @@ public class Terreno implements Titulo, Posicao {
 	}
 
 	/**
-	 * @author 
+	 * @author
 	 **/
 
 	@Override
 	public void evento(Jogador j) {
-		if(this.dono == null) {			
-				j.comprarTerreno(this.precoDaPropriedade,this);				
-}}}
+		if (this.dono == null) {
+			Scanner e = new Scanner(System.in);
+			System.out.println("O titulo de propriedade "+this.nomeDoTerreno+" está disponivel por $"+this.precoDaPropriedade);
+			System.out.println(j.getNome()+" possui $"+j.getSaldo());
+			System.out.print("Deseja comprar "+this.nomeDoTerreno+"?(Sim/nao)");
+			String escolha = e.nextLine().toLowerCase();
+			if(escolha.equals("sim")) {
+				j.comprarTerreno(this.precoDaPropriedade, this);
+				this.dono = j;
+			}
+		}else {
+			j.pagar(this.dono, this.aluguel);
+			System.out.println("Pagou $"+this.aluguel+" ao jogador "+this.dono);
+		}
+	}
+
+	@Override
+	public void venderAoBanco(Jogador j) {
+		this.dono = null;
+		j.receber(this.precoDaPropriedade);
+	}
+}
