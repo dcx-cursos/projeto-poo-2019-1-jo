@@ -13,7 +13,8 @@ import ufpb.jogo.Conta;
 
 class ContaTest {
 	
-	private Conta conta;		
+	private Conta conta;	
+	
 	
 	
 	@BeforeEach

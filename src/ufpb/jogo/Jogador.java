@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import ufpb.exceptions.LimiteExcedidoException;
 import ufpb.exceptions.ValorInvalidoException;
-import ufpb.lougradouros.Titulo;
+import ufpb.lougradouros.TituloFactory;
 
 /**
  * Representing the player
@@ -16,7 +16,7 @@ public class Jogador {
 	private String cor;
 	private int posicao;
 	private Conta conta;
-	private LinkedList<Titulo> titulos;
+	private LinkedList<TituloFactory> titulos;
 	private boolean carta;
 
 	/**
@@ -31,7 +31,7 @@ public class Jogador {
 	public Jogador(String nome, String cor) {
 		this.nome = nome;
 		this.cor = cor;
-		this.titulos = new LinkedList<Titulo>();
+		this.titulos = new LinkedList<TituloFactory>();
 		this.conta = new Conta();
 		this.carta = false;
 	}
@@ -119,7 +119,7 @@ public class Jogador {
 	 * @throws ValorInvalidoException, LimiteExcedidoException
 	 */
 
-	public void comprarTitulo(int valor, Titulo t) {
+	public void comprarTitulo(int valor, TituloFactory t) {
 		try {
 			this.conta.debita(valor);
 			System.out.println("Compra efetuada com sucesso!");
@@ -170,12 +170,12 @@ public class Jogador {
 	 * 
 	 */
 
-	public LinkedList<Titulo> getTitulos() {
+	public LinkedList<TituloFactory> getTitulos() {
 		return titulos;
 	}
 
-	public void removeTitulo(Titulo t) {
-		this.titulos.remove(t);
+	public void removeTitulo(TituloFactory tituloFactory) {
+		this.titulos.remove(tituloFactory);
 	}
 
 	public boolean temCarta() {

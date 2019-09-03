@@ -3,12 +3,8 @@ package ufpb.lougradouros;
 import ufpb.jogo.Jogador;
 import ufpb.jogo.JogoFacade;
 
-public class Companhia implements Titulo, Posicao {
+public class Companhia extends TituloFactory implements  Posicao {
 
-	private int numeroDePosicao;
-	private String nomeDaCompanhia;
-	private int precoDaPropriedade;
-	private Jogador dono;
 	private int multiplicador;
 
 	/**
@@ -21,8 +17,8 @@ public class Companhia implements Titulo, Posicao {
 	 * @param int multiplicador - the rent multiplier
 	  */
 	public Companhia(int numeroDePosicao, String nomeDaCompanhia, int precoDaPropriedade, int multiplicadoor) {
-		this.numeroDePosicao = numeroDePosicao;
-		this.nomeDaCompanhia = nomeDaCompanhia;
+		this.posicao = numeroDePosicao;
+		this.nomeDoTitulo = nomeDaCompanhia;
 		this.precoDaPropriedade = precoDaPropriedade;
 		this.dono = null;
 		this.multiplicador = multiplicadoor;
@@ -35,7 +31,7 @@ public class Companhia implements Titulo, Posicao {
 	 * */
 	@Override
 	public int getNumeroDePosicao() {
-		return this.numeroDePosicao;
+		return this.posicao;
 	}
 	
 	/**
@@ -44,44 +40,12 @@ public class Companhia implements Titulo, Posicao {
 	 */
 	@Override
 	public String toString() {
-		return this.numeroDePosicao+" - "+ this.nomeDaCompanhia;
+		return this.posicao+" - "+ this.nomeDoTitulo;
 	}
 
 	@Override
-	public void evento(JogoFacade jogo) {
-		if (this.dono == null) {
-			System.out.println("O titulo de propriedade " + this.nomeDaCompanhia + " está disponivel por $"
-					+ this.precoDaPropriedade);
-			System.out.println(jogo.JogadorAtual().getNome() + " possui $" + jogo.JogadorAtual().getSaldo());
-			System.out.print("Deseja comprar " + this.nomeDaCompanhia + "?(Sim/nao)");
-			String escolha = jogo.input();
-			if (escolha.equalsIgnoreCase("sim")) {
-				jogo.JogadorAtual().comprarTitulo(this.precoDaPropriedade, this);
-				this.dono = jogo.JogadorAtual();
-			}
-			else if(!escolha.equalsIgnoreCase("nao")) {
-				//Trocar para uma exceção
-				System.out.println("Opção não permetida");
-				evento(jogo);
-			}
-		} else {
-			if (!this.dono.equals(jogo.JogadorAtual())) {
-				int sumDados = jogo.getUltimosDados()[0]+jogo.getUltimosDados()[1];
-				int totalAhPagar = this.multiplicador*sumDados;
-				jogo.JogadorAtual().pagar(this.dono, totalAhPagar);
-				System.out.println("Pagou $" + totalAhPagar + " ao jogador " + this.dono);
-			}
-		}
-	}
-	
-	@Override
-	public void venderAoBanco(Jogador j) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
 	public String mostrarTitulo() {
-		return "["+this.nomeDaCompanhia+"] multiplicador de "+this.multiplicador;
+		return "["+this.nomeDoTitulo+"] multiplicador de "+this.multiplicador;
 	}
 
 	@Override
@@ -95,6 +59,14 @@ public class Companhia implements Titulo, Posicao {
 	
 	public int getPrecoDaPropriedade() {
 		return this.precoDaPropriedade;
+	}
+
+	@Override
+	public void factoryMethod(JogoFacade jogo) {
+		int sumDados = jogo.getUltimosDados()[0]+jogo.getUltimosDados()[1];
+		int totalAhPagar = this.multiplicador*sumDados;
+		jogo.JogadorAtual().pagar(this.dono, totalAhPagar);
+		System.out.println("Pagou $" + totalAhPagar + " ao jogador " + this.dono);		
 	}
 
 }

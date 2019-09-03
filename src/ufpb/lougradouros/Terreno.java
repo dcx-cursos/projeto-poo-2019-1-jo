@@ -4,11 +4,8 @@ import ufpb.exceptions.ValorInvalidoException;
 import ufpb.jogo.Jogador;
 import ufpb.jogo.JogoFacade;
 
-public class Terreno implements Titulo, Posicao {
+public class Terreno extends TituloFactory implements  Posicao {
 
-	private int numeroDePosicao;
-	private String nomeDoTerreno;
-	private int precoDaPropriedade;
 	private int aluguel;
 	private int aluguelComUmaCasa;
 	private int aluguelComDuasCasa;
@@ -17,7 +14,6 @@ public class Terreno implements Titulo, Posicao {
 	private int aluguelComHotel;
 	private int precoDaCasa;
 	private String cor;
-	private Jogador dono;
 
 	/**
 	 * Constructor from class Terreno, enables initialization of position number,
@@ -41,8 +37,8 @@ public class Terreno implements Titulo, Posicao {
 	public Terreno(int numeroDePosicao, String nomeDoTerreno, int precoDaPropriedade, int aluguel,
 			int aluguelComUmaCasa, int aluguelComDuasCasas, int aluguelComTresCasas, int aluguelComQuatroCasas,
 			int aluguelComHotel, int precoDaCasa, String cor) {
-		this.numeroDePosicao = numeroDePosicao;
-		this.nomeDoTerreno = nomeDoTerreno;
+		this.posicao = numeroDePosicao;
+		this.nomeDoTitulo = nomeDoTerreno;
 		this.precoDaPropriedade = precoDaPropriedade;
 		this.aluguel = aluguel;
 		this.aluguelComUmaCasa = aluguelComUmaCasa;
@@ -64,7 +60,7 @@ public class Terreno implements Titulo, Posicao {
 	@Override
 	public int getNumeroDePosicao() {
 		// TODO Auto-generated method stub
-		return this.numeroDePosicao;
+		return this.posicao;
 	}
 
 	/**
@@ -73,55 +69,28 @@ public class Terreno implements Titulo, Posicao {
 	 */
 	@Override
 	public String toString() {
-		return this.numeroDePosicao + " - " + this.nomeDoTerreno;
+		return this.posicao + " - " + this.nomeDoTitulo;
 	}
 
 	/**
 	 * @author
 	 **/
 
-	@Override
-	public void evento(JogoFacade jogo) {
-		if (this.dono == null) {
-			System.out.println("O titulo de propriedade " + this.nomeDoTerreno + " está disponivel por $"
-					+ this.precoDaPropriedade);
-			System.out.println(jogo.JogadorAtual().getNome() + " possui $" + jogo.JogadorAtual().getSaldo());
-			boolean escolha;
-			try {
-				escolha = jogo.simOuNao(("Deseja comprar " + this.nomeDoTerreno + "?"));
-				if (escolha) {
-					jogo.JogadorAtual().comprarTitulo(this.precoDaPropriedade, this);
-					this.dono = jogo.JogadorAtual();
-				}
-			} catch (ValorInvalidoException e) {
-				System.err.print(e.getMessage()+"\n");
-				evento(jogo);
-
-			}
-			
-		} else {
-			if (!this.dono.equals(jogo.JogadorAtual())) {
-				jogo.JogadorAtual().pagar(this.dono, this.aluguel);
-				System.out.println("Pagou $" + this.aluguel + " ao jogador " + this.dono);
-			}
-		}
-	}
-
-	@Override
-	public void venderAoBanco(Jogador j) {
-		this.dono = null;
-		j.receber(this.precoDaPropriedade);
-		j.removeTitulo(this);
-	}
 
 	@Override
 	public String mostrarTitulo() {
-		return "[" + this.nomeDoTerreno + "] propriedade " + this.cor + " aluguel " + this.aluguel;
+		return "[" + this.nomeDoTitulo + "] propriedade " + this.cor + " aluguel " + this.aluguel;
 	}
 
 	@Override
 	public String getTipo() {
 		return "Terreno";
+	}
+
+	@Override
+	public void factoryMethod(JogoFacade jogo) {
+		jogo.JogadorAtual().pagar(this.dono, this.aluguel);
+		System.out.println("Pagou $" + this.aluguel + " ao jogador " + this.dono);		
 	}
 
 }
