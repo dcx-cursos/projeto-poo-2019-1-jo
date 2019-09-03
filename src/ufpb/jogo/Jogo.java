@@ -1,8 +1,5 @@
 package ufpb.jogo;
 
-import java.util.LinkedList;
-import java.util.Scanner;
-
 import ufpb.exceptions.CorValidaException;
 import ufpb.exceptions.ExisteJogadorComEstaCorException;
 
@@ -12,13 +9,10 @@ import ufpb.exceptions.ExisteJogadorComEstaCorException;
  */
 
 public class Jogo {
-	private static final Scanner input = new Scanner(System.in);
+	protected JogoFacade jogo;
+	int idJogador = 1;
 	private int numeroDeJogadores;
-	private LinkedList<Jogador> listaJogadores;
-	private int jogadorAtual;
-	private Dado dado = new Dado();
-	private Tabuleiro tabuleiro = new Tabuleiro();
-
+	
 	/**
 	 * Class that has the methods to starts and ends and other objects that make up
 	 * the game.
@@ -26,8 +20,7 @@ public class Jogo {
 	 * @author Clebson
 	 */
 	public Jogo() {
-		this.jogadorAtual = 0;
-		listaJogadores = new LinkedList<Jogador>();
+		this.jogo = new JogoFacade();
 	}
 
 	/**
@@ -52,38 +45,39 @@ public class Jogo {
 		System.out.print("Digite o número de jogadores [2 - 8]: ");
 		int numero = 0;
 		try {
-			numero = Integer.parseInt(input.nextLine());
+			numero = jogo.inputInt();
 		} catch (NumberFormatException e) {
 			System.err.print("O valor deve ser um inteiro!\n");
 		}
 		if (numero > 8 || numero < 2) {
+			System.out.println("Numero de jogadores invalidos");
 			nJogadores();
 		} else {
 			this.numeroDeJogadores = numero;
 		}
 	}
+
 	/**
 	 * methods
+	 * 
 	 * @author joana
-	 * @return nome 
-	 * */
+	 * @return nome
+	 */
 	private String escolheNomeJogador() {
-		System.out.print("Digite o nome do jogador " + (this.jogadorAtual + 1) + ": ");
-		String nome = input.nextLine().toLowerCase();
-		return nome;
-
+		System.out.print("Digite o nome do jogador " + (this.idJogador) + ": ");
+		return jogo.input();
 	}
+
 	/**
 	 * methods
+	 * 
 	 * @author joana
-	 * @return cor 
-	 * */
+	 * @return cor
+	 */
 	private String escolheCorPeao() {
-		System.out.print("Escolha a cor do peão do jogador " + (this.jogadorAtual + 1) + " entre as opções seguintes:"
-				+ "[preto][branco][vermelho][verde][azul][amarelo][laranja][rosa]" + "\n:");
-		String cor = input.nextLine();
+		System.out.print("Escolha a cor do peão do jogador " + (this.idJogador) + " entre as opções seguintes: [preto][branco][vermelho][verde][azul][amarelo][laranja][rosa]:");
+		String cor = jogo.input();
 		return cor;
-
 	}
 
 	/**
@@ -98,10 +92,10 @@ public class Jogo {
 			while (parar != true) {
 				String cor = escolheCorPeao();
 				try {
-					verificaSeAhCorEhValida(cor);
-					verificaSeExisteJogadorComEstaCor(cor);
-					this.listaJogadores.add(new Jogador(nome, cor));
-					this.jogadorAtual += 1;
+					jogo.verificaSeAhCorEhValida(cor);
+					jogo.verificaSeExisteJogadorComEstaCor(cor);
+					jogo.addJogador(new Jogador(nome, cor));
+					this.idJogador++; 
 					parar = true;
 				} catch (ExisteJogadorComEstaCorException e) {
 					System.err.println("Já existe jogador com a cor escolhida, tente novamente!");
@@ -113,92 +107,42 @@ public class Jogo {
 	}
 
 	/**
-	 * This method checks if there is any other player using the color passed as a
-	 * parameter.
-	 * 
-	 * @param cor
-	 * @throws ExisteJogadorComEstaCorException
-	 * @author Amanda
-	 */
-	private void verificaSeExisteJogadorComEstaCor(String cor) throws ExisteJogadorComEstaCorException {
-		for (Jogador j : this.listaJogadores) {
-			if (j.getCor().equals(cor)) {
-				throw new ExisteJogadorComEstaCorException(
-						"Já existe um jogador utilizando esta cor. Tente novamente!");
-			}
-		}
-	}
-
-	/**
-	 * @param String cor
-	 * @return true if the color passed as a parameter is within expected colors
-	 * @throws CorValidaException
-	 * @author Amanda 
-	 */
-	private boolean verificaSeAhCorEhValida(String cor) throws CorValidaException {
-		if (cor.equals("preto") || cor.equals("branco") || cor.equals("vermelho") || cor.equals("verde")
-				|| cor.equals("azul") || cor.equals("amarelo") || cor.equals("laranja") || cor.equals("rosa")) {
-			return true;
-		}
-		throw new CorValidaException("Esta cor não é válida. Tente novamente uma cor disponível!");
-	}
-
-	/**
 	 * Method that shows the options available to the player.
 	 * 
 	 * @author Joyce
 	 * @param j Jogador
 	 */
 	private void opcoes(Jogador j) {
-		System.out.print("Comandos disponíveis: [jogar][status][sair]\nEntre com um comando: ");
-		String opcao = input.nextLine().toLowerCase();
-		switch (opcao) {
-		case "jogar":
-			j.jogada(this.dado, this.tabuleiro);
-			break;
-		case "status":
-			j.status(this.tabuleiro);
-
-			this.opcoes(j);
-			break;
-		case "sair":
-			System.out.print("Você realmente quer sair (Sim/Nao)? ");
-			String sair = input.nextLine().toLowerCase();
-			if (sair.startsWith("s")) {
-				if (this.numeroDeJogadores > 2) {
-					this.numeroDeJogadores -= 1;
-					listaJogadores.remove(this.jogadorAtual);
-					partida();
-					break;
-				} else {
-					System.out.println("Jogo encerrado.");
-					System.exit(0);
-				}
-			}
-		default:
+		if(jogo.verificarSeTaNaPrisao()) {
+			opcoesPrisao();
+		}else {
+			opcoesNormal();
+		}
+		String opcao = jogo.input();
+		jogo.escolheOpcao(opcao);
+		boolean jogar = jogo.executarOpcao();
+		if(!jogar) {
 			opcoes(j);
-
 		}
 	}
-
+	private void opcoesNormal() {
+		System.out.print("Comandos disponíveis:[jogar][status][sair]\nEntre com um comando: ");
+	}
+	
+	private void opcoesPrisao() {
+		System.out.print("Comandos disponíveis:[pagar][cartas][jogar][status][sair]\nEntre com um comando: ");
+	}
+	
 	/**
 	 * The match
 	 * 
 	 * @author Joyce
 	 */
 	private void partida() {
-		// To-do
-		// Chama as opÃ§Ãµes do jogador e depois troca o jogador atual
-		while (this.jogadorAtual < this.numeroDeJogadores) {
-			Jogador jAtual = this.listaJogadores.get(jogadorAtual);
-			System.out.println("A jogada de " + jAtual.toString() + "comeÃ§ou:");
-			opcoes(listaJogadores.get(this.jogadorAtual));
-			tabuleiro.getPosicoeDoTabuleiro(jAtual.getPosicao()).evento(jAtual);
-			jogadorAtual += 1;
-		}
-		this.jogadorAtual = 0;
+		System.out.println("A jogada de " + jogo.JogadorAtual().toString() + "começou:");
+		opcoes(jogo.JogadorAtual());
+		this.jogo.pollJogador();
 		partida();
-
 	}
 
 }

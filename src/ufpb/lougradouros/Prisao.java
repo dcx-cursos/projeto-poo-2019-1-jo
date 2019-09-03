@@ -1,6 +1,6 @@
  package ufpb.lougradouros;
 
-import ufpb.jogo.Jogador;
+import ufpb.jogo.JogoFacade;
 
 public class Prisao implements Posicao {
 	private int posicao;
@@ -37,8 +37,14 @@ public class Prisao implements Posicao {
 	}
 
 	@Override
-	public void evento(Jogador j) {
+	public void evento(JogoFacade jogo) {
 		System.out.println("Nada Aconteceu.");
+	}
+
+	@Override
+	public String getTipo() {
+		System.out.println("Entrou aq");
+		return "Prisão";
 	}
 }
 

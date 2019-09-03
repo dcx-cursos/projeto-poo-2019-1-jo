@@ -1,6 +1,7 @@
 package ufpb.lougradouros;
 
 import ufpb.jogo.Jogador;
+import ufpb.jogo.JogoFacade;
 
 public class Companhia implements Titulo, Posicao {
 
@@ -47,7 +48,7 @@ public class Companhia implements Titulo, Posicao {
 	}
 
 	@Override
-	public void evento(Jogador j) {
+	public void evento(JogoFacade j) {
 		// TODO Auto-generated method stub
 
 	}
@@ -61,6 +62,12 @@ public class Companhia implements Titulo, Posicao {
 	public String mostrarTitulo() {
 		// TODO Auto-generated method stub
 		return "["+this.nomeDaCompanhia+"] multiplicador de "+this.multiplicador;
+	}
+
+	@Override
+	public String getTipo() {
+		// TODO Auto-generated method stub
+		return "Companhia";
 	}
 
 

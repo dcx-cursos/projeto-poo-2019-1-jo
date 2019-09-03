@@ -1,6 +1,7 @@
 package ufpb.lougradouros;
 
 import ufpb.jogo.Jogador;
+import ufpb.jogo.JogoFacade;
 
 public class ParadaLivre implements Posicao {
 
@@ -34,9 +35,15 @@ public class ParadaLivre implements Posicao {
 		return this.posicao+ "- Parada Livre";
 	}
 	@Override
-	public void evento(Jogador j) {
+	public void evento(JogoFacade jogo) {
 		// TODO Auto-generated method stub
 		System.out.println("Nada Aconteceu.");
+	}
+
+	@Override
+	public String getTipo() {
+		// TODO Auto-generated method stub
+		return "Parada Livre";
 	}
 
 }

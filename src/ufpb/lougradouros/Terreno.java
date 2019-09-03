@@ -1,10 +1,10 @@
 package ufpb.lougradouros;
 
-import java.util.Scanner;
 
 import ufpb.exceptions.LimiteExcedidoException;
 import ufpb.exceptions.ValorInvalidoException;
 import ufpb.jogo.Jogador;
+import ufpb.jogo.JogoFacade;
 
 public class Terreno implements Titulo, Posicao {
 
@@ -83,21 +83,25 @@ public class Terreno implements Titulo, Posicao {
 	 **/
 
 	@Override
-	public void evento(Jogador j) {
+	public void evento(JogoFacade jogo) {
 		if (this.dono == null) {
-			Scanner e = new Scanner(System.in);
 			System.out.println("O titulo de propriedade " + this.nomeDoTerreno + " está disponivel por $"
 					+ this.precoDaPropriedade);
-			System.out.println(j.getNome() + " possui $" + j.getSaldo());
+			System.out.println(jogo.JogadorAtual().getNome() + " possui $" + jogo.JogadorAtual().getSaldo());
 			System.out.print("Deseja comprar " + this.nomeDoTerreno + "?(Sim/nao)");
-			String escolha = e.nextLine().toLowerCase();
-			if (escolha.equals("sim")) {
-				j.comprarTerreno(this.precoDaPropriedade, this);
-				this.dono = j;
+			String escolha = jogo.input();
+			if (escolha.equalsIgnoreCase("sim")) {
+				jogo.JogadorAtual().comprarTerreno(this.precoDaPropriedade, this);
+				this.dono = jogo.JogadorAtual();
+			}
+			else if(!escolha.equalsIgnoreCase("nao")) {
+				//Trocar para uma exceção
+				System.out.println("Opção não permetida");
+				evento(jogo);
 			}
 		} else {
-			if (!this.dono.equals(j)) {
-				j.pagar(this.dono, this.aluguel);
+			if (!this.dono.equals(jogo.JogadorAtual())) {
+				jogo.JogadorAtual().pagar(this.dono, this.aluguel);
 				System.out.println("Pagou $" + this.aluguel + " ao jogador " + this.dono);
 			}
 		}
@@ -112,5 +116,11 @@ public class Terreno implements Titulo, Posicao {
 	@Override
 	public String mostrarTitulo() {
 		return "["+this.nomeDoTerreno+"] propriedade "+this.cor+" aluguel "+this.aluguel;
+	}
+
+	@Override
+	public String getTipo() {
+		// TODO Auto-generated method stub
+		return "Terreno";
 	}
 }

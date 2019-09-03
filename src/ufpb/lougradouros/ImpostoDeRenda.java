@@ -1,6 +1,6 @@
 package ufpb.lougradouros;
 
-import ufpb.jogo.Jogador;
+import ufpb.jogo.JogoFacade;
 
 public class ImpostoDeRenda implements Posicao {
 
@@ -26,9 +26,15 @@ public class ImpostoDeRenda implements Posicao {
 	}
 
 	@Override
-	public void evento(Jogador j) {
+	public void evento(JogoFacade jogo) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public String getTipo() {
+		// TODO Auto-generated method stub
+		return "Imposto de renda";
 	}
 
 }

@@ -18,7 +18,7 @@ public class Jogador {
 	private int posicao;
 	private Conta conta;
 	private LinkedList<Titulo> titulos;
-
+	private boolean carta;
 	
 	/**
 	 * Constructor from class Jogador, enables initialization of name and color
@@ -34,6 +34,7 @@ public class Jogador {
 		this.cor = cor;
 		this.titulos = new LinkedList<Titulo>();
 		this.conta = new Conta();
+		this.carta = false;
 	}
 	
 	public void receber(int valor) {
@@ -56,6 +57,21 @@ public class Jogador {
 			}else {
 				this.titulos.getLast().venderAoBanco(j);;
 				pagar(j,valor);
+			}
+		}
+	}
+	
+	public void pagar( int valor) {
+		try {
+			this.conta.debita(valor);
+		} catch (ValorInvalidoException e) {
+			
+		} catch (LimiteExcedidoException e) {
+			if(this.titulos.size() == 0) {
+				System.out.println("Falencia");	
+			}else {
+				this.titulos.getLast().venderAoBanco(this);;
+				pagar(valor);
 			}
 		}
 	}
@@ -135,14 +151,18 @@ public class Jogador {
 	public void jogada(Dado d, Tabuleiro t) {
 		int dado1 = d.lancaDado();
 		int dado2 = d.lancaDado();
-		this.posicao += dado1 + dado2;
-		if (this.posicao > 39) {
-			this.posicao -= 39;
-		}
+		
 		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "
 				+ t.getPosicoeDoTabuleiro(this.getPosicao()));
 	}
 
+	public void avancarCasas(int nCasas) {
+		this.posicao += nCasas;
+		if (this.posicao > 39) {
+			this.posicao -= 39;
+		}
+	}
+	
 	/**
 	 * Metodo para indicar o status do jogador
 	 * 
@@ -151,18 +171,9 @@ public class Jogador {
 	 * 
 	 */
 
-	public void status(Tabuleiro t) {
-		System.out.println("O status de " + this.toString() + " é o seguinte:");
-		System.out.println("Situado na posição " + t.getPosicoeDoTabuleiro(this.getPosicao()));
-		System.out.println("Titulos:");
-		for (Titulo c : titulos) {
-			System.out.println(c);
-		}
+	public LinkedList<Titulo> getTitulos(){
+		return titulos;
 	}
-
-	public void sair() {
-		// SAIR DA APLICAÇÃO
-		System.exit(0);
-	}
+	
 
 }

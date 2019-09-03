@@ -3,27 +3,23 @@ package ufpb.jogo;
 import ufpb.recuperaDados.RecuperaDadosDoTXT;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
-import ufpb.cartasEspeciais.SorteOuReves;
-import ufpb.lougradouros.Companhia;
-import ufpb.lougradouros.ImpostoDeRenda;
-import ufpb.lougradouros.LucroEDividendo;
-import ufpb.lougradouros.ParadaLivre;
-import ufpb.lougradouros.PontoDePartida;
-import ufpb.lougradouros.Posicao;
-import ufpb.lougradouros.Prisao;
-import ufpb.lougradouros.Terreno;
+import ufpb.lougradouros.*;
+
 
 public class Tabuleiro {
 
 	private Posicao[] posicoeDoTabuleiro;
 	private RecuperaDadosDoTXT recupera = new RecuperaDadosDoTXT();
-
+	
 	private static final String ARQUIVO_POSICOES_ESPECIAIS = "./Arquivos/posicoesEspeciais.txt";
 	private static final String ARQUIVO_COMPANHIAS = "./Arquivos/companhias.txt";
 	private static final String ARQUIVO_PRISAO = "./Arquivos/prisao.txt";
 	private static final String ARQUIVO_TERRENOS = "./Arquivos/terrenos.txt";
 	private static final String ARQUIVO_POSICOES_DE_SORTE_OU_REVES = "./Arquivos/posicaoDeSorteOuReves.txt";
+	private static final String ARQUIVO_SORTE_OU_REVES = "./Arquivos/cartasDeSorteOuReves.txt";
+
 
 	/**
 	 * Constructor from class Tabuleiro, enables initialization of position on the
@@ -39,6 +35,8 @@ public class Tabuleiro {
 		recuperaPrisao();
 		recuperaTerrenos();
 		recuperaPosicoesDeSorteOuReves();
+
+		
 
 	}
 
@@ -171,8 +169,7 @@ public class Tabuleiro {
 			for (String s : recupera.recuperaTextoDeArquivo(ARQUIVO_POSICOES_DE_SORTE_OU_REVES)) {
 
 				int posicao = Integer.parseInt(s);
-				SorteOuReves r = new SorteOuReves(posicao);
-
+				PosicaoSorteOuReves r = new PosicaoSorteOuReves(posicao);
 				this.posicoeDoTabuleiro[posicao] = r;
 
 			}
@@ -191,4 +188,6 @@ public class Tabuleiro {
 		return this.posicoeDoTabuleiro[indice];
 	}
 
+
+	
 }
