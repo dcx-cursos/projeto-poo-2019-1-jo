@@ -27,7 +27,7 @@ public class ImpostoDeRenda implements Posicao {
 	@Override
 	public void evento(JogoFacade jogo) {
 		System.out.println("Você pagou 200");
-		jogo.JogadorAtual().pagar(200);
+		jogo.JogadorAtual().pagar(200,jogo);
 	}
 
 	@Override

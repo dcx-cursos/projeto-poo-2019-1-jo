@@ -1,9 +1,30 @@
 package ufpb.lougradouros;
 
-import ufpb.jogo.Jogador;
 import ufpb.jogo.JogoFacade;
 
 public class Companhia extends TituloFactory implements  Posicao {
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + multiplicador;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Companhia other = (Companhia) obj;
+		if (multiplicador != other.multiplicador)
+			return false;
+		return true;
+	}
 
 	private int multiplicador;
 

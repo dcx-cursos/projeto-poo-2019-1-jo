@@ -193,7 +193,13 @@ public class Tabuleiro {
 	public Posicao getPosicoeDoTabuleiro(int indice) {
 		return this.posicoeDoTabuleiro[indice];
 	}
-
+	
+	/**
+	 * Methods
+	 * 
+	 * @author joyce
+	 * 
+	 */
 	public SorteOuReves getSorteOuReves() {
 		SorteOuReves carta = this.baralho.pollFirst();
 		this.baralho.add(carta);

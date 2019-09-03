@@ -3,7 +3,14 @@ package ufpb.opcoes;
 import ufpb.jogo.JogoFacade;
 
 public class Carta implements Opcao {
-
+	
+	/**
+	 * Methods
+	 * 
+	 * @author Joyce
+	 * @param jogo JogoFacade
+	 * @return boolean
+	 */
 	@Override
 	public boolean fazerOP(JogoFacade jogo) {
 		// TODO Auto-generated method stub

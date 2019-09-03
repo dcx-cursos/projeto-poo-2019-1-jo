@@ -6,15 +6,32 @@ import ufpb.exceptions.ValorInvalidoException;
 public class Conta {
 	private int saldo;
 
+	/**
+	 * Methods
+	 * 
+	 * @author Joana
+	 * 
+	 */
 	public Conta() {
 		this.saldo = 1500;
 	}
-
+	
+	/**
+	 * Methods
+	 * 
+	 * @author Joana
+	 * @return int
+	 */
 	public int getSaldo() {
 		return this.saldo;
 	}
 	
-
+	/**
+	 * Methods
+	 * 
+	 * @author joana
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return "Possui: " + this.saldo;

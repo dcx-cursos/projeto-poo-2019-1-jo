@@ -10,6 +10,10 @@ import ufpb.opcoes.Status;
 public class JogoFactory {
 	protected Opcao op;
 
+	/**
+	 * 
+	 * @author Clebson
+	 */
 	public boolean escolheOpcao(String opcao, JogoFacade jogo) {
 		switch (opcao) {
 		case "jogar":
@@ -22,8 +26,7 @@ public class JogoFactory {
 			boolean escolha;
 			try {
 				escolha = jogo.simOuNao("Você realmente quer sair");
-				if(escolha)
-				{
+				if (escolha) {
 					setOpcaoSair();
 					return true;
 				}
@@ -31,7 +34,7 @@ public class JogoFactory {
 
 			} catch (ValorInvalidoException e) {
 				System.err.println(e.getMessage());
-				escolheOpcao(opcao,jogo);
+				escolheOpcao(opcao, jogo);
 			}
 			break;
 		default:
@@ -39,23 +42,43 @@ public class JogoFactory {
 		}
 		return true;
 	}
-	
+
+	/**
+	 * 
+	 * @author Joana
+	 */
 	public void setOpcaoJogar() {
 		this.op = new Jogar();
 	}
 
+	/**
+	 * 
+	 * @author Joyce
+	 */
 	public void setOpcaoStatus() {
 		this.op = new Status();
 	}
 
+	/**
+	 * 
+	 * @author Clebson
+	 */
 	public void setOpcaoSair() {
 		this.op = new Sair();
 	}
-	
+
+	/**
+	 * 
+	 * @author Amanda
+	 */
 	protected void setOpcaoErro() {
 		this.op = new Erro();
 	}
 
+	/**
+	 * 
+	 * @author Clebson
+	 */
 	public boolean executarOpcao(JogoFacade jogo) {
 		return this.op.fazerOP(jogo);
 	}

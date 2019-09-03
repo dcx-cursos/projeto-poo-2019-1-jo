@@ -1,6 +1,5 @@
 package ufpb.cartas;
 
-import ufpb.jogo.Jogador;
 import ufpb.jogo.JogoFacade;
 
 public class Pague extends SorteOuReves{
@@ -11,9 +10,9 @@ public class Pague extends SorteOuReves{
 	}
 
 	@Override
-	public void acao(Jogador j) {
+	public void acao(JogoFacade j) {
 		// TODO Auto-generated method stub
-		j.pagar(valor);
+		j.JogadorAtual().pagar(valor,j);
 		System.out.println(this.descricao+"\n"+"Você pagou "+this.valor);
 	}
 

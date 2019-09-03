@@ -1,10 +1,40 @@
 package ufpb.lougradouros;
 
-import ufpb.exceptions.ValorInvalidoException;
-import ufpb.jogo.Jogador;
 import ufpb.jogo.JogoFacade;
 
 public class Terreno extends TituloFactory implements  Posicao {
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Terreno other = (Terreno) obj;
+		if (aluguel != other.aluguel)
+			return false;
+		if (aluguelComDuasCasa != other.aluguelComDuasCasa)
+			return false;
+		if (aluguelComHotel != other.aluguelComHotel)
+			return false;
+		if (aluguelComQuatroCasa != other.aluguelComQuatroCasa)
+			return false;
+		if (aluguelComTresCasa != other.aluguelComTresCasa)
+			return false;
+		if (aluguelComUmaCasa != other.aluguelComUmaCasa)
+			return false;
+		if (cor == null) {
+			if (other.cor != null)
+				return false;
+		} else if (!cor.equals(other.cor))
+			return false;
+		if (precoDaCasa != other.precoDaCasa)
+			return false;
+		return true;
+	}
 
 	private int aluguel;
 	private int aluguelComUmaCasa;

@@ -137,10 +137,18 @@ public class Jogo {
 			opcoes(j);
 		}
 	}
+	/**
+	 * 
+	 * @author Joana
+	 */
 	private void opcoesNormal() {
 		System.out.print("Comandos disponíveis:[jogar][status][sair]\nEntre com um comando: ");
 	}
 	
+	/**
+	 * 
+	 * @author Joana
+	 */
 	private void opcoesPrisao() {
 		System.out.print("Comandos disponíveis:[pagar][cartas][jogar][status][sair]\nEntre com um comando: ");
 	}

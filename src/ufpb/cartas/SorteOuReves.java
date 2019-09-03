@@ -1,18 +1,28 @@
 package ufpb.cartas;
 
-import ufpb.jogo.Jogador;
+import ufpb.jogo.JogoFacade;
 
 
-public class SorteOuReves {
+public abstract class SorteOuReves {
 	protected String descricao;
 	protected int valor;
 	
+	/**
+	 * Methods
+	 * 
+	 * @author Clebson
+	 * @param descricao String, valor String
+	 */
 	public SorteOuReves(String descricao, String valor) {
 		this.descricao = descricao;
 		this.valor = Integer.parseInt(valor);
 	}
 	
-	public void acao(Jogador j) {
-		System.out.println(this.descricao+"\n");
-	}
+	/**
+	 * Methods
+	 * 
+	 * @author Clebson
+	 * @param j JogoFacade
+	 */
+	public abstract void acao(JogoFacade j);
 }

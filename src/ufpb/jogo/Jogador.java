@@ -26,7 +26,7 @@ public class Jogador {
 	 * @author Joana
 	 * @param String nome - player's name
 	 * @param String cor - player's pawn color
-	 * @param int    posicao - the player's position
+	 * @param        int posicao - the player's position
 	 */
 	public Jogador(String nome, String cor) {
 		this.nome = nome;
@@ -36,6 +36,11 @@ public class Jogador {
 		this.carta = false;
 	}
 
+	/**
+	 * 
+	 * @author Amanda
+	 * 
+	 */
 	public void receber(int valor) {
 		try {
 			this.conta.deposita(valor);
@@ -44,6 +49,11 @@ public class Jogador {
 		}
 	}
 
+	/**
+	 * 
+	 * @author Amanda
+	 * 
+	 */
 	public void pagar(Jogador j, int valor) {
 		try {
 			this.conta.debita(valor);
@@ -54,14 +64,18 @@ public class Jogador {
 			if (this.titulos.size() == 0) {
 				System.out.println("Falencia");
 			} else {
-				this.titulos.getLast().venderAoBanco(j);
-				;
+				this.titulos.getLast().venderAoBanco(this);
 				pagar(j, valor);
 			}
 		}
 	}
 
-	public void pagar(int valor) {
+	/**
+	 * 
+	 * @author Joyce
+	 * 
+	 */
+	public void pagar(int valor, JogoFacade jogo) {
 		try {
 			this.conta.debita(valor);
 		} catch (ValorInvalidoException e) {
@@ -69,9 +83,10 @@ public class Jogador {
 		} catch (LimiteExcedidoException e) {
 			if (this.titulos.size() == 0) {
 				System.out.println("Falencia");
+				jogo.removeJogador();
 			} else {
 				this.titulos.getLast().venderAoBanco(this);
-				pagar(valor);
+				pagar(valor, jogo);
 			}
 		}
 	}
@@ -106,6 +121,11 @@ public class Jogador {
 		return this.posicao;
 	}
 
+	/**
+	 * 
+	 * @author Joyce
+	 * 
+	 */
 	public int getSaldo() {
 		return this.conta.getSaldo();
 	}
@@ -150,17 +170,24 @@ public class Jogador {
 	 */
 	// JOGADOR USA DADO, PORTANTO, DADO É UM PARAMETRO DO METODO JOGADA
 	public void jogada(int dado1, int dado2, JogoFacade jogo) {
-		avancarCasas(dado1,dado2);
-		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "+ jogo.getPosicaoAtual());
+		avancarCasas(dado1, dado2);
+		System.out.println(
+				this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou " + jogo.getPosicaoAtual());
 	}
 
+	/**
+	 * Metodo para avançar casas
+	 * 
+	 * @author Clebson
+	 * @param dado1 int
+	 * @param dado2 int
+	 */
 	public void avancarCasas(int dado1, int dado2) {
-		this.posicao += dado1+dado2;
+		this.posicao += dado1 + dado2;
 		if (this.posicao > 39) {
 			this.posicao -= 39;
 		}
 	}
-
 
 	/**
 	 * Metodo para indicar o status do jogador
@@ -175,9 +202,19 @@ public class Jogador {
 	}
 
 	public void removeTitulo(TituloFactory tituloFactory) {
-		this.titulos.remove(tituloFactory);
+		for (int k = 0; k < this.titulos.size(); k++) {
+			if (titulos.get(k).equals(tituloFactory)) {
+				System.out.println(titulos.get(k) + " foi vendido.");
+				titulos.remove(k);
+			}
+		}
 	}
 
+	/**
+	 * 
+	 * @author Joyce
+	 * 
+	 */
 	public boolean temCarta() {
 		if (this.carta == true) {
 			return true;
@@ -185,14 +222,29 @@ public class Jogador {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @author Joyce
+	 * 
+	 */
 	public void removeCarta() {
 		this.carta = false;
 	}
 
+	/**
+	 * 
+	 * @author Amanda
+	 * 
+	 */
 	public void addCarta() {
 		this.carta = true;
 	}
-	
+
+	/**
+	 * 
+	 * @author Amanda
+	 * 
+	 */
 	public void vaiParaPrisao() {
 		this.posicao = 30;
 	}
