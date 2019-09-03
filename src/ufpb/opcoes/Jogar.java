@@ -20,6 +20,7 @@ public class Jogar implements Opcao {
 		System.out.println(jogo.JogadorAtual() + "tirou " + this.dado1 + "," + this.dado2 + " e o peão avançou "
 				+ jogo.getPosicaoAtual());
 		jogo.chamarEvento();
+		
 	}
 
 }

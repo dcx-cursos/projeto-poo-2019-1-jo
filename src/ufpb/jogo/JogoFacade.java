@@ -6,17 +6,18 @@ import java.util.Scanner;
 import ufpb.cartas.SorteOuReves;
 import ufpb.exceptions.CorValidaException;
 import ufpb.exceptions.ExisteJogadorComEstaCorException;
+import ufpb.exceptions.ValorInvalidoException;
 import ufpb.lougradouros.Posicao;
-import ufpb.lougradouros.Prisao;
 import ufpb.opcoes.*;
 
 public class JogoFacade {
-	private static final Scanner in = new Scanner(System.in);
-	private LinkedList<Jogador> listaJogadores;
-	private Dado dado = new Dado();
-	private Tabuleiro tabuleiro = new Tabuleiro();
-	protected Opcao op;
+	protected static final Scanner in = new Scanner(System.in);
+	protected LinkedList<Jogador> listaJogadores;
+	protected Dado dado = new Dado();
+	protected Tabuleiro tabuleiro = new Tabuleiro();
+	private JogoFactory fabrica;
 
+	
 	public JogoFacade() {
 		listaJogadores = new LinkedList<Jogador>();
 	}
@@ -49,28 +50,8 @@ public class JogoFacade {
 		return (this.dado.lancaDado());
 	}
 
-	public void setOpcaoJogar() {
-		this.op = new Jogar();
-	}
-
-	public void setOpcaoStatus() {
-		this.op = new Status();
-	}
-
-	public void setOpcaoSair() {
-		this.op = new Sair();
-	}
-	
 	public boolean verificarSeTaNaPrisao() {
 		return this.tabuleiro.getPosicoeDoTabuleiro(this.JogadorAtual().getPosicao()).getTipo().equals("Prisão");
-	}  
-
-	protected void setOpcaoErro() {
-		this.op = new Erro();
-	}
-
-	public boolean executarOpcao() {
-		return this.op.fazerOP(this);
 	}
 
 	/**
@@ -91,6 +72,8 @@ public class JogoFacade {
 		}
 	}
 
+	
+	
 	/**
 	 * @param String cor
 	 * @throws CorValidaException
@@ -106,27 +89,6 @@ public class JogoFacade {
 		throw new CorValidaException("Esta cor não é válida. Tente novamente uma cor disponível!");
 	}
 
-	public void escolheOpcao(String opcao) {
-		switch (opcao) {
-		case "jogar":
-			setOpcaoJogar();
-			break;
-		case "status":
-			setOpcaoStatus();
-			break;
-		case "sair":
-			System.out.println("Você realmente quer sair (Sim/Não)?");
-			String escolha = this.input();
-			if(escolha.equalsIgnoreCase("sim"))
-			{
-				setOpcaoSair();
-			}
-			break;
-		default:
-			setOpcaoErro();
-		}
-	}
-
 	public Jogador JogadorAtual() {
 		return this.listaJogadores.getFirst();
 	}
@@ -139,10 +101,29 @@ public class JogoFacade {
 	public Posicao getPosicaoAtual() {
 		return this.tabuleiro.getPosicoeDoTabuleiro(this.JogadorAtual().getPosicao());
 	}
-	
+
 	public SorteOuReves getCarta() {
 		return this.tabuleiro.getSorteOuReves();
 	}
+
+	public void verificaNumeroJogadores(int numero) throws ValorInvalidoException {
+		if ((numero > 8 || numero < 2)) {
+			throw new ValorInvalidoException("Número de jogadores inválidos!\n");
+		}
+	}
+
+	public void passarAVez() {
+		this.listaJogadores.add(this.listaJogadores.pollFirst());
+	}
 	
+	public void setPrisao() {
+		this.fabrica = new JogoFactoryPrisao();
+	}
+	public void setFabrica() {
+		this.fabrica = new JogoFactory();
+	}
+	public JogoFactory getFabrica() {
+		return this.fabrica;
+	}
 
 }

@@ -33,7 +33,6 @@ public class PosicaoSorteOuReves implements Posicao {
 
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
 		return "Sorte ou reves";
 	}
 

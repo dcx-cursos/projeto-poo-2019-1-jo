@@ -111,6 +111,7 @@ public class Terreno implements Titulo, Posicao {
 	public void venderAoBanco(Jogador j) {
 		this.dono = null;
 		j.receber(this.precoDaPropriedade);
+		j.removeTitulo(this);
 	}
 
 	@Override

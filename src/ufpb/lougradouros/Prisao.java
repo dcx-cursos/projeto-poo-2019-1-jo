@@ -1,18 +1,16 @@
  package ufpb.lougradouros;
 
 import ufpb.jogo.JogoFacade;
-	
+
 public class Prisao implements Posicao {
 	private int posicao;
 	private String nome;
-	
 	/**
 	 * Constructor from class Prisao, enables initialization of name and position attribute. 
 	 *@author Clebson
 	 *@param string nome - the name
 	 *@param int posicao - the position
 	 **/
-	
 	public Prisao(int posicao, String nome) {	
 		this.nome = nome;
 		this.posicao = posicao;
@@ -40,12 +38,12 @@ public class Prisao implements Posicao {
 
 	@Override
 	public void evento(JogoFacade jogo) {
-		System.out.println("Nada Aconteceu.");
+		System.out.println("Passou a vez");
+	
 	}
 
 	@Override
 	public String getTipo() {
-		System.out.println("Entrou aq");
 		return "Prisão";
 	}
 }

@@ -12,6 +12,7 @@ public class HabeasCorpus extends SorteOuReves{
 	@Override
 	public void acao(Jogador j) {
 		// TODO Auto-generated method stub
+		j.addCarta();
 		System.out.println(this.descricao);
 		
 	}

@@ -2,6 +2,7 @@ package ufpb.jogo;
 
 import ufpb.exceptions.CorValidaException;
 import ufpb.exceptions.ExisteJogadorComEstaCorException;
+import ufpb.exceptions.ValorInvalidoException;
 
 /**
  * <h1>ENTRADA ACEITAR APENAS NÚMEROS INTEIROS SEM DÃ� ERRO</h1> //ENTRADA DE
@@ -10,8 +11,9 @@ import ufpb.exceptions.ExisteJogadorComEstaCorException;
 
 public class Jogo {
 	protected JogoFacade jogo;
-	int idJogador = 1;
+	private int idJogador = 1;
 	private int numeroDeJogadores;
+	
 	
 	/**
 	 * Class that has the methods to starts and ends and other objects that make up
@@ -46,15 +48,16 @@ public class Jogo {
 		int numero = 0;
 		try {
 			numero = jogo.inputInt();
+			this.jogo.verificaNumeroJogadores(numero);
+			this.numeroDeJogadores = numero;
 		} catch (NumberFormatException e) {
 			System.err.print("O valor deve ser um inteiro!\n");
-		}
-		if (numero > 8 || numero < 2) {
-			System.out.println("Numero de jogadores invalidos");
 			nJogadores();
-		} else {
-			this.numeroDeJogadores = numero;
+		}catch (ValorInvalidoException e) {
+			System.err.print("Número de jogadores inválidos!");
+			nJogadores();
 		}
+		
 	}
 
 	/**
@@ -119,9 +122,9 @@ public class Jogo {
 			opcoesNormal();
 		}
 		String opcao = jogo.input();
-		jogo.escolheOpcao(opcao);
-		boolean jogar = jogo.executarOpcao();
-		if(!jogar) {
+		jogo.getFabrica().escolheOpcao(opcao,this.jogo);
+		boolean jogar = jogo.getFabrica().executarOpcao(this.jogo);
+		if((jogar==false ) || (!(opcao.equals("jogar") | opcao.equals("carta") | opcao.equals("pagar")))) {
 			opcoes(j);
 		}
 	}
@@ -139,10 +142,16 @@ public class Jogo {
 	 * @author Joyce
 	 */
 	private void partida() {
+		if(jogo.verificarSeTaNaPrisao()) {
+			jogo.setPrisao();
+		}else {
+			jogo.setFabrica();
+		}
 		System.out.println("A jogada de " + jogo.JogadorAtual().toString() + "começou:");
 		opcoes(jogo.JogadorAtual());
 		this.jogo.pollJogador();
 		partida();
 	}
+	
 
 }

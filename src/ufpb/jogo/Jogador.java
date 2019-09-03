@@ -175,5 +175,23 @@ public class Jogador {
 		return titulos;
 	}
 	
+	public void removeTitulo(Titulo t) {
+		this.titulos.remove(t);
+	}
+	
+	public boolean temCarta() {
+		if(this.carta == true) {
+			return true;
+		} return false;
+	}
+	
+	public void removeCarta() {
+		this.carta = false;
+	}
+
+	public void addCarta() {
+		this.carta = true;
+	}
+	
 
 }
