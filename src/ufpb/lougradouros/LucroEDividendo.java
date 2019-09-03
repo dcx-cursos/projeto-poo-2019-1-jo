@@ -22,20 +22,24 @@ public class LucroEDividendo implements Posicao {
 	 */
 	@Override
 	public int getNumeroDePosicao() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.posicao;
 	}
+	
 	@Override
 	public void evento(JogoFacade jogo) {
-		// TODO Auto-generated method stub
-
+		System.out.println("Você ganhou 200");
+		jogo.JogadorAtual().receber(200);
 	}
 
 
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
 		return "Lucro e dividendo";
 	}
 
+	public String toString() {
+		return this.posicao + " - Lucros ou Dividendos";
+	}
+	
+	
 }

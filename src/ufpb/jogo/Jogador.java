@@ -194,5 +194,9 @@ public class Jogador {
 	public void addCarta() {
 		this.carta = true;
 	}
+	
+	public void vaiParaPrisao() {
+		this.posicao = 30;
+	}
 
 }

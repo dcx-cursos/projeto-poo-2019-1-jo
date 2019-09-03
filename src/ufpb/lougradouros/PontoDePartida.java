@@ -31,13 +31,11 @@ public class PontoDePartida implements Posicao {
 
 	@Override
 	public void evento(JogoFacade jogo) {
-		// TODO Auto-generated method stub
 		System.out.println("Nada aconteceu"+jogo.JogadorAtual().getNome());
 	}
 
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
 		return "Ponto de partida ";
 	}
 	

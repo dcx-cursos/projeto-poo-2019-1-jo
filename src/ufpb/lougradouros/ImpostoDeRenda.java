@@ -21,20 +21,21 @@ public class ImpostoDeRenda implements Posicao {
 	 */
 	@Override
 	public int getNumeroDePosicao() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.posicao;
 	}
 
 	@Override
 	public void evento(JogoFacade jogo) {
-		// TODO Auto-generated method stub
-
+		System.out.println("Você pagou 200");
+		jogo.JogadorAtual().pagar(200);
 	}
 
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
 		return "Imposto de renda";
 	}
-
+	
+	public String toString() {
+		return this.posicao + " - Imposto de Renda";
+	}
 }
