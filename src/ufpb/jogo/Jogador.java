@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 import ufpb.exceptions.LimiteExcedidoException;
 import ufpb.exceptions.ValorInvalidoException;
-import ufpb.lougradouros.Terreno;
 import ufpb.lougradouros.Titulo;
 
 /**
@@ -19,7 +18,7 @@ public class Jogador {
 	private Conta conta;
 	private LinkedList<Titulo> titulos;
 	private boolean carta;
-	
+
 	/**
 	 * Constructor from class Jogador, enables initialization of name and color
 	 * attributes.
@@ -27,7 +26,7 @@ public class Jogador {
 	 * @author Joana
 	 * @param String nome - player's name
 	 * @param String cor - player's pawn color
-	 * @param        int posicao - the player's position
+	 * @param int    posicao - the player's position
 	 */
 	public Jogador(String nome, String cor) {
 		this.nome = nome;
@@ -36,7 +35,7 @@ public class Jogador {
 		this.conta = new Conta();
 		this.carta = false;
 	}
-	
+
 	public void receber(int valor) {
 		try {
 			this.conta.deposita(valor);
@@ -44,37 +43,39 @@ public class Jogador {
 			// TODO Auto-generated catch block
 		}
 	}
-	
+
 	public void pagar(Jogador j, int valor) {
 		try {
 			this.conta.debita(valor);
 			j.conta.deposita(valor);
 		} catch (ValorInvalidoException e) {
-			
+
 		} catch (LimiteExcedidoException e) {
-			if(this.titulos.size() == 0) {
-				System.out.println("Falencia");	
-			}else {
-				this.titulos.getLast().venderAoBanco(j);;
-				pagar(j,valor);
+			if (this.titulos.size() == 0) {
+				System.out.println("Falencia");
+			} else {
+				this.titulos.getLast().venderAoBanco(j);
+				;
+				pagar(j, valor);
 			}
 		}
 	}
-	
-	public void pagar( int valor) {
+
+	public void pagar(int valor) {
 		try {
 			this.conta.debita(valor);
 		} catch (ValorInvalidoException e) {
-			
+
 		} catch (LimiteExcedidoException e) {
-			if(this.titulos.size() == 0) {
-				System.out.println("Falencia");	
-			}else {
-				this.titulos.getLast().venderAoBanco(this);;
+			if (this.titulos.size() == 0) {
+				System.out.println("Falencia");
+			} else {
+				this.titulos.getLast().venderAoBanco(this);
 				pagar(valor);
 			}
 		}
 	}
+
 	/**
 	 * Method that enables the access to name attribute.
 	 * 
@@ -108,7 +109,7 @@ public class Jogador {
 	public int getSaldo() {
 		return this.conta.getSaldo();
 	}
-	
+
 	/**
 	 * Metodo para jogador comprar terreno
 	 * 
@@ -118,7 +119,7 @@ public class Jogador {
 	 * @throws ValorInvalidoException, LimiteExcedidoException
 	 */
 
-	public void comprarTerreno(int valor, Terreno t) {
+	public void comprarTitulo(int valor, Titulo t) {
 		try {
 			this.conta.debita(valor);
 			System.out.println("Compra efetuada com sucesso!");
@@ -151,7 +152,7 @@ public class Jogador {
 	public void jogada(Dado d, Tabuleiro t) {
 		int dado1 = d.lancaDado();
 		int dado2 = d.lancaDado();
-		
+
 		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "
 				+ t.getPosicoeDoTabuleiro(this.getPosicao()));
 	}
@@ -162,7 +163,7 @@ public class Jogador {
 			this.posicao -= 39;
 		}
 	}
-	
+
 	/**
 	 * Metodo para indicar o status do jogador
 	 * 
@@ -171,20 +172,21 @@ public class Jogador {
 	 * 
 	 */
 
-	public LinkedList<Titulo> getTitulos(){
+	public LinkedList<Titulo> getTitulos() {
 		return titulos;
 	}
-	
+
 	public void removeTitulo(Titulo t) {
 		this.titulos.remove(t);
 	}
-	
+
 	public boolean temCarta() {
-		if(this.carta == true) {
+		if (this.carta == true) {
 			return true;
-		} return false;
+		}
+		return false;
 	}
-	
+
 	public void removeCarta() {
 		this.carta = false;
 	}
@@ -192,6 +194,5 @@ public class Jogador {
 	public void addCarta() {
 		this.carta = true;
 	}
-	
 
 }

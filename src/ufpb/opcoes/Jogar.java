@@ -22,5 +22,13 @@ public class Jogar implements Opcao {
 		jogo.chamarEvento();
 		
 	}
+	
+	public void ultimosDadosJogados(JogoFacade jogo) {
+		int [] array = new int[2];
+		array[0] = dado1;
+		array[1] = dado2;
+		jogo.setUltimosDados(array);
+	}
+	
 
 }

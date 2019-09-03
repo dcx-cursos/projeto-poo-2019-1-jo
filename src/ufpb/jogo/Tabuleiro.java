@@ -62,10 +62,9 @@ public class Tabuleiro {
 				int posicao = Integer.parseInt(linha[0]);
 				String nome = linha[1];
 				int preco = Integer.parseInt(linha[2]);
-				String dono = "banco";
 				int multiplicador = Integer.parseInt(linha[3]);
 
-				Companhia c = new Companhia(posicao, nome, preco, dono, multiplicador);
+				Companhia c = new Companhia(posicao, nome, preco, multiplicador);
 
 				this.posicoeDoTabuleiro[posicao] = c;
 

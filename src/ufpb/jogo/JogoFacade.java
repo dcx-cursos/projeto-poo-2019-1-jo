@@ -8,7 +8,6 @@ import ufpb.exceptions.CorValidaException;
 import ufpb.exceptions.ExisteJogadorComEstaCorException;
 import ufpb.exceptions.ValorInvalidoException;
 import ufpb.lougradouros.Posicao;
-import ufpb.opcoes.*;
 
 public class JogoFacade {
 	protected static final Scanner in = new Scanner(System.in);
@@ -16,10 +15,14 @@ public class JogoFacade {
 	protected Dado dado = new Dado();
 	protected Tabuleiro tabuleiro = new Tabuleiro();
 	private JogoFactory fabrica;
+	private int [] ultimosDados;
 
 	
+
+
 	public JogoFacade() {
 		listaJogadores = new LinkedList<Jogador>();
+		ultimosDados = new int [2];
 	}
 
 	public String input() {
@@ -53,7 +56,8 @@ public class JogoFacade {
 	public boolean verificarSeTaNaPrisao() {
 		return this.tabuleiro.getPosicoeDoTabuleiro(this.JogadorAtual().getPosicao()).getTipo().equals("Prisão");
 	}
-
+	
+	
 	/**
 	 * This method checks if there is any other player using the color passed as a
 	 * parameter.
@@ -73,7 +77,7 @@ public class JogoFacade {
 	}
 
 	
-	
+
 	/**
 	 * @param String cor
 	 * @throws CorValidaException
@@ -126,4 +130,11 @@ public class JogoFacade {
 		return this.fabrica;
 	}
 
+	public int[] getUltimosDados() {
+		return ultimosDados;
+	}
+
+	public void setUltimosDados(int[] ultimosDados) {
+		this.ultimosDados = ultimosDados;
+	}
 }

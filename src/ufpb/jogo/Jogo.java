@@ -118,7 +118,7 @@ public class Jogo {
 	private void opcoes(Jogador j) {
 		if(jogo.verificarSeTaNaPrisao()) {
 			opcoesPrisao();
-		}else {
+		} else {
 			opcoesNormal();
 		}
 		String opcao = jogo.input();

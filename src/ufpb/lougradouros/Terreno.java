@@ -1,8 +1,5 @@
 package ufpb.lougradouros;
 
-
-import ufpb.exceptions.LimiteExcedidoException;
-import ufpb.exceptions.ValorInvalidoException;
 import ufpb.jogo.Jogador;
 import ufpb.jogo.JogoFacade;
 
@@ -91,11 +88,10 @@ public class Terreno implements Titulo, Posicao {
 			System.out.print("Deseja comprar " + this.nomeDoTerreno + "?(Sim/nao)");
 			String escolha = jogo.input();
 			if (escolha.equalsIgnoreCase("sim")) {
-				jogo.JogadorAtual().comprarTerreno(this.precoDaPropriedade, this);
+				jogo.JogadorAtual().comprarTitulo(this.precoDaPropriedade, this);
 				this.dono = jogo.JogadorAtual();
-			}
-			else if(!escolha.equalsIgnoreCase("nao")) {
-				//Trocar para uma exceção
+			} else if (!escolha.equalsIgnoreCase("nao")) {
+				// Trocar para uma exceção
 				System.out.println("Opção não permetida");
 				evento(jogo);
 			}
@@ -116,12 +112,12 @@ public class Terreno implements Titulo, Posicao {
 
 	@Override
 	public String mostrarTitulo() {
-		return "["+this.nomeDoTerreno+"] propriedade "+this.cor+" aluguel "+this.aluguel;
+		return "[" + this.nomeDoTerreno + "] propriedade " + this.cor + " aluguel " + this.aluguel;
 	}
 
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
 		return "Terreno";
 	}
+
 }
