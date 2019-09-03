@@ -9,8 +9,7 @@ public class JogarPrisao extends Jogar {
 			jogo.setFabrica();
 			int novoDado = jogo.lancaDados();
 			int novoDado2 = jogo.lancaDados();
-			jogo.JogadorAtual().avancarCasas(novoDado+novoDado2);
-			System.out.println(jogo.JogadorAtual() + "tirou " +novoDado + ","+novoDado2 + "e o peão avançou "+jogo.getPosicaoAtual());
+			jogo.JogadorAtual().jogada(novoDado,novoDado2,jogo);
 			jogo.getPosicaoAtual().evento(jogo);
 		} else {
 			System.out.print("Dados não são iguais!");

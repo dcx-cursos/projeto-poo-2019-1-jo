@@ -149,20 +149,18 @@ public class Jogador {
 	 * 
 	 */
 	// JOGADOR USA DADO, PORTANTO, DADO É UM PARAMETRO DO METODO JOGADA
-	public void jogada(Dado d, Tabuleiro t) {
-		int dado1 = d.lancaDado();
-		int dado2 = d.lancaDado();
-
-		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "
-				+ t.getPosicoeDoTabuleiro(this.getPosicao()));
+	public void jogada(int dado1, int dado2, JogoFacade jogo) {
+		avancarCasas(dado1,dado2);
+		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "+ jogo.getPosicaoAtual());
 	}
 
-	public void avancarCasas(int nCasas) {
-		this.posicao += nCasas;
+	public void avancarCasas(int dado1, int dado2) {
+		this.posicao += dado1+dado2;
 		if (this.posicao > 39) {
 			this.posicao -= 39;
 		}
 	}
+
 
 	/**
 	 * Metodo para indicar o status do jogador

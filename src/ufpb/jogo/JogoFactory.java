@@ -1,5 +1,6 @@
 package ufpb.jogo;
 
+import ufpb.exceptions.ValorInvalidoException;
 import ufpb.opcoes.Erro;
 import ufpb.opcoes.Jogar;
 import ufpb.opcoes.Opcao;
@@ -9,7 +10,7 @@ import ufpb.opcoes.Status;
 public class JogoFactory {
 	protected Opcao op;
 
-	public void escolheOpcao(String opcao, JogoFacade jogo) {
+	public boolean escolheOpcao(String opcao, JogoFacade jogo) {
 		switch (opcao) {
 		case "jogar":
 			setOpcaoJogar();
@@ -18,16 +19,25 @@ public class JogoFactory {
 			setOpcaoStatus();
 			break;
 		case "sair":
-			System.out.println("Você realmente quer sair (Sim/Não)?");
-			String escolha = jogo.input();
-			if(escolha.equalsIgnoreCase("sim"))
-			{
-				setOpcaoSair();
+			boolean escolha;
+			try {
+				escolha = jogo.simOuNao("Você realmente quer sair");
+				if(escolha)
+				{
+					setOpcaoSair();
+					return true;
+				}
+				return false;
+
+			} catch (ValorInvalidoException e) {
+				System.err.println(e.getMessage());
+				escolheOpcao(opcao,jogo);
 			}
 			break;
 		default:
 			setOpcaoErro();
 		}
+		return true;
 	}
 	
 	public void setOpcaoJogar() {

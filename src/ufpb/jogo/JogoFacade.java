@@ -1,5 +1,4 @@
 package ufpb.jogo;
-
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -26,7 +25,7 @@ public class JogoFacade {
 	}
 
 	public String input() {
-		return in.nextLine().toLowerCase();
+		return in.nextLine();
 	}
 
 	public int inputInt() {
@@ -137,4 +136,16 @@ public class JogoFacade {
 	public void setUltimosDados(int[] ultimosDados) {
 		this.ultimosDados = ultimosDados;
 	}
+	
+	public boolean simOuNao(String msg) throws ValorInvalidoException {
+		System.out.print(msg+"\nSim/Não");
+		String escolha = this.input();
+		if (escolha.matches("[Ss]+[Ii]*[Mm]*")) {
+			return true;
+		} else if (!(escolha.matches("[Nn]+[ÃãAa]*[Oo]*"))) {
+			throw new ValorInvalidoException("Opção não permitida");
+		}
+		return false;
+	}
+	
 }

@@ -2,7 +2,7 @@ package ufpb.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,11 +13,10 @@ import ufpb.jogo.Conta;
 
 class ContaTest {
 	
-	private Conta conta;	
+	private Conta conta;		
 	
 	
-	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		this.conta = new Conta();
 	}

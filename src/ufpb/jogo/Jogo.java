@@ -68,7 +68,13 @@ public class Jogo {
 	 */
 	private String escolheNomeJogador() {
 		System.out.print("Digite o nome do jogador " + (this.idJogador) + ": ");
-		return jogo.input();
+		String nome = jogo.input();
+		if(!nome.matches("[a-zA-Z]+")) {
+			System.err.println("Digite apenas letras.\nTente novamente");
+			escolheNomeJogador();
+		}
+		return nome;
+		
 	}
 
 	/**
@@ -122,8 +128,11 @@ public class Jogo {
 			opcoesNormal();
 		}
 		String opcao = jogo.input();
-		jogo.getFabrica().escolheOpcao(opcao,this.jogo);
-		boolean jogar = jogo.getFabrica().executarOpcao(this.jogo);
+		boolean deuCerto = jogo.getFabrica().escolheOpcao(opcao,this.jogo);
+		boolean jogar = false;
+		if(deuCerto) {
+			jogar = jogo.getFabrica().executarOpcao(this.jogo);
+		}
 		if((jogar==false ) || (!(opcao.equals("jogar") | opcao.equals("carta") | opcao.equals("pagar")))) {
 			opcoes(j);
 		}

@@ -1,5 +1,6 @@
 package ufpb.lougradouros;
 
+import ufpb.exceptions.ValorInvalidoException;
 import ufpb.jogo.Jogador;
 import ufpb.jogo.JogoFacade;
 
@@ -85,16 +86,19 @@ public class Terreno implements Titulo, Posicao {
 			System.out.println("O titulo de propriedade " + this.nomeDoTerreno + " está disponivel por $"
 					+ this.precoDaPropriedade);
 			System.out.println(jogo.JogadorAtual().getNome() + " possui $" + jogo.JogadorAtual().getSaldo());
-			System.out.print("Deseja comprar " + this.nomeDoTerreno + "?(Sim/nao)");
-			String escolha = jogo.input();
-			if (escolha.equalsIgnoreCase("sim")) {
-				jogo.JogadorAtual().comprarTitulo(this.precoDaPropriedade, this);
-				this.dono = jogo.JogadorAtual();
-			} else if (!escolha.equalsIgnoreCase("nao")) {
-				// Trocar para uma exceção
-				System.out.println("Opção não permetida");
+			boolean escolha;
+			try {
+				escolha = jogo.simOuNao(("Deseja comprar " + this.nomeDoTerreno + "?"));
+				if (escolha) {
+					jogo.JogadorAtual().comprarTitulo(this.precoDaPropriedade, this);
+					this.dono = jogo.JogadorAtual();
+				}
+			} catch (ValorInvalidoException e) {
+				System.err.print(e.getMessage()+"\n");
 				evento(jogo);
+
 			}
+			
 		} else {
 			if (!this.dono.equals(jogo.JogadorAtual())) {
 				jogo.JogadorAtual().pagar(this.dono, this.aluguel);

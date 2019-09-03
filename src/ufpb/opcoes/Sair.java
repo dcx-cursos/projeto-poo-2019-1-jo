@@ -9,7 +9,8 @@ public class Sair implements Opcao {
 		if(jogo.getNumeroDeJogadores() > 2) {
 			jogo.removeJogador();
 		}else {
-			System.out.println("B");
+			jogo.removeJogador();
+			System.out.println(jogo.JogadorAtual()+" é o vencedor!");
 			System.exit(0);
 		}
 		return false;

@@ -23,9 +23,7 @@ public class Jogar implements Opcao {
 	}
 
 	public void sumDados(JogoFacade jogo) {
-		jogo.JogadorAtual().avancarCasas(this.dado1 + this.dado2);
-		System.out.println(jogo.JogadorAtual() + "tirou " + this.dado1 + "," + this.dado2 + " e o peão avançou "
-				+ jogo.getPosicaoAtual());
+		jogo.JogadorAtual().jogada(this.dado1, this.dado2,jogo);
 		jogo.chamarEvento();
 		
 	}

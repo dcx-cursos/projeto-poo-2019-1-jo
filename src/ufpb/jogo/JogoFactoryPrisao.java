@@ -1,10 +1,12 @@
 package ufpb.jogo;
 
+import ufpb.exceptions.ValorInvalidoException;
 import ufpb.opcoes.Carta;
 import ufpb.opcoes.JogarPrisao;
+import ufpb.opcoes.Pagar;
 
 public class JogoFactoryPrisao extends JogoFactory {
-	public void escolheOpcao(String opcao, JogoFacade jogo) {
+	public boolean escolheOpcao(String opcao, JogoFacade jogo) {
 		switch (opcao) {
 		case "jogar":
 			setOpcaoJogar();
@@ -19,16 +21,23 @@ public class JogoFactoryPrisao extends JogoFactory {
 			setOpcaoStatus();
 			break;
 		case "sair":
-			System.out.println("Você realmente quer sair (Sim/Não)?");
-			String escolha = jogo.input();
-			if(escolha.equalsIgnoreCase("sim"))
-			{
-				setOpcaoSair();
+			boolean escolha;
+			try {
+				escolha = jogo.simOuNao("Você realmente quer sair");
+				if(escolha)
+				{
+					setOpcaoSair();
+				}
+			} catch (ValorInvalidoException e) {
+				System.err.println(e.getMessage());
+				escolheOpcao(opcao,jogo);
+				return false;
 			}
 			break;
 		default:
 			setOpcaoErro();
 		}
+		return true;
 	}
 	
 	@Override 
@@ -42,7 +51,6 @@ public class JogoFactoryPrisao extends JogoFactory {
 	}
 
 	private void setOpcaoPagar() {
-		// TODO Auto-generated method stub
-		
+		this.op = new Pagar();
 	}
 }
