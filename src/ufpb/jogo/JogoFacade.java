@@ -3,6 +3,7 @@ package ufpb.jogo;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import ufpb.cartas.SorteOuReves;
 import ufpb.exceptions.CorValidaException;
 import ufpb.exceptions.ExisteJogadorComEstaCorException;
 import ufpb.lougradouros.Posicao;
@@ -139,6 +140,9 @@ public class JogoFacade {
 		return this.tabuleiro.getPosicoeDoTabuleiro(this.JogadorAtual().getPosicao());
 	}
 	
-
+	public SorteOuReves getCarta() {
+		return this.tabuleiro.getSorteOuReves();
+	}
+	
 
 }

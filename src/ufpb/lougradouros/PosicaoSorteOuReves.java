@@ -28,7 +28,7 @@ public class PosicaoSorteOuReves implements Posicao {
 
 	@Override
 	public void evento(JogoFacade jogo) {
-		System.out.println("Nada aconteceu");
+		jogo.getCarta().acao(jogo.JogadorAtual());
 	}
 
 	@Override

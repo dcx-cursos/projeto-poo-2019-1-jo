@@ -5,6 +5,7 @@ import ufpb.recuperaDados.RecuperaDadosDoTXT;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import ufpb.cartas.SorteOuReves;
 import ufpb.lougradouros.*;
 
 
@@ -12,6 +13,7 @@ public class Tabuleiro {
 
 	private Posicao[] posicoeDoTabuleiro;
 	private RecuperaDadosDoTXT recupera = new RecuperaDadosDoTXT();
+	private LinkedList<SorteOuReves> baralho;
 	
 	private static final String ARQUIVO_POSICOES_ESPECIAIS = "./Arquivos/posicoesEspeciais.txt";
 	private static final String ARQUIVO_COMPANHIAS = "./Arquivos/companhias.txt";
@@ -35,7 +37,12 @@ public class Tabuleiro {
 		recuperaPrisao();
 		recuperaTerrenos();
 		recuperaPosicoesDeSorteOuReves();
-
+		try {
+			this.baralho = recupera.recuperaCartas(ARQUIVO_SORTE_OU_REVES);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 
 	}
@@ -188,6 +195,10 @@ public class Tabuleiro {
 		return this.posicoeDoTabuleiro[indice];
 	}
 
-
+	public SorteOuReves getSorteOuReves() {
+		SorteOuReves carta = this.baralho.pollFirst();
+		this.baralho.add(carta);
+		return carta;
+	}
 	
 }
