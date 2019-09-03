@@ -10,6 +10,13 @@ public class Jogar implements Opcao {
 	public boolean fazerOP(JogoFacade jogo) {
 		this.dado1 = jogo.lancaDados();
 		this.dado2 = jogo.lancaDados();
+		
+		int [] array = new int[2];
+		array[0] = dado1;
+		array[1] = dado2;
+		jogo.setUltimosDados(array);
+		
+		
 		sumDados(jogo);
 		return true;
 
@@ -22,13 +29,5 @@ public class Jogar implements Opcao {
 		jogo.chamarEvento();
 		
 	}
-	
-	public void ultimosDadosJogados(JogoFacade jogo) {
-		int [] array = new int[2];
-		array[0] = dado1;
-		array[1] = dado2;
-		jogo.setUltimosDados(array);
-	}
-	
 
 }
