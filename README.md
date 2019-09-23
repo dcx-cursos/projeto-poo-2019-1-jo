@@ -58,8 +58,8 @@ Para verificar os testes feitos execute a classe `AllTests.java` do pacote `src/
 |Padrão de protejo| Maneira como foi implementado |
 |--|--|
 | Facade  | Foi utilizado como uma fachada de comunicação da logica do banco imobiliário com a parte visível para o jogador. |
-| Factory | Foi utilizado para tratar as opções dos jogadores, quando se está na prisão, uma serie de opções está disponível e quando não está as opções normais são usadas. Também foi usado na implementação de títulos que tinham um evento muito parecido. |
-| Strategy| Foi utilizado para em tempo de execução fosse feito um evento/ação do baralho/tabuleiro. |
+| Factory | Foi utilizado para tratar as opções dos jogadores, quando se está na prisão, uma serie de opções está disponível e quando não está as opções normais são usadas.  |
+| Strategy| Foi utilizado para em tempo de execução fosse feito um evento/ação do baralho/tabuleiro. Também foi usado na implementação de títulos que tinham um evento muito parecido.s|
 | Singleton| Foi utilizado para ter uma classe JogoFacade com uma única instância. |
 
 
@@ -72,7 +72,7 @@ Para verificar os testes feitos execute a classe `AllTests.java` do pacote `src/
 
 |Nome do Pacote| Descrição |
 |--|--|
-|ufpb.jogo  | Tabuleiro.java se relaciona com SorteOuReves.java, com recuperaDadosDoTXT.java, com Posicao.java [...] Jogador.java se relaciona com TituloFactory,java [...] JogoFactory.java com Opcao.java,JogoFactoryPrisao.java[...]JogoFacade.java |
+|ufpb.jogo  | Tabuleiro.java se relaciona com SorteOuReves.java, com recuperaDadosDoTXT.java, com Posicao.java [...] Jogador.java se relaciona com TituloStrategyjava [...] JogoFactory.java com Opcao.java,JogoFactoryPrisao.java[...]JogoFacade.java |
 | ufpb.opcoes | Este pacote é referente às opções que cada jogador tem durante sua jogada. Sendo elas, a opção de jogar - jogar os dados e se movimentar no tabuleiro, de ver o status do jogador(se ele tem títulos, mostrar quais são; o saldo do jogador e a posição no qual está situado), de tentar usar a carta de Habeas Corpus para sair da prisão, de pagar para sair da prisão, de jogar os dados para tentar sair da prisão e a opção de sair do jogo. No padrão JogoFactory, são as opções presentes na “fábrica”, o JogoFactory cria tipos de opções. |
 |ufpb.cartas  |Neste pacote são armazenadas as classes que extends a superclasse, SorteOuReves.java. Nela foi criada uma classe para cada tipo de carta de Sorte ou Revés, que realizam ações com base na sua descrição. Na classe de SorteOuReves.java, onseguimos agrupar as cartas como sendo do tipo Pague, em que o jogador tem que pagar algum valor ao banco, Presente, em que todos os jogadores pagam alguma quantia ao jogador que retirou esse carta da pilha, Receba, em que o jogador recebe uma quantia do banco, Vá para prisão, em que o jogador é mandado para a prisão, Habeas Corpus, em que o jogador ao possuir esta carta pode-se livrar da prisão e Sorte ou Revés, que a depender do resultado da soma dos dados, ou ele paga ou recebe alguma quantia do banco. Neste pacote são armazenadas as classes que extends a superclasse, Sorte ou revés. Nela foi criada uma classe para cada tipo descrito acima, que realizam ações com base na sua descrição. |
 | ufpb.lougradouros | Por implementar Posicao.java, todas as classes deste pacote possuem um método evento(), esse método possibilita que ao o jogador se mover no tabuleiro e parar em uma nova posição, ele executa apenas a ação prevista para aquela posição. |
@@ -84,6 +84,6 @@ Para verificar os testes feitos execute a classe `AllTests.java` do pacote `src/
 |Nome|Ações|
 |--|--|
 |Amanda| Parte do Story 8, parte do JavaDoc.|
-|Clebson| Parte do Story 9, mudança de factory method para o template method e padronização das entradas.|
+|Clebson| Parte do Story 9, correção de factory method para o strategy method e padronização das entradas.|
 |Joana|  Parte do Story 9 e todos os testes.|
 |Joyce| Implementção do padrão Singleton, parte do javaDoc e parte do Story 8. |
