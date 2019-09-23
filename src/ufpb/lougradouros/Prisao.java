@@ -2,22 +2,13 @@ package ufpb.lougradouros;
 
 import ufpb.jogo.JogoFacade;
 
-/**
- * <p>
- * Represents the position of "Prison" on the board.
- * </p>
- *
- */
 public class Prisao implements Posicao {
-
 	private int posicao;
 	private String nome;
 
 	/**
-	 * <p>
 	 * Constructor from class Prisao, enables initialization of name and position
 	 * attribute.
-	 * </p>
 	 * 
 	 * @author Clebson
 	 * @param string nome - the name
@@ -29,27 +20,32 @@ public class Prisao implements Posicao {
 	}
 
 	/**
-	 * <p>
-	 * An event that the player in prison pass his/her turn.
-	 * </p>
+	 * Method that enables the access to position number attribute.
+	 * 
+	 * @author Clebson
+	 * @return int - position number attribute value
 	 */
-	@Override
-	public void evento(JogoFacade jogo) {
-		if (this.posicao == 30) {
-			jogo.JogadorAtual().vaiParaPrisao();
-		}
-		System.out.println("Passou a vez");
-
-	}
-
 	@Override
 	public int getNumeroDePosicao() {
 		return this.posicao;
 	}
 
+	/**
+	 * @author Clebson
+	 * @return String - the position
+	 */
 	@Override
 	public String toString() {
 		return this.posicao + " - " + this.nome;
+	}
+
+	@Override
+	public void evento(JogoFacade jogo) {
+		if (this.posicao == 30) {
+		jogo.JogadorAtual().vaiParaPrisao();
+		}
+		System.out.println("Passou a vez");
+
 	}
 
 	@Override

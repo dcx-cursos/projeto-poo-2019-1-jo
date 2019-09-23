@@ -4,91 +4,7 @@ import ufpb.exceptions.ValorInvalidoException;
 import ufpb.jogo.Jogador;
 import ufpb.jogo.JogoFacade;
 
-/**
- * <p>
- * Represents the factory class "Titles(Título)". 
- * </p>
- *
- */
 public abstract class TituloFactory {
-
-	protected Jogador dono;
-	protected String nomeDoTitulo;
-	protected int posicao;
-	protected int precoDaPropriedade;
-
-	/**
-	 * <p>
-	 * An event to shows if the property is available to buy and if the player wants to buy it.
-	 * </p>
-	 * 
-	 * @param jogo
-	 */
-	public void evento(JogoFacade jogo) {
-		if (this.dono == null) {
-			System.out.println("O titulo de propriedade " + this.nomeDoTitulo + " está disponivel por $"
-					+ this.precoDaPropriedade);
-			System.out.println(jogo.JogadorAtual().getNome() + " possui $" + jogo.JogadorAtual().getSaldo());
-			boolean escolha;
-			try {
-				escolha = jogo.simOuNao(("Deseja comprar " + this.nomeDoTitulo + "?"));
-				if (escolha) {
-					jogo.JogadorAtual().comprarTitulo(this.precoDaPropriedade, this);
-					this.dono = jogo.JogadorAtual();
-				}
-			} catch (ValorInvalidoException e) {
-				System.err.print(e.getMessage() + "\n");
-				evento(jogo);
-
-			}
-
-		} else {
-			if (!this.dono.equals(jogo.JogadorAtual())) {
-				factoryMethod(jogo);
-			}
-		}
-	}
-
-	/**
-	 * <p>
-	 * The abstract method signature for factory method.
-	 * </p>
-	 * 
-	 * @param jogo
-	 */
-	public abstract void factoryMethod(JogoFacade jogo);
-
-	/**
-	 * <p>
-	 * The abstract method signature to get "Tipo".
-	 * </p>
-	 * 
-	 * @return
-	 */
-	public abstract String getTipo();
-
-	/**
-	 * <p>
-	 * The abstract method signature to show the player's titles.
-	 * </p>
-	 * 
-	 * @return
-	 */
-	public abstract String mostrarTitulo();
-
-	/**
-	 * <p>
-	 * The method to sells the property to the bank.
-	 * </p>
-	 * 
-	 * @param jogador - 
-	 */
-	public void venderAoBanco(Jogador jogador) {
-		this.dono = null;
-		jogador.receber(this.precoDaPropriedade);
-		jogador.removeTitulo(this);
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -99,6 +15,7 @@ public abstract class TituloFactory {
 		result = prime * result + precoDaPropriedade;
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -124,5 +41,47 @@ public abstract class TituloFactory {
 		if (precoDaPropriedade != other.precoDaPropriedade)
 			return false;
 		return true;
+	}
+
+	protected Jogador dono;
+	protected String nomeDoTitulo;
+	protected int posicao;
+	protected int precoDaPropriedade;
+	
+	
+	public void evento(JogoFacade jogo) {
+		if (this.dono == null) {
+			System.out.println("O titulo de propriedade " + this.nomeDoTitulo + " está disponivel por $"
+					+ this.precoDaPropriedade);
+			System.out.println(jogo.JogadorAtual().getNome() + " possui $" + jogo.JogadorAtual().getSaldo());
+			boolean escolha;
+			try {
+				escolha = jogo.simOuNao(("Deseja comprar " + this.nomeDoTitulo + "?"));
+				if (escolha) {
+					jogo.JogadorAtual().comprarTitulo(this.precoDaPropriedade, this);
+					this.dono = jogo.JogadorAtual();
+				}
+			} catch (ValorInvalidoException e) {
+				System.err.print(e.getMessage()+"\n");
+				evento(jogo);
+
+			}
+			
+		} else {
+			if (!this.dono.equals(jogo.JogadorAtual())) {
+				factoryMethod(jogo);
+			}
+		}
+	}
+
+
+	public abstract void factoryMethod(JogoFacade jogo);
+	public abstract String getTipo();
+	public abstract String mostrarTitulo();
+	
+	public void venderAoBanco(Jogador j) {
+		this.dono = null;
+		j.receber(this.precoDaPropriedade);
+		j.removeTitulo(this);		
 	}
 }

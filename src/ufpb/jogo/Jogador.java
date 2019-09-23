@@ -7,16 +7,11 @@ import ufpb.exceptions.ValorInvalidoException;
 import ufpb.lougradouros.TituloFactory;
 
 /**
- * <p>
- * Representing a player. </br>
- * In this class, a player is considered to have a name, a pawn color, a
- * position on the board, an account, a list of titles, and if he has a Habeas
- * Corpus card.
- * </p>
+ * Representing the player
  * 
+ * @author Joana
  */
 public class Jogador {
-
 	private String nome;
 	private String cor;
 	private int posicao;
@@ -25,13 +20,13 @@ public class Jogador {
 	private boolean carta;
 
 	/**
-	 * <p>
-	 * Constructor method of class Jogador,enables initialization of name and color
-	 * attributes. In addition, the player is started with an empty title list, an
-	 * account and no Habeas Corpus card.
-	 * </p>
+	 * Constructor from class Jogador, enables initialization of name and color
+	 * attributes.
+	 * 
+	 * @author Joana
 	 * @param String nome - player's name
 	 * @param String cor - player's pawn color
+	 * @param        int posicao - the player's position
 	 */
 	public Jogador(String nome, String cor) {
 		this.nome = nome;
@@ -41,59 +36,28 @@ public class Jogador {
 		this.carta = false;
 	}
 
-	public String getNome() {
-		return this.nome;
-	}
-
-	public String getCor() {
-		return this.cor;
-	}
-
-	public int getPosicao() {
-		return this.posicao;
-	}
-
-	public int getSaldo() {
-		return this.conta.getSaldo();
-	}
-
-	public LinkedList<TituloFactory> getTitulos() {
-		return titulos;
-	}
-
-	@Override
-	public String toString() {
-		return this.nome + "(" + this.cor + ")";
-	}
-
 	/**
-	 * <p>
-	 * Deposits a value into the player's account.
-	 * </p>
 	 * 
-	 * @param valor - An integer number representing the value that will be received
-	 *              for the player.
+	 * @author Amanda
 	 * 
 	 */
 	public void receber(int valor) {
 		try {
 			this.conta.deposita(valor);
 		} catch (ValorInvalidoException e) {
+			// TODO Auto-generated catch block
 		}
 	}
 
 	/**
-	 * <p>
-	 * Pays a certain valeu to the other player.
-	 * </p>
 	 * 
-	 * @param jogador - 
-	 * @param valor - An integer representing the amount that will be paid to the other player.
+	 * @author Amanda
+	 * 
 	 */
-	public void pagar(Jogador jogador, int valor) {
+	public void pagar(Jogador j, int valor) {
 		try {
 			this.conta.debita(valor);
-			jogador.conta.deposita(valor);
+			j.conta.deposita(valor);
 		} catch (ValorInvalidoException e) {
 
 		} catch (LimiteExcedidoException e) {
@@ -101,18 +65,15 @@ public class Jogador {
 				System.out.println("Falencia");
 			} else {
 				this.titulos.getLast().venderAoBanco(this);
-				pagar(jogador, valor);
+				pagar(j, valor);
 			}
 		}
 	}
 
 	/**
-	 * <p>
-	 * Pays a certain valeu to the other player.
-	 * </p>
 	 * 
-	 * @param jogo - 
-	 * @param valor - An integer representing the amount that will be paid to the other player.
+	 * @author Joyce
+	 * 
 	 */
 	public void pagar(int valor, JogoFacade jogo) {
 		try {
@@ -131,14 +92,51 @@ public class Jogador {
 	}
 
 	/**
-	 * <p>
+	 * Method that enables the access to name attribute.
 	 * 
-	 * </p>
-	 * Method for the player buys a land.
+	 * @author Joana
+	 * @return String - name attribute value
+	 */
+	public String getNome() {
+		return this.nome;
+	}
+
+	/**
+	 * Method that enables the access to color attribute
 	 * 
+	 * @author Joana
+	 * @return String - color attribute value
+	 */
+	public String getCor() {
+		return this.cor;
+	}
+
+	/**
+	 * Method that enables the access to positon attribute
+	 * 
+	 * @author Joana
+	 * @return int - position attribute value
+	 */
+	public int getPosicao() {
+		return this.posicao;
+	}
+
+	/**
+	 * 
+	 * @author Joyce
+	 * 
+	 */
+	public int getSaldo() {
+		return this.conta.getSaldo();
+	}
+
+	/**
+	 * Metodo para jogador comprar terreno
+	 * 
+	 * @author joana
 	 * @param valor
 	 * @param t
-	 * 
+	 * @throws ValorInvalidoException, LimiteExcedidoException
 	 */
 
 	public void comprarTitulo(int valor, TituloFactory t) {
@@ -154,10 +152,18 @@ public class Jogador {
 	}
 
 	/**
-	 * <p>
-	 * Method that makes the move.
-	 * </p>
+	 * @author joana
+	 * @return String - the player's name and pawn color
+	 */
+	@Override
+	public String toString() {
+		return this.nome + "(" + this.cor + ")";
+	}
+
+	/**
+	 * Metodo para efetuar a Jogada
 	 * 
+	 * @author joana
 	 * @param d Dado utilizado no jogo
 	 * @param t Tabuleiro utilizado no jogo
 	 * 
@@ -170,11 +176,9 @@ public class Jogador {
 	}
 
 	/**
-	 * <p>
-	 * Method that advances to the next posicion.
-	 * </p>
+	 * Metodo para avançar casas
 	 * 
-	 * 
+	 * @author Clebson
 	 * @param dado1 int
 	 * @param dado2 int
 	 */
@@ -186,12 +190,17 @@ public class Jogador {
 	}
 
 	/**
-	 * <p>
-	 * Removes the title from the player.
-	 * </p>
+	 * Metodo para indicar o status do jogador
 	 * 
-	 * @param tituloFactory
+	 * @author clebson
+	 * @param t Tabuleiro
+	 * 
 	 */
+
+	public LinkedList<TituloFactory> getTitulos() {
+		return titulos;
+	}
+
 	public void removeTitulo(TituloFactory tituloFactory) {
 		for (int k = 0; k < this.titulos.size(); k++) {
 			if (titulos.get(k).equals(tituloFactory)) {
@@ -202,11 +211,8 @@ public class Jogador {
 	}
 
 	/**
-	 * <p>
-	 * Checks if there is any cards.
-	 * </p>
 	 * 
-	 * @return
+	 * @author Joyce
 	 * 
 	 */
 	public boolean temCarta() {
@@ -217,9 +223,8 @@ public class Jogador {
 	}
 
 	/**
-	 * <p>
-	 * Removes the card.
-	 * </p>
+	 * 
+	 * @author Joyce
 	 * 
 	 */
 	public void removeCarta() {
@@ -227,9 +232,8 @@ public class Jogador {
 	}
 
 	/**
-	 * <p>
-	 * adds a card.
-	 * </p>
+	 * 
+	 * @author Amanda
 	 * 
 	 */
 	public void addCarta() {
@@ -237,9 +241,8 @@ public class Jogador {
 	}
 
 	/**
-	 * <p>
-	 * Makes the player go to the prison if he/she is on the posicion 30 on the board.
-	 * </p>
+	 * 
+	 * @author Amanda
 	 * 
 	 */
 	public void vaiParaPrisao() {

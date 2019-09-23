@@ -2,18 +2,11 @@ package ufpb.opcoes;
 
 import ufpb.jogo.JogoFacade;
 
-/**
- * <p>
- * Represents when the player has to pay a certain value.
- * </p>
- *
- */
 public class Pagar implements Opcao {
-
 	/**
-	 * <p>
-	 * The player pays a value and the match continues.
-	 * </p> 
+	 * Methods
+	 * 
+	 * @author Joana
 	 * @param jogo JogoFacade
 	 * @return boolean
 	 */

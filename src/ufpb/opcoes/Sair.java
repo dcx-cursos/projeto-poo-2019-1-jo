@@ -2,20 +2,12 @@ package ufpb.opcoes;
 
 import ufpb.jogo.JogoFacade;
 
-/**
- * <p>
- * REpresents when the player wants to leave the game.
- * </p>
- *
- */
 public class Sair implements Opcao {
 
 	/**
-	 * <p>
-	 * If the match has 2 player and one player leaves the game, the other player wins the game.
-	 * </p>
 	 * Methods
 	 * 
+	 * @author joana
 	 * @param jogo JogoFacade
 	 * @return boolean
 	 */
