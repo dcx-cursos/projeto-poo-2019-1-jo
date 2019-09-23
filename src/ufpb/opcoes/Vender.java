@@ -1,10 +1,9 @@
 package ufpb.opcoes;
 
-
 import ufpb.exceptions.NaoTemTerrenosException;
 import ufpb.jogo.JogoFacade;
 
-public class ConstruirOP implements Opcao {
+public class Vender implements Opcao{
 
 	@Override
 	public boolean fazerOP() {
@@ -12,7 +11,7 @@ public class ConstruirOP implements Opcao {
 		int entrada = -1;
 		while(entrada != 0) {
 			System.out.println(jogo.JogadorAtual().getNome()+" possui "+jogo.JogadorAtual().getSaldo());
-			System.out.println("Escolha onde quer construir:");
+			System.out.println("Escolha onde quer vender:");
 			jogo.JogadorAtual().mostrarTerrenos();
 			System.out.println("Digite o número da propriedade (0 para sair):");
 			try {
@@ -22,7 +21,7 @@ public class ConstruirOP implements Opcao {
 			}
 			try {
 				if(entrada>= 1 && entrada <= jogo.JogadorAtual().getNumeroDeTerrenos()) {
-					jogo.JogadorAtual().escolheTerreno(entrada).construir();
+					jogo.JogadorAtual().escolheTerreno(entrada).vender();
 				}else if(entrada != 0){
 					System.err.print("Opção inválida!\n");
 				} 
@@ -33,5 +32,6 @@ public class ConstruirOP implements Opcao {
 		}
 		return true;
 	}
+
 
 }

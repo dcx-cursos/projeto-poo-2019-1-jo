@@ -27,7 +27,6 @@ public class JogoFactoryConstruir extends JogoFactory {
 			setOpcaoJogar();
 			break;
 		case "vender":
-			setOpcaoVender();
 			break;
 		case "construir":
 			setOpcaoConstruir();
@@ -55,10 +54,6 @@ public class JogoFactoryConstruir extends JogoFactory {
 		return true;
 	}
 
-	private void setOpcaoVender() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	private void setOpcaoConstruir() {
 		this.op = new ConstruirOP();

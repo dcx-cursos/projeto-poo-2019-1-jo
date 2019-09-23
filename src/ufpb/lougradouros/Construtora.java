@@ -5,7 +5,7 @@ import ufpb.jogo.Jogador;
 public class Construtora {
 	private int CONT_ROXO = 3;
 	private int CONT_CIANO = 3;
-	private int CONT_TURQUESA= 2;
+	private int CONT_TURQUESA = 2;
 	private int CONT_LILAS = 3;
 	private int CONT_LARANJA = 2;
 	private int CONT_VERMELHO = 2;
@@ -55,6 +55,18 @@ public class Construtora {
 				|| CONT_LILAS == 0 || CONT_CIANO == 0 || CONT_TURQUESA == 0) {
 			return true;
 		}
+		return false;
+	}
+
+	public boolean podeVender() {
+		for (TituloFactory x : jogador.getTitulos()) {
+			Terreno t = ((Terreno) x);
+			if (t.getNumeroDeCasas()>=1) {
+				return true;
+			}
+
+		}
+
 		return false;
 	}
 }

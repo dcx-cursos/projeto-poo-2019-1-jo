@@ -171,4 +171,14 @@ public class Terreno extends TituloFactory implements Posicao {
 	public int getValorDaConstrucao() {
 		return this.precoDaCasa;
 	}
+
+	public void vender() {
+		if ( this.numeroDeCasas >= 1) {
+			JogoFacade.getInstance().JogadorAtual().pagar(this.precoDaCasa);
+			this.numeroDeCasas -= 1;
+			System.out.println("Venda realizada com sucesso!");
+		} else {
+			System.out.println("Não foi possível realizar a venda!");
+		}
+	}
 }
