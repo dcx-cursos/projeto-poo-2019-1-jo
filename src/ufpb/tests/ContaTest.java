@@ -16,16 +16,12 @@ class ContaTest {
 	private Conta conta;	
 	
 	
+	
 	@BeforeEach
 	public void setUp() {
 		this.conta = new Conta();
 	}
 	
-	/**
-	 * 
-	 * @author Clebson
-	 * 
-	 */
 	@Test
 	void testDepositar() {
 		assertEquals(1500,this.conta.getSaldo());
@@ -42,11 +38,6 @@ class ContaTest {
 		assertEquals(1600,this.conta.getSaldo(),"Testando saldo apos exceção");
 	}
 	
-	/**
-	 * 
-	 * @author Clebson
-	 * 
-	 */
 	@Test
 	void testDebitar() {
 		assertEquals(1500,this.conta.getSaldo());

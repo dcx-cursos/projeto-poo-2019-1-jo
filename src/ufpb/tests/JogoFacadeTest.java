@@ -33,7 +33,7 @@ class JogoFacadeTest {
 	}
 
 	/**
-	 * TESTANDO A REMOÇÃO DE JOGADOR
+	 * TESTE REMOVENDO JOGADOR
 	 * 
 	 * @author joana
 	 * 
@@ -83,11 +83,7 @@ class JogoFacadeTest {
 		this.jogo.JogadorAtual().jogada(10, 0, jogo);
 		assertTrue(this.jogo.verificarSeTaNaPrisao(), "Verifica se está na prisão");
 	}
-	
-	/**
-	 * @author joana
-	 * 
-	 */
+
 	@Test
 	void testVerificaSeExisteJogadorComEstaCor() {
 		try {

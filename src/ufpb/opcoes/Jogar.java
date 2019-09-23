@@ -2,13 +2,22 @@ package ufpb.opcoes;
 
 import ufpb.jogo.JogoFacade;
 
+/**
+ * <p>
+ * Represents class that the player throws the dices.
+ * </p>
+ *
+ */
 public class Jogar implements Opcao {
+
 	protected int dado1;
 	protected int dado2;
 
 	/**
-	 *
-	 * @author Clebson
+	 * <p>
+	 * When the player throws the dices.
+	 * </p>
+	 * 
 	 * @param jogo
 	 */
 	@Override
@@ -21,19 +30,16 @@ public class Jogar implements Opcao {
 		array[1] = dado2;
 		jogo.setUltimosDados(array);
 
-		/**
-		 *
-		 * @author Amanda
-		 * @return true(boolean)
-		 */
 		sumDados(jogo);
 		return true;
 
 	}
 
 	/**
+	 * <p>
+	 * Add up the dices' values.
+	 * </p>
 	 * 
-	 * @author Amanda
 	 * @param jogo JogoFacade
 	 */
 	public void sumDados(JogoFacade jogo) {

@@ -9,7 +9,14 @@ import ufpb.exceptions.ExisteJogadorComEstaCorException;
 import ufpb.exceptions.ValorInvalidoException;
 import ufpb.lougradouros.Posicao;
 
+/**
+ * <p>
+ * Represents the facade of the games.
+ * </p>
+ *
+ */
 public class JogoFacade {
+
 	protected static final Scanner in = new Scanner(System.in);
 	protected LinkedList<Jogador> listaJogadores;
 	protected Dado dado = new Dado();
@@ -18,8 +25,11 @@ public class JogoFacade {
 	private int[] ultimosDados;
 
 	/**
+	 * <p>
+	 * Shows the facade of the game to the players.
+	 * </p>
 	 * 
-	 * @author Clebson
+	 * @param
 	 */
 	public JogoFacade() {
 		listaJogadores = new LinkedList<Jogador>();
@@ -27,76 +37,90 @@ public class JogoFacade {
 	}
 
 	/**
+	 * <p>
+	 * Convert to String.
+	 * </p>
 	 * 
-	 * @author Joyce
+	 * @param
 	 */
 	public String input() {
 		return in.nextLine();
 	}
 
 	/**
+	 * <p>
+	 * Convert to integer.
+	 * </p>
 	 * 
-	 * @author Joyce
+	 * @param
 	 */
 	public int inputInt() {
 		return Integer.parseInt(in.nextLine());
 	}
 
 	/**
+	 * <p>
+	 * Add a new player.
+	 * </p>
 	 * 
-	 * @author Clebson
-	 */
-	public int getNumeroDeJogadores() {
-		return this.listaJogadores.size();
-	}
-
-	/**
-	 * 
-	 * @author Clebson
+	 * @param
 	 */
 	public void addJogador(Jogador e) {
 		this.listaJogadores.add(e);
 	}
 
 	/**
+	 * <p>
+	 * Add the player who is at the beginning of the queue to the end.
+	 * </p>
 	 * 
-	 * @author Clebson
+	 * @param
 	 */
 	public void pollJogador() {
 		this.listaJogadores.add(this.listaJogadores.pollFirst());
 	}
 
 	/**
+	 * <p>
+	 * Removes the player.
+	 * </p>
 	 * 
-	 * @author Clebson
+	 * @param
 	 */
 	public void removeJogador() {
 		this.listaJogadores.remove(this.JogadorAtual());
 	}
 
 	/**
+	 * <p>
+	 * Throws the dices.
+	 * </p>
 	 * 
-	 * @author joana
+	 * @param
 	 */
 	public int lancaDados() {
 		return (this.dado.lancaDado());
 	}
 
 	/**
+	 * <p>
+	 * Verifies if the player is in prison.
+	 * </p>
 	 * 
-	 * @author Clebson
+	 * @param
 	 */
 	public boolean verificarSeTaNaPrisao() {
 		return this.tabuleiro.getPosicoeDoTabuleiro(this.JogadorAtual().getPosicao()).getTipo().equals("Prisão");
 	}
 
 	/**
+	 * <p>
 	 * This method checks if there is any other player using the color passed as a
 	 * parameter.
+	 * </p>
 	 * 
 	 * @param cor
 	 * @throws ExisteJogadorComEstaCorException
-	 * @author Amanda
 	 */
 
 	public void verificaSeExisteJogadorComEstaCor(String cor) throws ExisteJogadorComEstaCorException {
@@ -109,10 +133,13 @@ public class JogoFacade {
 	}
 
 	/**
+	 * <p>
+	 * Verifies if the chosen color is still available. 
+	 * </p>
+	 * 
 	 * @param String cor
 	 * @throws CorValidaException
 	 * @return true if the color passed as a parameter is within expected colors
-	 * @author Amanda
 	 */
 	public boolean verificaSeAhCorEhValida(String cor) throws CorValidaException {
 		if (cor.equalsIgnoreCase("preto") || cor.equalsIgnoreCase("branco") || cor.equalsIgnoreCase("vermelho")
@@ -124,16 +151,21 @@ public class JogoFacade {
 	}
 
 	/**
+	 * <p>
+	 * The current player.
+	 * </p>
 	 * 
-	 * @author Joyce
+	 * @param
 	 */
 	public Jogador JogadorAtual() {
 		return this.listaJogadores.getFirst();
 	}
 
 	/**
+	 * <p>
+	 * </p>
 	 * 
-	 * @author Clebson
+	 * @param
 	 */
 	public void chamarEvento() {
 		this.tabuleiro.getPosicoeDoTabuleiro(this.JogadorAtual().getPosicao()).evento(this);
@@ -141,24 +173,12 @@ public class JogoFacade {
 	}
 
 	/**
+	 * <p>
+	 * Verifies if the number of player in the macth is valid.
+	 * It must be above 2 and up to 8 players.
+	 * </p>
 	 * 
-	 * @author Clebson
-	 */
-	public Posicao getPosicaoAtual() {
-		return this.tabuleiro.getPosicoeDoTabuleiro(this.JogadorAtual().getPosicao());
-	}
-
-	/**
-	 * 
-	 * @author Joyce
-	 */
-	public SorteOuReves getCarta() {
-		return this.tabuleiro.getSorteOuReves();
-	}
-
-	/**
-	 * 
-	 * @author Joana
+	 * @param
 	 */
 	public void verificaNumeroJogadores(int numero) throws ValorInvalidoException {
 		if ((numero > 8 || numero < 2)) {
@@ -167,56 +187,22 @@ public class JogoFacade {
 	}
 
 	/**
+	 * <p>
+	 * Pass the turn.
+	 * </p>
 	 * 
-	 * @author Clebson
+	 * @param
 	 */
 	public void passarAVez() {
 		this.listaJogadores.add(this.listaJogadores.pollFirst());
 	}
 
 	/**
+	 * <p>
+	 * Shows the option "yes or no" in certains situations. 
+	 * </p>
 	 * 
-	 * @author Clebson
-	 */
-	public void setPrisao() {
-		this.fabrica = new JogoFactoryPrisao();
-	}
-
-	/**
-	 * 
-	 * @author Clebson
-	 */
-	public void setFabrica() {
-		this.fabrica = new JogoFactory();
-	}
-
-	/**
-	 * 
-	 * @author Clebson
-	 */
-	public JogoFactory getFabrica() {
-		return this.fabrica;
-	}
-
-	/**
-	 * 
-	 * @author Joyce
-	 */
-	public int[] getUltimosDados() {
-		return ultimosDados;
-	}
-
-	/**
-	 * 
-	 * @author Joyce
-	 */
-	public void setUltimosDados(int[] ultimosDados) {
-		this.ultimosDados = ultimosDados;
-	}
-
-	/**
-	 * 
-	 * @author Clebson
+	 * @param @return @throws
 	 */
 	public boolean simOuNao(String msg) throws ValorInvalidoException {
 		System.out.print(msg + "\nSim/Não");
@@ -227,6 +213,38 @@ public class JogoFacade {
 			throw new ValorInvalidoException("Opção não permitida");
 		}
 		return false;
+	}
+
+	public SorteOuReves getCarta() {
+		return this.tabuleiro.getSorteOuReves();
+	}
+
+	public int getNumeroDeJogadores() {
+		return this.listaJogadores.size();
+	}
+
+	public Posicao getPosicaoAtual() {
+		return this.tabuleiro.getPosicoeDoTabuleiro(this.JogadorAtual().getPosicao());
+	}
+
+	public void setPrisao() {
+		this.fabrica = new JogoFactoryPrisao();
+	}
+
+	public JogoFactory getFabrica() {
+		return this.fabrica;
+	}
+
+	public void setFabrica() {
+		this.fabrica = new JogoFactory();
+	}
+
+	public int[] getUltimosDados() {
+		return ultimosDados;
+	}
+
+	public void setUltimosDados(int[] ultimosDados) {
+		this.ultimosDados = ultimosDados;
 	}
 
 }

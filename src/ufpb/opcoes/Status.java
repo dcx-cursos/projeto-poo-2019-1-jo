@@ -3,11 +3,20 @@ package ufpb.opcoes;
 import ufpb.jogo.JogoFacade;
 import ufpb.lougradouros.TituloFactory;
 
+/**
+ * <p>
+ * Represents the players' status.
+ * </p>
+ *
+ */
 public class Status implements Opcao {
+
 	/**
+	 * <p>
+	 * Shows the player's current status.
+	 * </p>
 	 * Methods
 	 * 
-	 * @author Joyce
 	 * @param jogo JogoFacade
 	 * @return boolean
 	 */
