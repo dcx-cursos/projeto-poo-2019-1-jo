@@ -27,6 +27,7 @@ public class Construtora {
 	 * <p>
 	 * It will count how many houses can be build in each color of land.
 	 * </p>
+	 * 
 	 * @return boolean
 	 */
 	public boolean podeConstruir() {
@@ -74,13 +75,16 @@ public class Construtora {
 	 * <p>
 	 * Allows the player to sell the property.
 	 * </p>
+	 * 
 	 * @return boolean
 	 */
 	public boolean podeVender() {
 		for (TituloStrategy x : jogador.getTitulos()) {
-			Terreno t = ((Terreno) x);
-			if (t.getNumeroDeCasas()>=1) {
-				return true;
+			if (x.hasTerreno()) {
+				Terreno t = ((Terreno) x);
+				if (t.getNumeroDeCasas() >= 1) {
+					return true;
+				}
 			}
 
 		}
