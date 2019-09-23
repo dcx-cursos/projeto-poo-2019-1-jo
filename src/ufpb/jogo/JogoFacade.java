@@ -125,8 +125,8 @@ public class JogoFacade {
 	 * </p>
 	 *
 	 */
-	public boolean verificarSeTaNaPrisao() {
-		return this.tabuleiro.getPosicoeDoTabuleiro(this.JogadorAtual().getPosicao()).getTipo().equals("Prisão");
+	public boolean verificarSeTaNaPrisao(Jogador j) {
+		return this.tabuleiro.getPosicoeDoTabuleiro(j.getPosicao()).getTipo().equals("Prisão");
 	}
 
 	/**
@@ -283,6 +283,12 @@ public class JogoFacade {
 		return c.podeVender();
 		
 	}
+
+	public LinkedList<Jogador> getJogadores() {
+		// TODO Auto-generated method stub
+		return this.listaJogadores;
+	}
+
 	
 	
 	

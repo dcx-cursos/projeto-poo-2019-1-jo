@@ -49,7 +49,11 @@ public class Presente extends SorteOuReves {
 	@Override
 	public void acao(Jogador j) {
 		System.out.println(this.descricao);
-		j.receber(valor * (JogoFacade.getInstance().getNumeroDeJogadores() - 1));
+		for(Jogador jogador: JogoFacade.getInstance().getJogadores()) {
+			if(!jogador.equals(j)) {
+				jogador.pagar(j, this.valor);
+			}
+		}
 	}
 
 }

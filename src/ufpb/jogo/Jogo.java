@@ -161,7 +161,7 @@ public class Jogo {
 	 * @param j Jogador
 	 */
 	private void opcoes(Jogador j) {
-		if (jogo.verificarSeTaNaPrisao()) {
+		if (jogo.verificarSeTaNaPrisao(j)) {
 			opcoesPrisao();
 		} else if(jogo.podeConstruir() == true && this.inicioDaPartida == true) {
 			opcoesConstruir();
@@ -221,7 +221,7 @@ public class Jogo {
 	 * 
 	 */
 	private void partida() {
-		if (jogo.verificarSeTaNaPrisao()) {
+		if (jogo.verificarSeTaNaPrisao(jogo.JogadorAtual())) {
 			jogo.setPrisao();
 		} else if(jogo.podeConstruir() == true) {
 			jogo.setConstruir();
