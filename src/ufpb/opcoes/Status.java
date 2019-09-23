@@ -1,7 +1,7 @@
 package ufpb.opcoes;
 
 import ufpb.jogo.JogoFacade;
-import ufpb.lougradouros.TituloFactory;
+import ufpb.lougradouros.TituloStrategy;
 
 /**
  * <p>
@@ -31,7 +31,7 @@ public class Status implements Opcao {
 		if (jogo.JogadorAtual().getTitulos().size() == 0) {
 			System.out.println("O jogador " + jogo.JogadorAtual().getNome() + " não possui títulos.");
 		} else {
-			for (TituloFactory c : jogo.JogadorAtual().getTitulos()) {
+			for (TituloStrategy c : jogo.JogadorAtual().getTitulos()) {
 				System.out.println(c.mostrarTitulo());
 			}
 		}

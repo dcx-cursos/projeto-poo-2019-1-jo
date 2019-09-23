@@ -30,7 +30,7 @@ public class Construtora {
 	 * @return boolean
 	 */
 	public boolean podeConstruir() {
-		for (TituloFactory x : jogador.getTitulos()) {
+		for (TituloStrategy x : jogador.getTitulos()) {
 			if (x.hasCor()) {
 				String cor = ((Terreno) x).getCor();
 				switch (cor) {
@@ -77,7 +77,7 @@ public class Construtora {
 	 * @return boolean
 	 */
 	public boolean podeVender() {
-		for (TituloFactory x : jogador.getTitulos()) {
+		for (TituloStrategy x : jogador.getTitulos()) {
 			Terreno t = ((Terreno) x);
 			if (t.getNumeroDeCasas()>=1) {
 				return true;

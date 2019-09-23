@@ -7,7 +7,7 @@ import ufpb.exceptions.LimiteExcedidoException;
 import ufpb.exceptions.NaoTemTerrenosException;
 import ufpb.exceptions.ValorInvalidoException;
 import ufpb.lougradouros.Terreno;
-import ufpb.lougradouros.TituloFactory;
+import ufpb.lougradouros.TituloStrategy;
 
 /**
  * <p>
@@ -24,7 +24,7 @@ public class Jogador {
 	private String cor;
 	private int posicao;
 	private Conta conta;
-	private LinkedList<TituloFactory> titulos;
+	private LinkedList<TituloStrategy> titulos;
 	private boolean carta;
 
 	/**
@@ -39,7 +39,7 @@ public class Jogador {
 	public Jogador(String nome, String cor) {
 		this.nome = nome;
 		this.cor = cor;
-		this.titulos = new LinkedList<TituloFactory>();
+		this.titulos = new LinkedList<TituloStrategy>();
 		this.conta = new Conta();
 		this.carta = false;
 		this.posicao = 0;
@@ -65,7 +65,7 @@ public class Jogador {
 		return this.conta.getSaldo();
 	}
 
-	public LinkedList<TituloFactory> getTitulos() {
+	public LinkedList<TituloStrategy> getTitulos() {
 		return titulos;
 	}
 
@@ -151,7 +151,7 @@ public class Jogador {
 	 * 
 	 */
 
-	public void comprarTitulo(int valor, TituloFactory t) {
+	public void comprarTitulo(int valor, TituloStrategy t) {
 		try {
 			this.conta.debita(valor);
 			System.out.println("Compra efetuada com sucesso!");
@@ -202,7 +202,7 @@ public class Jogador {
 	 * 
 	 * @param tituloFactory
 	 */
-	public void removeTitulo(TituloFactory tituloFactory) {
+	public void removeTitulo(TituloStrategy tituloFactory) {
 		for (int k = 0; k < this.titulos.size(); k++) {
 			if (titulos.get(k).equals(tituloFactory)) {
 				System.out.println(titulos.get(k) + " foi vendido.");
@@ -259,7 +259,7 @@ public class Jogador {
 	public void mostrarTerrenos() {
 		String texto = "";
 		int cont = 1;
-		for(TituloFactory e: this.titulos) {
+		for(TituloStrategy e: this.titulos) {
 			if(e.hasTerreno() ){
 				Terreno t = ((Terreno) e);
 				texto = Integer.toString(cont) +" - "+ e.getNome()+" tem "+ t.getNumeroDeCasas()+" casa(s) construídas, casa custa $ "+ t.getValorDaConstrucao();
@@ -271,7 +271,7 @@ public class Jogador {
 	
 	public int getNumeroDeTerrenos() {
 		int cont = 0;
-		for(TituloFactory e: this.titulos) {
+		for(TituloStrategy e: this.titulos) {
 			if(e.hasTerreno() ){
 				cont += 1;
 			}
@@ -280,7 +280,7 @@ public class Jogador {
 	
 	public Terreno escolheTerreno(int n) throws NaoTemTerrenosException {
 		ArrayList<Terreno> terrenos = new ArrayList<Terreno>();
-		for(TituloFactory e: this.titulos) {
+		for(TituloStrategy e: this.titulos) {
 			if(e.hasTerreno()){
 				terrenos.add((Terreno) e);
 			}

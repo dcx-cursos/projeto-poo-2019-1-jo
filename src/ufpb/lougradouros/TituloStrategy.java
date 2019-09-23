@@ -10,7 +10,7 @@ import ufpb.jogo.JogoFacade;
  * </p>
  *
  */
-public abstract class TituloFactory {
+public abstract class TituloStrategy {
 
 	protected Jogador dono;
 	protected String nomeDoTitulo;
@@ -109,7 +109,7 @@ public abstract class TituloFactory {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TituloFactory other = (TituloFactory) obj;
+		TituloStrategy other = (TituloStrategy) obj;
 		if (dono == null) {
 			if (other.dono != null)
 				return false;

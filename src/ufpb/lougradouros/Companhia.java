@@ -8,7 +8,7 @@ import ufpb.jogo.JogoFacade;
  * </p>
  *
  */
-public class Companhia extends TituloFactory implements Posicao {
+public class Companhia extends TituloStrategy implements Posicao {
 
 	private int multiplicador;
 

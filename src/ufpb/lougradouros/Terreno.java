@@ -8,7 +8,7 @@ import ufpb.jogo.JogoFacade;
  * </p>
  *
  */
-public class Terreno extends TituloFactory implements Posicao {
+public class Terreno extends TituloStrategy implements Posicao {
 
 	private int aluguel;
 	private int aluguelComUmaCasa;

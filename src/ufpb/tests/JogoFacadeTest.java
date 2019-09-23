@@ -13,14 +13,20 @@ import ufpb.jogo.Jogador;
 import ufpb.jogo.JogoFacade;
 
 public class JogoFacadeTest {
-
+	
+	/**
+	 * attributes used in the test
+	 * 
+	 * @author joana
+	 * 
+	 */
 	private JogoFacade jogo;
 
 	@Mock
 	Mock jogoT;
 
 	/**
-	 * methods test
+	 * method that initializes the attributes used in the game test
 	 * 
 	 * @author joana
 	 * 
@@ -34,7 +40,7 @@ public class JogoFacadeTest {
 	}
 
 	/**
-	 * TESTE REMOVENDO JOGADOR
+	 * method that tests when the player is removed
 	 * 
 	 * @author joana
 	 * 
@@ -61,7 +67,7 @@ public class JogoFacadeTest {
 	}
 
 	/**
-	 * methods TESTA ADICIONAR JOGADORES
+	 *testing method add players
 	 * 
 	 * @author joana
 	 * @return nome
@@ -74,7 +80,7 @@ public class JogoFacadeTest {
 	}
 
 	/**
-	 * methods TESTA VERIFICA SE ESTÁ NA PRISÃO
+	 * method that checks to see if you're in prison
 	 * 
 	 * @author joana
 	 * 
@@ -84,6 +90,13 @@ public class JogoFacadeTest {
 		this.jogo.JogadorAtual().jogada(10, 0, jogo);
 		assertTrue( "Verifica se está na prisão",this.jogo.verificarSeTaNaPrisao(jogo.JogadorAtual()));
 	}
+	
+	/**
+	 * 
+	 * method testing if the color player
+	 * @author joana
+	 * 
+	 */	
 
 	@Test
 	public void testVerificaSeExisteJogadorComEstaCor() {

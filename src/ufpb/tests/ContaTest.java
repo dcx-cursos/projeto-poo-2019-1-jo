@@ -11,13 +11,30 @@ import ufpb.exceptions.ValorInvalidoException;
 import ufpb.jogo.Conta;
 
 public class ContaTest {
+	
+	/**
+	 * 
+	 *attribute to test on account
+	 * @author joana
+	 */
 
 	private Conta conta;
 
+	/**
+	 * 
+	 *method that initializes the attributes to be tested on account
+	 * @author joana
+	 */
 	@Before
 	public void setUp() {
 		this.conta = new Conta();
 	}
+	
+	/**
+	 * 
+	 *method to test account deposit
+	 * @author joana
+	 */
 
 	@Test
 	public void testDepositar() {
@@ -36,6 +53,12 @@ public class ContaTest {
 		assertEquals("Testando saldo apos exceção",1600, this.conta.getSaldo() );
 	}
 
+	
+	/**
+	 * 
+	 *method to test account debit
+	 * @author joana
+	 */
 	@Test
 	public void testDebitar() {
 		assertEquals(1500, this.conta.getSaldo());
