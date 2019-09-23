@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import ufpb.exceptions.LimiteExcedidoException;
+import ufpb.exceptions.NaoTemTerrenosException;
 import ufpb.exceptions.ValorInvalidoException;
 import ufpb.lougradouros.Terreno;
 import ufpb.lougradouros.TituloFactory;
@@ -277,7 +278,7 @@ public class Jogador {
 		}  return cont;
 	}
 	
-	public Terreno escolheTerreno(int n)  {
+	public Terreno escolheTerreno(int n) throws NaoTemTerrenosException {
 		ArrayList<Terreno> terrenos = new ArrayList<Terreno>();
 		for(TituloFactory e: this.titulos) {
 			if(e.hasTerreno()){
@@ -285,8 +286,7 @@ public class Jogador {
 			}
 		} if(terrenos.size() > 0) {
 			return terrenos.get(n-1);
-		}
-		return null; 
+		} throw new NaoTemTerrenosException("Você não tem Terrenos.");
 	}
 	
 }

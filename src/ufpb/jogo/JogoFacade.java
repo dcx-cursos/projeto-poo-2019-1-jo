@@ -1,15 +1,20 @@
 package ufpb.jogo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import javax.swing.text.StyleConstants.ColorConstants;
 
 import ufpb.cartas.SorteOuReves;
 import ufpb.exceptions.CorValidaException;
 import ufpb.exceptions.ExisteJogadorComEstaCorException;
 import ufpb.exceptions.ValorInvalidoException;
+import ufpb.lougradouros.Construtora;
 import ufpb.lougradouros.Posicao;
+import ufpb.lougradouros.Terreno;
+import ufpb.lougradouros.TituloFactory;
 
 /**
  * <p>
@@ -258,7 +263,7 @@ public class JogoFacade {
 	}
 
 	public void setConstruir() {
-		//to-do
+		this.fabrica = new JogoFactoryConstruir();
 	}
 	
 	public void setFabrica() {
@@ -274,7 +279,9 @@ public class JogoFacade {
 	}
 
 	public boolean podeConstruir() {
-		return true;
+		Construtora c = new Construtora(this.JogadorAtual());
+		return c.podeConstruir();
+		
 	}
 
 }
