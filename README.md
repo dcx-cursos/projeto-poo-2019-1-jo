@@ -65,7 +65,7 @@ Para verificar os testes feitos execute a classe `AllTests.java` do pacote `src/
 
 ## Diagrama de classes 
 
-![enter image description here](https://raw.githubusercontent.com/joanasoaresd/ProjetoBancoImobiliario/master/diagrama%20da%203%C2%AA%20entrega.png?token=AKUQEUKW6FZV5UH4N5GQKGS5SFVHY)
+![enter image description here](https://raw.githubusercontent.com/dcx-cursos/projeto-poo-2019-1-jo/entrega3/diagrama-de-classes/diagrama%20da%203%C2%AA%20entrega.png)
 
 
 - Descrição do diagrama de classes UML
