@@ -4,8 +4,19 @@ package ufpb.opcoes;
 import ufpb.exceptions.NaoTemTerrenosException;
 import ufpb.jogo.JogoFacade;
 
+/**
+ * <p>
+ * Represents when the player is, or not, able to build a house on their property.
+ * </p>
+ */
 public class ConstruirOP implements Opcao {
 
+	/**
+	 * <p>
+	 * In this method, the player will be able to build houses on their property.
+	 * </p>
+	 * @return boolean
+	 */
 	@Override
 	public boolean fazerOP() {
 		JogoFacade jogo = JogoFacade.getInstance();

@@ -4,6 +4,7 @@ package ufpb.opcoes;
 
 /**
  * <p>
+ * Error
  * </p>
  *
  */
@@ -11,10 +12,8 @@ public class Erro implements Opcao {
 
 	/**
 	 * <p>
+	 * Error
 	 * </p>
-	 * Methods
-	 * 
-	 * @param jogo JogoFacade
 	 * @return false
 	 */
 	@Override

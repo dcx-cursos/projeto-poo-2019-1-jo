@@ -7,11 +7,7 @@ import ufpb.opcoes.Opcao;
 import ufpb.opcoes.Sair;
 import ufpb.opcoes.Status;
 
-/**
- * <p>
- * </p>
- *
- */
+
 public class JogoFactory {
 
 	protected Opcao op;
@@ -21,9 +17,9 @@ public class JogoFactory {
 	 * Method for the player choose an option.
 	 * </p>
 	 * 
-	 * @param
-	 * @param
-	 * @return
+	 * @param opcao
+	 * @param jogo
+	 * @return boolean
 	 */
 	public boolean escolheOpcao(String opcao, JogoFacade jogo) {
 		switch (opcao) {

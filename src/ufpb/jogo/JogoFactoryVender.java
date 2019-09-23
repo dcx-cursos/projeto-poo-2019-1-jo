@@ -4,13 +4,19 @@ import ufpb.exceptions.ValorInvalidoException;
 import ufpb.opcoes.JogarPrisao;
 import ufpb.opcoes.Vender;
 
+/**
+ * <p>
+ * Represents the option available in the game to the player.
+ * </p>
+ * 
+ */
 public class JogoFactoryVender extends JogoFactory{
 	
 	/**
-	 * Shows the options of facade of the game when the player is in prison.
-	 * @param
-	 * @param
-	 * @return
+	 * Shows the options of facade of the game to the player.
+	 * @param opcao
+	 * @param jogo
+	 * @return boolean
 	 */
 	public boolean escolheOpcao(String opcao, JogoFacade jogo) {
 		switch (opcao) {
@@ -43,6 +49,11 @@ public class JogoFactoryVender extends JogoFactory{
 		return true;
 	}
 
+	/**
+	 * <p>
+	 * Sets the option "Sell(Vender)".
+	 * </p>
+	 */
 	private void setOpcaoVender() {
 		this.op = new Vender();
 		

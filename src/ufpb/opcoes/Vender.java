@@ -3,8 +3,21 @@ package ufpb.opcoes;
 import ufpb.exceptions.NaoTemTerrenosException;
 import ufpb.jogo.JogoFacade;
 
+/**
+ * <p>
+ * Represents when the player wants to sell their property
+ * </p>
+ *
+ */
 public class Vender implements Opcao{
 
+	/**
+	 * <p>
+	 * The player sells their property, and will receive the value relative to the selling price.
+	 * If the player does not have any property, then the method will throws an exception.
+	 * </p>
+	 * @return boolean
+	 */
 	@Override
 	public boolean fazerOP() {
 		JogoFacade jogo = JogoFacade.getInstance();

@@ -16,9 +16,9 @@ public class JogoFactoryPrisao extends JogoFactory {
 
 	/**
 	 * Shows the options of facade of the game when the player is in prison.
-	 * @param
-	 * @param
-	 * @return
+	 * @param opcao
+	 * @param jogo
+	 * @return boolean
 	 */
 	public boolean escolheOpcao(String opcao, JogoFacade jogo) {
 		switch (opcao) {

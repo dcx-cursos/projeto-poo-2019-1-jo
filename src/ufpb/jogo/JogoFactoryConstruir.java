@@ -9,7 +9,7 @@ import ufpb.opcoes.Vender;
 
 /**
  * <p>
- * Represents the facade of the game when the player is in prison.
+ * Represents the option available in the game to the player.
  * </p>
  * 
  *
@@ -17,10 +17,10 @@ import ufpb.opcoes.Vender;
 public class JogoFactoryConstruir extends JogoFactory {
 
 	/**
-	 * Shows the options of facade of the game when the player is in prison.
-	 * @param
-	 * @param
-	 * @return
+	 * Shows the options of the game.
+	 * @param opcao
+	 * @param jogo
+	 * @return boolean
 	 */
 	public boolean escolheOpcao(String opcao, JogoFacade jogo) {
 		switch (opcao) {
@@ -56,11 +56,21 @@ public class JogoFactoryConstruir extends JogoFactory {
 		return true;
 	}
 
+	/**
+	 * <p>
+	 * Sets the option "Sell(Vender)".
+	 * </p>
+	 */
 	private void setOpcaoVender() {
 		this.op = new Vender();
 		
 	}
 
+	/**
+	 * <p>
+	 * Sets the option "Build(Construir)".
+	 * </p>
+	 */
 	private void setOpcaoConstruir() {
 		this.op = new ConstruirOP();
 	}

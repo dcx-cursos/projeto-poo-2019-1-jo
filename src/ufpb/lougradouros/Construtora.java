@@ -2,6 +2,12 @@ package ufpb.lougradouros;
 
 import ufpb.jogo.Jogador;
 
+/**
+ * <p>
+ * Represents an accountant to enables the player to build houses.
+ * </p>
+ *
+ */
 public class Construtora {
 	private int CONT_ROXO = 3;
 	private int CONT_CIANO = 3;
@@ -17,6 +23,12 @@ public class Construtora {
 		this.jogador = j;
 	}
 
+	/**
+	 * <p>
+	 * It will count how many houses can be build in each color of land.
+	 * </p>
+	 * @return boolean
+	 */
 	public boolean podeConstruir() {
 		for (TituloFactory x : jogador.getTitulos()) {
 			if (x.hasCor()) {
@@ -58,6 +70,12 @@ public class Construtora {
 		return false;
 	}
 
+	/**
+	 * <p>
+	 * Allows the player to sell the property.
+	 * </p>
+	 * @return boolean
+	 */
 	public boolean podeVender() {
 		for (TituloFactory x : jogador.getTitulos()) {
 			Terreno t = ((Terreno) x);

@@ -54,7 +54,6 @@ public class JogoFacade {
 	 * Convert to String.
 	 * </p>
 	 * 
-	 * @param
 	 */
 	public String input() {
 		return in.nextLine();
@@ -65,7 +64,6 @@ public class JogoFacade {
 	 * Convert to integer.
 	 * </p>
 	 * 
-	 * @param
 	 * @throws IOException 
 	 */
 	public int inputInt() throws NumberFormatException {
@@ -82,7 +80,6 @@ public class JogoFacade {
 	 * Add a new player.
 	 * </p>
 	 * 
-	 * @param
 	 */
 	public void addJogador(Jogador e) {
 		this.listaJogadores.add(e);
@@ -93,7 +90,6 @@ public class JogoFacade {
 	 * Add the player who is at the beginning of the queue to the end.
 	 * </p>
 	 * 
-	 * @param
 	 */
 	public void pollJogador() {
 		this.listaJogadores.add(this.listaJogadores.pollFirst());
@@ -104,7 +100,6 @@ public class JogoFacade {
 	 * Removes the player.
 	 * </p>
 	 * 
-	 * @param
 	 */
 	public void removeJogador() {
 		this.listaJogadores.remove(this.JogadorAtual());
@@ -115,7 +110,6 @@ public class JogoFacade {
 	 * Throws the dices.
 	 * </p>
 	 * 
-	 * @param
 	 */
 	public Dado getDado() {
 		return this.dado;
@@ -129,8 +123,7 @@ public class JogoFacade {
 	 * <p>
 	 * Verifies if the player is in prison.
 	 * </p>
-	 * 
-	 * @param
+	 *
 	 */
 	public boolean verificarSeTaNaPrisao() {
 		return this.tabuleiro.getPosicoeDoTabuleiro(this.JogadorAtual().getPosicao()).getTipo().equals("Prisão");
@@ -178,7 +171,6 @@ public class JogoFacade {
 	 * The current player.
 	 * </p>
 	 * 
-	 * @param
 	 */
 	public Jogador JogadorAtual() {
 		return this.listaJogadores.getFirst();
@@ -186,9 +178,9 @@ public class JogoFacade {
 
 	/**
 	 * <p>
+	 * Calls an event.
 	 * </p>
 	 * 
-	 * @param
 	 */
 	public void chamarEvento() {
 		this.tabuleiro.getPosicoeDoTabuleiro(this.JogadorAtual().getPosicao()).evento(this);
@@ -197,11 +189,12 @@ public class JogoFacade {
 
 	/**
 	 * <p>
-	 * Verifies if the number of player in the macth is valid. It must be above 2
+	 * Verifies if the number of player in the match is valid. It must be above 2
 	 * and up to 8 players.
 	 * </p>
 	 * 
-	 * @param
+	 * @param numero
+	 * @throws ValorInvalidoException
 	 */
 	public void verificaNumeroJogadores(int numero) throws ValorInvalidoException {
 		if ((numero > 8 || numero < 2)) {
@@ -214,7 +207,6 @@ public class JogoFacade {
 	 * Pass the turn.
 	 * </p>
 	 * 
-	 * @param
 	 */
 	public void passarAVez() {
 		this.listaJogadores.add(this.listaJogadores.pollFirst());
@@ -222,10 +214,11 @@ public class JogoFacade {
 
 	/**
 	 * <p>
-	 * Shows the option "yes or no" in certains situations.
+	 * Shows the option "yes or no" in certain situations.
 	 * </p>
-	 * 
-	 * @param @return @throws
+	 * @param msg
+	 * @throws ValorInvalidoException
+	 * @return boolean
 	 */
 	public boolean simOuNao(String msg) throws ValorInvalidoException {
 		System.out.print(msg + "\nSim/Não");

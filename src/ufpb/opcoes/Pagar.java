@@ -13,8 +13,7 @@ public class Pagar implements Opcao {
 	/**
 	 * <p>
 	 * The player pays a value and the match continues.
-	 * </p> 
-	 * @param jogo JogoFacade
+	 * </p>
 	 * @return boolean
 	 */
 	@Override
