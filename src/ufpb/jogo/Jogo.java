@@ -207,7 +207,7 @@ public class Jogo {
 	 * 
 	 */
 	private void opcoesPrisao() {
-		System.out.print("Comandos disponíveis:[pagar][cartas][jogar][status][sair]\nEntre com um comando: ");
+		System.out.print("Comandos disponíveis:[pagar][carta][jogar][status][sair]\nEntre com um comando: ");
 	}
 	
 	private void opcoesVender() {

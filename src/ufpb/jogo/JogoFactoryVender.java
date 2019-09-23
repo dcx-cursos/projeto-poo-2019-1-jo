@@ -19,6 +19,7 @@ public class JogoFactoryVender extends JogoFactory{
 	 * @return boolean
 	 */
 	public boolean escolheOpcao(String opcao, JogoFacade jogo) {
+		opcao = opcao.replaceAll("\\s+", "").toLowerCase();
 		switch (opcao) {
 		case "jogar":
 			setOpcaoJogar();
