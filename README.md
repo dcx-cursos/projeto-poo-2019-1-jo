@@ -34,17 +34,17 @@ Pronto, tudo instalado!
 
 Para jogar Banco Imobiliário execute a classe `Main.java`,  do pacote `src/ufpb/jogo`.
 
-Para verificar os testes feitos execute a classe `nomeDaClasse.java` do pacote `src/ufpb/tests`.
+Para verificar os testes feitos execute a classe `AllTests.java` do pacote `src/ufpb/tests`.
 
 - Para verificar os testes é importante que as seguintes dependências estejam devidamente configuradas: 
-	 -  JUnit5
+	 -  JUnit4
 	 - Mockito
 
 ## Organização deste repositório
  - `Arquivos/` - Contém arquivos com dados das posições do tabuleiro e conteúdo das cartas de sorte ou revés. 
  - `diagrama-de-classes/` - Contém a versão mais atualizada do diagrama de *UML* do jogo.
  - `lib/`- Contém a dependência do Mockito.
- - `relatorio/`- Contém os arquivos .docx e .pdf dos relatórios de todas as entregas.
+ - `relatorio/`- Contém os arquivos .docx e .pdf do relatório de todas as entregas.
  - `src/` - Contém o pacote  `ufpb/`, nele são encontrados todos os outros pacotes que possuem as classes do sistema do jogo.</br>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `ufpb/cartas/` - Contém as classes que possuem relação com sorte ou revés. </br>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `ufpb/exception/` - Contém as classes de exceção.</br>
@@ -60,11 +60,12 @@ Para verificar os testes feitos execute a classe `nomeDaClasse.java` do pacote `
 | Facade  | Foi utilizado como uma fachada de comunicação da logica do banco imobiliário com a parte visível para o jogador. |
 | Factory | Foi utilizado para tratar as opções dos jogadores, quando se está na prisão, uma serie de opções está disponível e quando não está as opções normais são usadas. Também foi usado na implementação de títulos que tinham um evento muito parecido. |
 | Strategy| Foi utilizado para em tempo de execução fosse feito um evento/ação do baralho/tabuleiro. |
+| Singleton| Foi utilizado para ter uma classe JogoFacade com uma única instância. |
 
 
 ## Diagrama de classes 
 
-![enter image description here](https://raw.githubusercontent.com/joanasoaresd/ProjetoBancoImobiliario/master/diagrama%20da%202%C2%AA%20entrega.png?token=AKUQEUNIHQWCYVTNPLJWYWC5R5STM)
+![enter image description here](https://raw.githubusercontent.com/joanasoaresd/ProjetoBancoImobiliario/master/diagrama%20da%203%C2%AA%20entrega.png?token=AKUQEUKW6FZV5UH4N5GQKGS5SFVHY)
 
 
 - Descrição do diagrama de classes UML
@@ -72,17 +73,17 @@ Para verificar os testes feitos execute a classe `nomeDaClasse.java` do pacote `
 |Nome do Pacote| Descrição |
 |--|--|
 |ufpb.jogo  | Tabuleiro.java se relaciona com SorteOuReves.java, com recuperaDadosDoTXT.java, com Posicao.java [...] Jogador.java se relaciona com TituloFactory,java [...] JogoFactory.java com Opcao.java,JogoFactoryPrisao.java[...]JogoFacade.java |
-| ufpb.opcoes | Este pacote é referente às opções que cada jogador tem durante sua jogada. {add como ela se relaciona com o padrão JogoFactory e pq disso} |
-|ufpb.cartas  |Neste pacote são armazenadas as classes que *extends* a superclasse, `SorteOuReves.java`. Nela foi criada uma classe para cada tipo de carta de Sorte ou Revés, que realizam ações com base na sua descrição. A classe de `SorteOuReves.java` {tipo de relação com Tabuleiro.java e o que acontece tanto} |
-| ufpb.lougradouros | Por implementar Posicao.java, todas as classes deste pacote possuem um método evento(), esse método possibilita que ao o jogador se mover no tabuleiro e parar em uma nova posição, ele execute apenas a ação prevista para aquela posição. |
-| ufpb.exception | Todas as exceções deste pacote são lançadas e tratadas nas classes `Conta.java`, `Jogador.java`, `JogoFacade.java`, `JogoFactory.java`, `JogoFactoryPrisao.java` e `Jogo.java`, do pacote `ufpb.jogo`.   {add como elas são lançadas e tratadas}|
-| ufpb.recuperaDados | Este pacote é referente a camada de persistência de dados em arquivos, onde conseguimos recuperar os dados, em forma de String dos arquivos `.txt`, para serem convertidos em objetos na classe `Tabuleiro.java`.|
+| ufpb.opcoes | Este pacote é referente às opções que cada jogador tem durante sua jogada. Sendo elas, a opção de jogar - jogar os dados e se movimentar no tabuleiro, de ver o status do jogador(se ele tem títulos, mostrar quais são; o saldo do jogador e a posição no qual está situado), de tentar usar a carta de Habeas Corpus para sair da prisão, de pagar para sair da prisão, de jogar os dados para tentar sair da prisão e a opção de sair do jogo. No padrão JogoFactory, são as opções presentes na “fábrica”, o JogoFactory cria tipos de opções. |
+|ufpb.cartas  |Neste pacote são armazenadas as classes que extends a superclasse, SorteOuReves.java. Nela foi criada uma classe para cada tipo de carta de Sorte ou Revés, que realizam ações com base na sua descrição. Na classe de SorteOuReves.java, onseguimos agrupar as cartas como sendo do tipo Pague, em que o jogador tem que pagar algum valor ao banco, Presente, em que todos os jogadores pagam alguma quantia ao jogador que retirou esse carta da pilha, Receba, em que o jogador recebe uma quantia do banco, Vá para prisão, em que o jogador é mandado para a prisão, Habeas Corpus, em que o jogador ao possuir esta carta pode-se livrar da prisão e Sorte ou Revés, que a depender do resultado da soma dos dados, ou ele paga ou recebe alguma quantia do banco. Neste pacote são armazenadas as classes que extends a superclasse, Sorte ou revés. Nela foi criada uma classe para cada tipo descrito acima, que realizam ações com base na sua descrição. |
+| ufpb.lougradouros | Por implementar Posicao.java, todas as classes deste pacote possuem um método evento(), esse método possibilita que ao o jogador se mover no tabuleiro e parar em uma nova posição, ele executa apenas a ação prevista para aquela posição. |
+| ufpb.exception | Todas as exceções deste pacote são lançadas e tratadas nas classes Conta.java, Jogador.java, JogoFacade.java, JogoFactory.java, JogoFactoryPrisao.java e Jogo.java, do pacote ufpb.jogo , tais como, se a cor que um jogador escolheu para si é uma cor possível, se um valor de dinheiro é válido , se algum limite foi excedido, entre outros. Este pacote possibilita que existam exceções mais especializadas, para que possamos tratá las para entender melhor alguns erros.|
+| ufpb.recuperaDados | Este pacote é referente a camada de persistência de dados em arquivos, onde conseguimos recuperar os dados, em forma de String dos arquivos .txt, para serem convertidos em objetos na classe Tabuleiro.java.|
 
 
-## Ações desenvolvidas por cada integrante da equipe
+## Ações desenvolvidas por cada integrante da equipe referente a 3ª entrega
 |Nome|Ações|
 |--|--|
-|Amanda| fdsvadf |
-|Clebson| svf |
-|Joana|  sdfvsd|
-|Joyce| sdvvcsdc |
+|Amanda| Parte do Story 8, parte do JavaDoc.|
+|Clebson| Parte do Story 9, mudança de factory method para o template method e padronização das entradas.|
+|Joana|  Parte do Story 9 e todos os testes.|
+|Joyce| Implementção do padrão Singleton, parte do javaDoc e parte do Story 8. |
