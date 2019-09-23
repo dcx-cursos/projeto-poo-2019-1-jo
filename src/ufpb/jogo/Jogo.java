@@ -1,6 +1,5 @@
 package ufpb.jogo;
 
-import java.io.IOException;
 
 import ufpb.exceptions.CorValidaException;
 import ufpb.exceptions.ExisteJogadorComEstaCorException;
@@ -166,7 +165,10 @@ public class Jogo {
 			opcoesPrisao();
 		} else if(jogo.podeConstruir() == true && this.inicioDaPartida == true) {
 			opcoesConstruir();
-		} 
+		} else if(jogo.podeVender()) {
+			opcoesVender();
+			
+		}
 		else {
 			opcoesNormal();
 		}
@@ -208,7 +210,7 @@ public class Jogo {
 		System.out.print("Comandos disponíveis:[pagar][cartas][jogar][status][sair]\nEntre com um comando: ");
 	}
 	
-	private void opcoesvender() {
+	private void opcoesVender() {
 		System.out.println("Comandos disponíveis:[Vender][jogar][status][sair]\nEntre com um comando: ");
 	}
 
@@ -223,7 +225,9 @@ public class Jogo {
 			jogo.setPrisao();
 		} else if(jogo.podeConstruir() == true) {
 			jogo.setConstruir();
-		} 
+		} else if(jogo.podeVender() == true) {
+			jogo.setVender();
+		}
 		else {
 			jogo.setFabrica();
 		}

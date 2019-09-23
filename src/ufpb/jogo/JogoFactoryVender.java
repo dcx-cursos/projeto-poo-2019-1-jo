@@ -1,21 +1,11 @@
 package ufpb.jogo;
 
 import ufpb.exceptions.ValorInvalidoException;
-
-import ufpb.opcoes.ConstruirOP;
 import ufpb.opcoes.JogarPrisao;
-
 import ufpb.opcoes.Vender;
 
-/**
- * <p>
- * Represents the facade of the game when the player is in prison.
- * </p>
- * 
- *
- */
-public class JogoFactoryConstruir extends JogoFactory {
-
+public class JogoFactoryVender extends JogoFactory{
+	
 	/**
 	 * Shows the options of facade of the game when the player is in prison.
 	 * @param
@@ -29,9 +19,6 @@ public class JogoFactoryConstruir extends JogoFactory {
 			break;
 		case "vender":
 			setOpcaoVender();
-			break;
-		case "construir":
-			setOpcaoConstruir();
 			break;
 		case "status":
 			setOpcaoStatus();
@@ -59,10 +46,6 @@ public class JogoFactoryConstruir extends JogoFactory {
 	private void setOpcaoVender() {
 		this.op = new Vender();
 		
-	}
-
-	private void setOpcaoConstruir() {
-		this.op = new ConstruirOP();
 	}
 
 	/**
