@@ -1,10 +1,20 @@
 package ufpb.opcoes;
 
-import ufpb.jogo.JogoFacade;
-/**  
- * @author Clebson
- * 
+
+
+/**
+ * <p>
+ * Represents the interface Option(opcão).
+ * </p>
  */
 public interface Opcao {
-	public boolean fazerOP(JogoFacade jogo);
+	
+	/**
+	 * <p>
+	 * </p>
+	 * 
+	 * @param jogo
+	 * @return
+	 */
+	public boolean fazerOP();
 }

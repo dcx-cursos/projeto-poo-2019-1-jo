@@ -1,19 +1,25 @@
 package ufpb.opcoes;
 
-import ufpb.jogo.JogoFacade;
 
-public class Erro implements Opcao{
-	
+
+/**
+ * <p>
+ * </p>
+ *
+ */
+public class Erro implements Opcao {
+
 	/**
+	 * <p>
+	 * </p>
 	 * Methods
 	 * 
-	 * @author Clebson
 	 * @param jogo JogoFacade
 	 * @return false
 	 */
 	@Override
-	public boolean fazerOP(JogoFacade jogo) {
-		
+	public boolean fazerOP() {
+
 		return false;
 	}
 

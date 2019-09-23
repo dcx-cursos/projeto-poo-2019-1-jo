@@ -4,8 +4,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
@@ -28,19 +26,14 @@ class JogoFacadeTest {
 	 */
 	@BeforeEach
 	public void setUp() {
-		this.jogo = JogoFacade.getInstance();
+		this.jogo = new JogoFacade();
 		for (int i = 0; i < 8; i++) {
 			jogo.addJogador(new Jogador("Joana", "Preto"));
 		}
 	}
-	
-	@AfterEach
-	public void setDown() {
-		this.jogo.reset();
-	}
 
 	/**
-	 * TESTANDO A REMOÇÃO DE JOGADOR
+	 * TESTE REMOVENDO JOGADOR
 	 * 
 	 * @author joana
 	 * 
@@ -90,11 +83,7 @@ class JogoFacadeTest {
 		this.jogo.JogadorAtual().jogada(10, 0, jogo);
 		assertTrue(this.jogo.verificarSeTaNaPrisao(), "Verifica se está na prisão");
 	}
-	
-	/**
-	 * @author joana
-	 * 
-	 */
+
 	@Test
 	void testVerificaSeExisteJogadorComEstaCor() {
 		try {

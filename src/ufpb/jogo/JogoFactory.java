@@ -7,12 +7,23 @@ import ufpb.opcoes.Opcao;
 import ufpb.opcoes.Sair;
 import ufpb.opcoes.Status;
 
+/**
+ * <p>
+ * </p>
+ *
+ */
 public class JogoFactory {
+
 	protected Opcao op;
 
 	/**
+	 * <p>
+	 * Method for the player choose an option.
+	 * </p>
 	 * 
-	 * @author Clebson
+	 * @param
+	 * @param
+	 * @return
 	 */
 	public boolean escolheOpcao(String opcao, JogoFacade jogo) {
 		switch (opcao) {
@@ -25,7 +36,7 @@ public class JogoFactory {
 		case "sair":
 			boolean escolha;
 			try {
-				escolha = jogo.simOuNao("Você realmente quer sair");
+				escolha = jogo.simOuNao("Você realmente quer sair? ");
 				if (escolha) {
 					setOpcaoSair();
 					return true;
@@ -39,47 +50,57 @@ public class JogoFactory {
 			break;
 		default:
 			setOpcaoErro();
+			return false;
 		}
 		return true;
 	}
 
 	/**
+	 * <p>
+	 * Execute the chosen option.
+	 * </p>
 	 * 
-	 * @author Joana
+	 * @param
+	 * @return
+	 */
+	public boolean executarOpcao(JogoFacade jogo) {
+		return this.op.fazerOP();
+	}
+
+	/**
+	 * <p>
+	 * Sets the option "Play(Jogar)".
+	 * </p>
 	 */
 	public void setOpcaoJogar() {
 		this.op = new Jogar();
 	}
 
 	/**
-	 * 
-	 * @author Joyce
+	 * <p>
+	 * Sets the option "Status".
+	 * </p>
 	 */
 	public void setOpcaoStatus() {
 		this.op = new Status();
 	}
 
 	/**
-	 * 
-	 * @author Clebson
+	 * <p>
+	 * Sets the option "Leave(Sair)".
+	 * </p>
 	 */
 	public void setOpcaoSair() {
 		this.op = new Sair();
 	}
 
 	/**
-	 * 
-	 * @author Amanda
+	 * <p>
+	 * Sets the option "Erro".
+	 * </p>
 	 */
 	protected void setOpcaoErro() {
 		this.op = new Erro();
 	}
 
-	/**
-	 * 
-	 * @author Clebson
-	 */
-	public boolean executarOpcao(JogoFacade jogo) {
-		return this.op.fazerOP(jogo);
-	}
 }
