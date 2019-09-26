@@ -1,63 +1,107 @@
 package ufpb.jogo;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import ufpb.exceptions.LimiteExcedidoException;
+import ufpb.exceptions.NaoTemTerrenosException;
 import ufpb.exceptions.ValorInvalidoException;
-import ufpb.lougradouros.TituloFactory;
+import ufpb.lougradouros.Terreno;
+import ufpb.lougradouros.TituloStrategy;
 
 /**
- * Representing the player
+ * <p>
+ * Representing a player. </br>
+ * In this class, a player is considered to have a name, a pawn color, a
+ * position on the board, an account, a list of titles, and if he has a Habeas
+ * Corpus card.
+ * </p>
  * 
- * @author Joana
  */
 public class Jogador {
+
 	private String nome;
 	private String cor;
 	private int posicao;
 	private Conta conta;
-	private LinkedList<TituloFactory> titulos;
+	private LinkedList<TituloStrategy> titulos;
 	private boolean carta;
 
 	/**
-	 * Constructor from class Jogador, enables initialization of name and color
-	 * attributes.
-	 * 
-	 * @author Joana
+	 * <p>
+	 * Constructor method of class Jogador,enables initialization of name and color
+	 * attributes. In addition, the player is started with an empty title list, an
+	 * account and no Habeas Corpus card.
+	 * </p>
 	 * @param String nome - player's name
 	 * @param String cor - player's pawn color
-	 * @param        int posicao - the player's position
 	 */
 	public Jogador(String nome, String cor) {
 		this.nome = nome;
 		this.cor = cor;
-		this.titulos = new LinkedList<TituloFactory>();
+		this.titulos = new LinkedList<TituloStrategy>();
 		this.conta = new Conta();
 		this.carta = false;
+		this.posicao = 0;
+	}
+	
+	public int lancaDado() {
+		return JogoFacade.getInstance().getDado().lancaDado();
+	}
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public String getCor() {
+		return this.cor;
+	}
+
+	public int getPosicao() {
+		return this.posicao;
+	}
+
+	public int getSaldo() {
+		return this.conta.getSaldo();
+	}
+
+	public LinkedList<TituloStrategy> getTitulos() {
+		return titulos;
+	}
+
+	@Override
+	public String toString() {
+		return this.nome + "(" + this.cor + ")";
 	}
 
 	/**
+	 * <p>
+	 * Deposits a value into the player's account.
+	 * </p>
 	 * 
-	 * @author Amanda
+	 * @param valor - An integer number representing the value that will be received
+	 *              for the player.
 	 * 
 	 */
 	public void receber(int valor) {
 		try {
 			this.conta.deposita(valor);
 		} catch (ValorInvalidoException e) {
-			// TODO Auto-generated catch block
 		}
 	}
 
 	/**
+	 * <p>
+	 * Pays a certain valeu to the other player.
+	 * </p>
 	 * 
-	 * @author Amanda
-	 * 
+	 * @param jogador - 
+	 * @param valor - An integer representing the amount that will be paid to the other player.
 	 */
-	public void pagar(Jogador j, int valor) {
+	public void pagar(Jogador jogador, int valor) {
 		try {
 			this.conta.debita(valor);
-			j.conta.deposita(valor);
+			jogador.conta.deposita(valor);
 		} catch (ValorInvalidoException e) {
 
 		} catch (LimiteExcedidoException e) {
@@ -65,81 +109,49 @@ public class Jogador {
 				System.out.println("Falencia");
 			} else {
 				this.titulos.getLast().venderAoBanco(this);
-				pagar(j, valor);
+				pagar(jogador, valor);
 			}
 		}
 	}
 
 	/**
+	 * <p>
+	 * Pays a certain valeu to the other player.
+	 * </p>
 	 * 
-	 * @author Joyce
-	 * 
+	 * @param jogo - 
+	 * @param valor - An integer representing the amount that will be paid to the other player.
 	 */
-	public void pagar(int valor, JogoFacade jogo) {
+	public boolean pagar(int valor) {
 		try {
 			this.conta.debita(valor);
+			return true;
 		} catch (ValorInvalidoException e) {
-
+			return false;
 		} catch (LimiteExcedidoException e) {
 			if (this.titulos.size() == 0) {
-				System.out.println("Falencia");
-				jogo.removeJogador();
+				System.out.println("Falência!");
+				JogoFacade.getInstance().removeJogador();
+				return false;
 			} else {
 				this.titulos.getLast().venderAoBanco(this);
-				pagar(valor, jogo);
+				pagar(valor);
 			}
-		}
+		}return false;
 	}
 
 	/**
-	 * Method that enables the access to name attribute.
+	 * <p>
 	 * 
-	 * @author Joana
-	 * @return String - name attribute value
-	 */
-	public String getNome() {
-		return this.nome;
-	}
-
-	/**
-	 * Method that enables the access to color attribute
+	 * </p>
+	 * Method for the player buys a land.
 	 * 
-	 * @author Joana
-	 * @return String - color attribute value
-	 */
-	public String getCor() {
-		return this.cor;
-	}
-
-	/**
-	 * Method that enables the access to positon attribute
-	 * 
-	 * @author Joana
-	 * @return int - position attribute value
-	 */
-	public int getPosicao() {
-		return this.posicao;
-	}
-
-	/**
-	 * 
-	 * @author Joyce
-	 * 
-	 */
-	public int getSaldo() {
-		return this.conta.getSaldo();
-	}
-
-	/**
-	 * Metodo para jogador comprar terreno
-	 * 
-	 * @author joana
 	 * @param valor
 	 * @param t
-	 * @throws ValorInvalidoException, LimiteExcedidoException
+	 * 
 	 */
 
-	public void comprarTitulo(int valor, TituloFactory t) {
+	public void comprarTitulo(int valor, TituloStrategy t) {
 		try {
 			this.conta.debita(valor);
 			System.out.println("Compra efetuada com sucesso!");
@@ -152,18 +164,10 @@ public class Jogador {
 	}
 
 	/**
-	 * @author joana
-	 * @return String - the player's name and pawn color
-	 */
-	@Override
-	public String toString() {
-		return this.nome + "(" + this.cor + ")";
-	}
-
-	/**
-	 * Metodo para efetuar a Jogada
+	 * <p>
+	 * Method that makes the move.
+	 * </p>
 	 * 
-	 * @author joana
 	 * @param d Dado utilizado no jogo
 	 * @param t Tabuleiro utilizado no jogo
 	 * 
@@ -176,9 +180,11 @@ public class Jogador {
 	}
 
 	/**
-	 * Metodo para avançar casas
+	 * <p>
+	 * Method that advances to the next posicion.
+	 * </p>
 	 * 
-	 * @author Clebson
+	 * 
 	 * @param dado1 int
 	 * @param dado2 int
 	 */
@@ -190,18 +196,13 @@ public class Jogador {
 	}
 
 	/**
-	 * Metodo para indicar o status do jogador
+	 * <p>
+	 * Removes the title from the player.
+	 * </p>
 	 * 
-	 * @author clebson
-	 * @param t Tabuleiro
-	 * 
+	 * @param tituloFactory
 	 */
-
-	public LinkedList<TituloFactory> getTitulos() {
-		return titulos;
-	}
-
-	public void removeTitulo(TituloFactory tituloFactory) {
+	public void removeTitulo(TituloStrategy tituloFactory) {
 		for (int k = 0; k < this.titulos.size(); k++) {
 			if (titulos.get(k).equals(tituloFactory)) {
 				System.out.println(titulos.get(k) + " foi vendido.");
@@ -211,8 +212,11 @@ public class Jogador {
 	}
 
 	/**
+	 * <p>
+	 * Checks if there is any cards.
+	 * </p>
 	 * 
-	 * @author Joyce
+	 * @return
 	 * 
 	 */
 	public boolean temCarta() {
@@ -223,8 +227,9 @@ public class Jogador {
 	}
 
 	/**
-	 * 
-	 * @author Joyce
+	 * <p>
+	 * Removes the card.
+	 * </p>
 	 * 
 	 */
 	public void removeCarta() {
@@ -232,8 +237,9 @@ public class Jogador {
 	}
 
 	/**
-	 * 
-	 * @author Amanda
+	 * <p>
+	 * adds a card.
+	 * </p>
 	 * 
 	 */
 	public void addCarta() {
@@ -241,12 +247,47 @@ public class Jogador {
 	}
 
 	/**
-	 * 
-	 * @author Amanda
+	 * <p>
+	 * Makes the player go to the prison if he/she is on the posicion 30 on the board.
+	 * </p>
 	 * 
 	 */
 	public void vaiParaPrisao() {
 		this.posicao = 30;
 	}
 
+	public void mostrarTerrenos() {
+		String texto = "";
+		int cont = 1;
+		for(TituloStrategy e: this.titulos) {
+			if(e.hasTerreno() ){
+				Terreno t = ((Terreno) e);
+				texto = Integer.toString(cont) +" - "+ e.getNome()+" tem "+ t.getNumeroDeCasas()+" casa(s) construídas, casa custa $ "+ t.getValorDaConstrucao();
+				cont += 1;
+				System.out.println(texto);
+			}
+		}  
+	}
+	
+	public int getNumeroDeTerrenos() {
+		int cont = 0;
+		for(TituloStrategy e: this.titulos) {
+			if(e.hasTerreno() ){
+				cont += 1;
+			}
+		}  return cont;
+	}
+	
+	public Terreno escolheTerreno(int n) throws NaoTemTerrenosException {
+		ArrayList<Terreno> terrenos = new ArrayList<Terreno>();
+		for(TituloStrategy e: this.titulos) {
+			if(e.hasTerreno()){
+				terrenos.add((Terreno) e);
+			}
+		} if(terrenos.size() > 0) {
+			return terrenos.get(n-1);
+		} throw new NaoTemTerrenosException("Você não tem Terrenos.");
+	}
+	
 }
+

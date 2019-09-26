@@ -1,30 +1,37 @@
 package ufpb.tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.fail;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 
 import ufpb.exceptions.CorValidaException;
 import ufpb.jogo.Jogador;
 import ufpb.jogo.JogoFacade;
 
-class JogoFacadeTest {
-
+public class JogoFacadeTest {
+	
+	/**
+	 * attributes used in the test
+	 * 
+	 * @author joana
+	 * 
+	 */
 	private JogoFacade jogo;
 
 	@Mock
 	Mock jogoT;
 
 	/**
-	 * methods test
+	 * method that initializes the attributes used in the game test
 	 * 
 	 * @author joana
 	 * 
 	 */
-	@BeforeEach
+	@Before
 	public void setUp() {
 		this.jogo = new JogoFacade();
 		for (int i = 0; i < 8; i++) {
@@ -33,63 +40,66 @@ class JogoFacadeTest {
 	}
 
 	/**
-	 * TESTANDO A REMOÇÃO DE JOGADOR
+	 * method that tests when the player is removed
 	 * 
 	 * @author joana
 	 * 
 	 */
 	@Test
-	void testRemoveJogador() {
+	public void testRemoveJogador() {
 		jogo.removeJogador();
-		assertEquals(7, this.jogo.getNumeroDeJogadores(), "Removendo 1 jogador");
+		assertEquals("Removendo 1 jogador", 7, this.jogo.getNumeroDeJogadores());
 		jogo.removeJogador();
-		assertEquals(6, this.jogo.getNumeroDeJogadores(), "Removendo 2 jogadores");
+		assertEquals("Removendo 2 jogadores",6, this.jogo.getNumeroDeJogadores());
 		jogo.removeJogador();
-		assertEquals(5, this.jogo.getNumeroDeJogadores(), "Removendo 3 jogadores");
+		assertEquals("Removendo 3 jogadores",5, this.jogo.getNumeroDeJogadores() );
 		jogo.removeJogador();
-		assertEquals(4, this.jogo.getNumeroDeJogadores(), "Removendo 4 jogadores");
+		assertEquals("Removendo 4 jogadores",4, this.jogo.getNumeroDeJogadores());
 		jogo.removeJogador();
-		assertEquals(3, this.jogo.getNumeroDeJogadores(), "Removendo 5 jogadores");
+		assertEquals("Removendo 5 jogadores", 3, this.jogo.getNumeroDeJogadores() );
 		jogo.removeJogador();
-		assertEquals(2, this.jogo.getNumeroDeJogadores(), "Removendo 6 jogadores");
+		assertEquals("Removendo 6 jogadores",2, this.jogo.getNumeroDeJogadores() );
 		jogo.removeJogador();
-		assertEquals(1, this.jogo.getNumeroDeJogadores(), "Removendo 7 jogadores");
+		assertEquals("Removendo 7 jogadores",1, this.jogo.getNumeroDeJogadores() );
 		jogo.removeJogador();
-		assertEquals(0, this.jogo.getNumeroDeJogadores(), "Removendo 8 jogadores");
+		assertEquals("Removendo 8 jogadores",0, this.jogo.getNumeroDeJogadores() );
 
 	}
 
 	/**
-	 * methods TESTA ADICIONAR JOGADORES
+	 *testing method add players
 	 * 
 	 * @author joana
 	 * @return nome
 	 */
 	@Test
-	void testAddJogador() {
+	public void testAddJogador() {
 		jogo.addJogador(new Jogador("Joana", "Azul"));
-		assertEquals(9, this.jogo.getNumeroDeJogadores(), "Adicionando um jogador");
+		assertEquals("Adicionando um jogador", 9, this.jogo.getNumeroDeJogadores() );
 
 	}
 
 	/**
-	 * methods TESTA VERIFICA SE ESTÁ NA PRISÃO
+	 * method that checks to see if you're in prison
 	 * 
 	 * @author joana
 	 * 
 	 */
 	@Test
-	void testVerificaSeTaNaPrisao() {
+	public void testVerificaSeTaNaPrisao() {
 		this.jogo.JogadorAtual().jogada(10, 0, jogo);
-		assertTrue(this.jogo.verificarSeTaNaPrisao(), "Verifica se está na prisão");
+		assertTrue( "Verifica se está na prisão",this.jogo.verificarSeTaNaPrisao(jogo.JogadorAtual()));
 	}
 	
 	/**
+	 * 
+	 * method testing if the color player
 	 * @author joana
 	 * 
-	 */
+	 */	
+
 	@Test
-	void testVerificaSeExisteJogadorComEstaCor() {
+	public void testVerificaSeExisteJogadorComEstaCor() {
 		try {
 			assertTrue(this.jogo.verificaSeAhCorEhValida("branco"));
 			assertTrue(this.jogo.verificaSeAhCorEhValida("preto"));

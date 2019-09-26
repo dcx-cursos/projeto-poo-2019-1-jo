@@ -1,21 +1,23 @@
 package ufpb.jogo;
 
 import ufpb.exceptions.ValorInvalidoException;
-import ufpb.opcoes.Carta;
+
+import ufpb.opcoes.ConstruirOP;
 import ufpb.opcoes.JogarPrisao;
-import ufpb.opcoes.Pagar;
+
+import ufpb.opcoes.Vender;
 
 /**
  * <p>
- * Represents the facade of the game when the player is in prison.
+ * Represents the option available in the game to the player.
  * </p>
  * 
  *
  */
-public class JogoFactoryPrisao extends JogoFactory {
+public class JogoFactoryConstruir extends JogoFactory {
 
 	/**
-	 * Shows the options of facade of the game when the player is in prison.
+	 * Shows the options of the game.
 	 * @param opcao
 	 * @param jogo
 	 * @return boolean
@@ -26,11 +28,11 @@ public class JogoFactoryPrisao extends JogoFactory {
 		case "jogar":
 			setOpcaoJogar();
 			break;
-		case "pagar":
-			setOpcaoPagar();
+		case "vender":
+			setOpcaoVender();
 			break;
-		case "carta":
-			setOpcaoCarta();
+		case "construir":
+			setOpcaoConstruir();
 			break;
 		case "status":
 			setOpcaoStatus();
@@ -50,8 +52,28 @@ public class JogoFactoryPrisao extends JogoFactory {
 			break;
 		default:
 			setOpcaoErro();
+			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * <p>
+	 * Sets the option "Sell(Vender)".
+	 * </p>
+	 */
+	private void setOpcaoVender() {
+		this.op = new Vender();
+		
+	}
+
+	/**
+	 * <p>
+	 * Sets the option "Build(Construir)".
+	 * </p>
+	 */
+	private void setOpcaoConstruir() {
+		this.op = new ConstruirOP();
 	}
 
 	/**
@@ -62,25 +84,6 @@ public class JogoFactoryPrisao extends JogoFactory {
 	@Override
 	public void setOpcaoJogar() {
 		this.op = new JogarPrisao();
-	}
-
-	/**
-	 * <p>
-	 * Sets the option "Card(Carta)" for the player try to get out of prison with a card.
-	 * </p>
-	 */
-	private void setOpcaoCarta() {
-		this.op = new Carta();
-
-	}
-
-	/**
-	 * <p>
-	 * Sets the option "Pay(Pagar)" for the player pay to get out of prison.
-	 * </p>
-	 */
-	private void setOpcaoPagar() {
-		this.op = new Pagar();
 	}
 
 }

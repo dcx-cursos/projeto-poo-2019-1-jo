@@ -8,13 +8,19 @@ import java.util.LinkedList;
 import ufpb.cartas.SorteOuReves;
 import ufpb.lougradouros.*;
 
-
+/**
+ * <p>
+ * Represents the board.
+ * </p>
+ * 
+ *
+ */
 public class Tabuleiro {
 
 	private Posicao[] posicoeDoTabuleiro;
 	private RecuperaDadosDoTXT recupera = new RecuperaDadosDoTXT();
 	private LinkedList<SorteOuReves> baralho;
-	
+
 	private static final String ARQUIVO_POSICOES_ESPECIAIS = "./Arquivos/posicoesEspeciais.txt";
 	private static final String ARQUIVO_COMPANHIAS = "./Arquivos/companhias.txt";
 	private static final String ARQUIVO_PRISAO = "./Arquivos/prisao.txt";
@@ -22,13 +28,13 @@ public class Tabuleiro {
 	private static final String ARQUIVO_POSICOES_DE_SORTE_OU_REVES = "./Arquivos/posicaoDeSorteOuReves.txt";
 	private static final String ARQUIVO_SORTE_OU_REVES = "./Arquivos/cartasDeSorteOuReves.txt";
 
-
 	/**
-	 * Constructor from class Tabuleiro, enables initialization of position on the
+	 * <p>
+	 *  Constructor from class Tabuleiro, enables initialization of position on the
 	 * board attribute.
+	 * </p>
+	 *.
 	 * 
-	 * @author Clebson
-	 * @param int posicoeDoTabuleiro - the player's position on the board
 	 */
 	public Tabuleiro() {
 		this.posicoeDoTabuleiro = new Posicao[41];
@@ -43,14 +49,18 @@ public class Tabuleiro {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 	}
 
+	public Posicao getPosicoeDoTabuleiro(int indice) {
+		return this.posicoeDoTabuleiro[indice];
+	}
+
 	/**
+	 * <p>
 	 * Method to recover companies file.
+	 * </p>
 	 * 
-	 * @author Clebson
 	 */
 	public void recuperaCompanhias() {
 
@@ -75,9 +85,10 @@ public class Tabuleiro {
 	}
 
 	/**
-	 * Method to recover the especial positions file
+	 * <p>
+	 * Method to recover the especial positions file.
+	 * </p>
 	 * 
-	 * @author Amanda
 	 */
 	public void recuperaPosicoesEspeciais() {
 		try {
@@ -108,9 +119,10 @@ public class Tabuleiro {
 	}
 
 	/**
-	 * Method to recover prison file
+	 * <p>
+	 * Method to recover prison file.
+	 * </p>
 	 * 
-	 * @author Joyce
 	 */
 	public void recuperaPrisao() {
 		try {
@@ -130,9 +142,10 @@ public class Tabuleiro {
 	}
 
 	/**
-	 * Method to recover lands file
+	 * <p>
+	 * Method to recover lands file.
+	 * </p>
 	 * 
-	 * @author Joana
 	 */
 	public void recuperaTerrenos() {
 
@@ -166,9 +179,10 @@ public class Tabuleiro {
 	}
 
 	/**
+	 * <p>
 	 * Method to recover luck or mischance file
+	 * </p>
 	 * 
-	 * @author Clebson
 	 */
 	public void recuperaPosicoesDeSorteOuReves() {
 		try {
@@ -186,18 +200,10 @@ public class Tabuleiro {
 	}
 
 	/**
-	 * Method to get the position on the board
-	 * 
-	 * @author Clebson
-	 */
-	public Posicao getPosicoeDoTabuleiro(int indice) {
-		return this.posicoeDoTabuleiro[indice];
-	}
-	
-	/**
-	 * Methods
-	 * 
-	 * @author joyce
+	 * <p>
+	 * Method to gets "Sorte ou Revés".
+	 * </p> 
+	 * @return
 	 * 
 	 */
 	public SorteOuReves getSorteOuReves() {
@@ -205,5 +211,5 @@ public class Tabuleiro {
 		this.baralho.add(carta);
 		return carta;
 	}
-	
+
 }
