@@ -4,8 +4,7 @@ import java.util.LinkedList;
 
 import ufpb.exceptions.LimiteExcedidoException;
 import ufpb.exceptions.ValorInvalidoException;
-import ufpb.lougradouros.Terreno;
-import ufpb.lougradouros.Titulo;
+import ufpb.lougradouros.TituloFactory;
 
 /**
  * Representing the player
@@ -17,9 +16,9 @@ public class Jogador {
 	private String cor;
 	private int posicao;
 	private Conta conta;
-	private LinkedList<Titulo> titulos;
+	private LinkedList<TituloFactory> titulos;
+	private boolean carta;
 
-	
 	/**
 	 * Constructor from class Jogador, enables initialization of name and color
 	 * attributes.
@@ -32,10 +31,16 @@ public class Jogador {
 	public Jogador(String nome, String cor) {
 		this.nome = nome;
 		this.cor = cor;
-		this.titulos = new LinkedList<Titulo>();
+		this.titulos = new LinkedList<TituloFactory>();
 		this.conta = new Conta();
+		this.carta = false;
 	}
-	
+
+	/**
+	 * 
+	 * @author Amanda
+	 * 
+	 */
 	public void receber(int valor) {
 		try {
 			this.conta.deposita(valor);
@@ -43,22 +48,49 @@ public class Jogador {
 			// TODO Auto-generated catch block
 		}
 	}
-	
+
+	/**
+	 * 
+	 * @author Amanda
+	 * 
+	 */
 	public void pagar(Jogador j, int valor) {
 		try {
 			this.conta.debita(valor);
 			j.conta.deposita(valor);
 		} catch (ValorInvalidoException e) {
-			
+
 		} catch (LimiteExcedidoException e) {
-			if(this.titulos.size() == 0) {
-				System.out.println("Falencia");	
-			}else {
-				this.titulos.getLast().venderAoBanco(j);;
-				pagar(j,valor);
+			if (this.titulos.size() == 0) {
+				System.out.println("Falencia");
+			} else {
+				this.titulos.getLast().venderAoBanco(this);
+				pagar(j, valor);
 			}
 		}
 	}
+
+	/**
+	 * 
+	 * @author Joyce
+	 * 
+	 */
+	public void pagar(int valor, JogoFacade jogo) {
+		try {
+			this.conta.debita(valor);
+		} catch (ValorInvalidoException e) {
+
+		} catch (LimiteExcedidoException e) {
+			if (this.titulos.size() == 0) {
+				System.out.println("Falencia");
+				jogo.removeJogador();
+			} else {
+				this.titulos.getLast().venderAoBanco(this);
+				pagar(valor, jogo);
+			}
+		}
+	}
+
 	/**
 	 * Method that enables the access to name attribute.
 	 * 
@@ -89,10 +121,15 @@ public class Jogador {
 		return this.posicao;
 	}
 
+	/**
+	 * 
+	 * @author Joyce
+	 * 
+	 */
 	public int getSaldo() {
 		return this.conta.getSaldo();
 	}
-	
+
 	/**
 	 * Metodo para jogador comprar terreno
 	 * 
@@ -102,7 +139,7 @@ public class Jogador {
 	 * @throws ValorInvalidoException, LimiteExcedidoException
 	 */
 
-	public void comprarTerreno(int valor, Terreno t) {
+	public void comprarTitulo(int valor, TituloFactory t) {
 		try {
 			this.conta.debita(valor);
 			System.out.println("Compra efetuada com sucesso!");
@@ -132,15 +169,24 @@ public class Jogador {
 	 * 
 	 */
 	// JOGADOR USA DADO, PORTANTO, DADO É UM PARAMETRO DO METODO JOGADA
-	public void jogada(Dado d, Tabuleiro t) {
-		int dado1 = d.lancaDado();
-		int dado2 = d.lancaDado();
+	public void jogada(int dado1, int dado2, JogoFacade jogo) {
+		avancarCasas(dado1, dado2);
+		System.out.println(
+				this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou " + jogo.getPosicaoAtual());
+	}
+
+	/**
+	 * Metodo para avançar casas
+	 * 
+	 * @author Clebson
+	 * @param dado1 int
+	 * @param dado2 int
+	 */
+	public void avancarCasas(int dado1, int dado2) {
 		this.posicao += dado1 + dado2;
 		if (this.posicao > 39) {
 			this.posicao -= 39;
 		}
-		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "
-				+ t.getPosicoeDoTabuleiro(this.getPosicao()));
 	}
 
 	/**
@@ -151,18 +197,56 @@ public class Jogador {
 	 * 
 	 */
 
-	public void status(Tabuleiro t) {
-		System.out.println("O status de " + this.toString() + " é o seguinte:");
-		System.out.println("Situado na posição " + t.getPosicoeDoTabuleiro(this.getPosicao()));
-		System.out.println("Titulos:");
-		for (Titulo c : titulos) {
-			System.out.println(c);
+	public LinkedList<TituloFactory> getTitulos() {
+		return titulos;
+	}
+
+	public void removeTitulo(TituloFactory tituloFactory) {
+		for (int k = 0; k < this.titulos.size(); k++) {
+			if (titulos.get(k).equals(tituloFactory)) {
+				System.out.println(titulos.get(k) + " foi vendido.");
+				titulos.remove(k);
+			}
 		}
 	}
 
-	public void sair() {
-		// SAIR DA APLICAÇÃO
-		System.exit(0);
+	/**
+	 * 
+	 * @author Joyce
+	 * 
+	 */
+	public boolean temCarta() {
+		if (this.carta == true) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @author Joyce
+	 * 
+	 */
+	public void removeCarta() {
+		this.carta = false;
+	}
+
+	/**
+	 * 
+	 * @author Amanda
+	 * 
+	 */
+	public void addCarta() {
+		this.carta = true;
+	}
+
+	/**
+	 * 
+	 * @author Amanda
+	 * 
+	 */
+	public void vaiParaPrisao() {
+		this.posicao = 30;
 	}
 
 }

@@ -1,18 +1,19 @@
-package ufpb.cartasEspeciais;
+package ufpb.lougradouros;
 
-import ufpb.jogo.Jogador;
+import ufpb.jogo.JogoFacade;
 import ufpb.lougradouros.Posicao;
 
-public class SorteOuReves implements Posicao {
+public class PosicaoSorteOuReves implements Posicao {
 	private int posicaoNoTabuleiro;
+	
 	/**
 	 * Constructor from class SorteOuReves, enables initialization of position on the board attributes. 
 	 * @author Joyce
+	 * @param posicao 
 	 * @param int posicaoNoTabuleiro - the player's position on the board
 	  */
-	public SorteOuReves(int posicao) {
+	public PosicaoSorteOuReves(int posicao) {
 		this.posicaoNoTabuleiro = posicao;
-		
 	}
 
 	@Override
@@ -26,9 +27,13 @@ public class SorteOuReves implements Posicao {
 	}
 
 	@Override
-	public void evento(Jogador j) {
-		// TODO Auto-generated method stub
-		
+	public void evento(JogoFacade jogo) {
+		jogo.getCarta().acao(jogo);
+	}
+
+	@Override
+	public String getTipo() {
+		return "Sorte ou reves";
 	}
 
 

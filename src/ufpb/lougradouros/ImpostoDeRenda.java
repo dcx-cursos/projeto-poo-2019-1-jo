@@ -1,6 +1,6 @@
 package ufpb.lougradouros;
 
-import ufpb.jogo.Jogador;
+import ufpb.jogo.JogoFacade;
 
 public class ImpostoDeRenda implements Posicao {
 
@@ -21,14 +21,21 @@ public class ImpostoDeRenda implements Posicao {
 	 */
 	@Override
 	public int getNumeroDePosicao() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.posicao;
 	}
 
 	@Override
-	public void evento(Jogador j) {
-		// TODO Auto-generated method stub
-
+	public void evento(JogoFacade jogo) {
+		System.out.println("Você pagou 200");
+		jogo.JogadorAtual().pagar(200,jogo);
 	}
 
+	@Override
+	public String getTipo() {
+		return "Imposto de renda";
+	}
+	
+	public String toString() {
+		return this.posicao + " - Imposto de Renda";
+	}
 }

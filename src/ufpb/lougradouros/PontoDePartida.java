@@ -1,6 +1,6 @@
 package ufpb.lougradouros;
 
-import ufpb.jogo.Jogador;
+import ufpb.jogo.JogoFacade;
 
 public class PontoDePartida implements Posicao {
 	private int posicao;
@@ -30,9 +30,13 @@ public class PontoDePartida implements Posicao {
 	}
 
 	@Override
-	public void evento(Jogador j) {
-		// TODO Auto-generated method stub
-		System.out.println("Nada aconteceu"+j.getNome());
+	public void evento(JogoFacade jogo) {
+		System.out.println("Nada aconteceu"+jogo.JogadorAtual().getNome());
+	}
+
+	@Override
+	public String getTipo() {
+		return "Ponto de partida ";
 	}
 	
 }

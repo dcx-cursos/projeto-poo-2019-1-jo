@@ -2,6 +2,7 @@ package ufpb.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,16 +12,23 @@ import ufpb.exceptions.ValorInvalidoException;
 import ufpb.jogo.Conta;
 
 class ContaTest {
+	
 	private Conta conta;	
+	
 	
 	@BeforeEach
 	public void setUp() {
 		this.conta = new Conta();
 	}
 	
+	/**
+	 * 
+	 * @author Clebson
+	 * 
+	 */
 	@Test
 	void testDepositar() {
-		assertEquals(1500,this.conta.getSaldo(),"Teste saldo inicial");
+		assertEquals(1500,this.conta.getSaldo());
 		try {
 			this.conta.deposita(100);
 		} catch (ValorInvalidoException e) {
@@ -34,9 +42,14 @@ class ContaTest {
 		assertEquals(1600,this.conta.getSaldo(),"Testando saldo apos exceção");
 	}
 	
+	/**
+	 * 
+	 * @author Clebson
+	 * 
+	 */
 	@Test
 	void testDebitar() {
-		assertEquals(1500,this.conta.getSaldo(),"Teste saldo inicial");
+		assertEquals(1500,this.conta.getSaldo());
 		try {
 			this.conta.debita(1800);
 			fail("Cadê a exceção?");
