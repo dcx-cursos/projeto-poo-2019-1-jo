@@ -1,12 +1,38 @@
 package ufpb.lougradouros;
 
-import ufpb.jogo.Jogador;
+import ufpb.jogo.JogoFacade;
 
-//MUDAR NOME DA INTERFACE SEGUNDO CLEBSON
+/**
+ * <p>
+ * The interface "Position".
+ * </p>
+ *
+ */
 public interface Posicao {
 
-	public void evento(Jogador j);
+	/**
+	 * <p>
+	 * The method signature for an event.
+	 * </p>
+	 * @param jogo
+	 */
+	public void evento(JogoFacade jogo);
+
+	/**
+	 * <p>
+	 * The method signature to get the number position.
+	 * </p> 
+	 * @return
+	 */
 	public int getNumeroDePosicao();
 
+	/**
+	 * <p>
+	 * The method signature to get "Tipo".
+	 * </p>
+	 * 
+	 * @return
+	 */
+	public String getTipo();
 
 }

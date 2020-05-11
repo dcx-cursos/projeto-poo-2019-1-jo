@@ -1,39 +1,44 @@
 package ufpb.jogo;
 
-import java.util.LinkedList;
-import java.util.Scanner;
 
 import ufpb.exceptions.CorValidaException;
 import ufpb.exceptions.ExisteJogadorComEstaCorException;
+import ufpb.exceptions.ValorInvalidoException;
 
 /**
- * <h1>ENTRADA ACEITAR APENAS NÚMEROS INTEIROS SEM DÃ� ERRO</h1> //ENTRADA DE
- * CORES SO ACEITAR O NOME DAS CORES CORRETAS
+ * <p>
+ * Representing the game. In this class, the game will starts, define the
+ * numbers of players, choose the players' name and the pawn color, show the
+ * options available for each player, and finally starts the match.
+ * </p>
  */
-
 public class Jogo {
-	private static final Scanner input = new Scanner(System.in);
-	private int numeroDeJogadores;
-	private LinkedList<Jogador> listaJogadores;
-	private int jogadorAtual;
-	private Dado dado = new Dado();
-	private Tabuleiro tabuleiro = new Tabuleiro();
 
+	protected JogoFacade jogo;
+	private int idJogador = 1;
+	private int numeroDeJogadores;
+	private boolean inicioDaPartida = true;
+	private String[] listaDeCoresDisponiveis = { "preto", "branco", "vermelho", "verde", "azul", "amarelo", "laranja",
+	"rosa" };
+
+	
 	/**
+	 * <p>
 	 * Class that has the methods to starts and ends and other objects that make up
 	 * the game.
+	 * </p>
+	 * .
 	 * 
-	 * @author Clebson
 	 */
 	public Jogo() {
-		this.jogadorAtual = 0;
-		listaJogadores = new LinkedList<Jogador>();
+		this.jogo = JogoFacade.getInstance();
 	}
 
 	/**
-	 * Starts the game
+	 * <p>
+	 * Starts the game.
+	 * </p>
 	 * 
-	 * @author Clebson
 	 */
 	public void iniciarJogo() {
 		nJogadores();
@@ -44,52 +49,87 @@ public class Jogo {
 	}
 
 	/**
-	 * Defines the number of players
+	 * <p>
+	 * Defines the number of players.
+	 * </p>
 	 * 
-	 * @author Clebson
 	 */
 	private void nJogadores() {
 		System.out.print("Digite o número de jogadores [2 - 8]: ");
 		int numero = 0;
 		try {
-			numero = Integer.parseInt(input.nextLine());
+			numero = jogo.inputInt();
+			this.jogo.verificaNumeroJogadores(numero);
+			this.numeroDeJogadores = numero;
 		} catch (NumberFormatException e) {
 			System.err.print("O valor deve ser um inteiro!\n");
-		}
-		if (numero > 8 || numero < 2) {
 			nJogadores();
-		} else {
-			this.numeroDeJogadores = numero;
+		} catch (ValorInvalidoException e) {
+			System.err.print("Número de jogadores inválidos!");
+			nJogadores();
 		}
+
 	}
+
 	/**
-	 * methods
-	 * @author joana
-	 * @return nome 
-	 * */
+	 * <p>
+	 * </p>
+	 * method to choose the player's name.
+	 * 
+	 * @return nome
+	 */
 	private String escolheNomeJogador() {
-		System.out.print("Digite o nome do jogador " + (this.jogadorAtual + 1) + ": ");
-		String nome = input.nextLine().toLowerCase();
+		System.out.print("Digite o nome do jogador " + (this.idJogador) + ": ");
+		String nome = jogo.input();
+		if (!nome.matches("[\\s]*[a-z\\s*A-Z0-9]+")) {
+			System.err.println("Digite apenas letras e números.\nTente novamente");
+			escolheNomeJogador();
+		}
 		return nome;
 
 	}
-	/**
-	 * methods
-	 * @author joana
-	 * @return cor 
-	 * */
-	private String escolheCorPeao() {
-		System.out.print("Escolha a cor do peão do jogador " + (this.jogadorAtual + 1) + " entre as opções seguintes:"
-				+ "[preto][branco][vermelho][verde][azul][amarelo][laranja][rosa]" + "\n:");
-		String cor = input.nextLine();
-		return cor;
 
+	/**
+	 * <p>
+	 * Method to choose the player's pawn color
+	 * </p>
+	 * 
+	 * @return cor
+	 */
+	private String escolheCorPeao() {
+		System.out.print("Escolha a cor do peão do jogador " + (this.idJogador) + " entre as opções seguintes:\n");
+		for (int k = 0; k < this.listaDeCoresDisponiveis.length; k++) {
+			if (this.listaDeCoresDisponiveis[k] != "") {
+				System.out.print("[" + this.listaDeCoresDisponiveis[k] + "]");
+			}
+		}
+		System.out.print("\n: ");
+		String cor = jogo.input();
+		return cor;
+	}
+	
+	/**
+	 * <p>
+	 * Removes the color chosen by the player from the list of available colors.
+	 * </p>
+	 * 
+	 * @param cor - A String representing the color that will be removed from the
+	 *            list of available colors.
+	 */
+	private void eliminaCorEscolhidaDaLista(String cor) {
+		for (int k = 0; k < this.listaDeCoresDisponiveis.length; k++) {
+			if (this.listaDeCoresDisponiveis[k].equals(cor)) {
+				this.listaDeCoresDisponiveis[k] = "";
+			}
+		}
 	}
 
+
 	/**
+	 * <p>
 	 * Method that creates the player(name and color pawn/)
+	 * </p>
 	 * 
-	 * @author Clebson
 	 */
 	public void criarJogadores() {
 		for (int i = 0; i < this.numeroDeJogadores; i++) {
@@ -98,10 +138,11 @@ public class Jogo {
 			while (parar != true) {
 				String cor = escolheCorPeao();
 				try {
-					verificaSeAhCorEhValida(cor);
-					verificaSeExisteJogadorComEstaCor(cor);
-					this.listaJogadores.add(new Jogador(nome, cor));
-					this.jogadorAtual += 1;
+					jogo.verificaSeAhCorEhValida(cor);
+					jogo.verificaSeExisteJogadorComEstaCor(cor);
+					jogo.addJogador(new Jogador(nome, cor));
+					eliminaCorEscolhidaDaLista(cor);
+					this.idJogador++;
 					parar = true;
 				} catch (ExisteJogadorComEstaCorException e) {
 					System.err.println("Já existe jogador com a cor escolhida, tente novamente!");
@@ -113,92 +154,89 @@ public class Jogo {
 	}
 
 	/**
-	 * This method checks if there is any other player using the color passed as a
-	 * parameter.
-	 * 
-	 * @param cor
-	 * @throws ExisteJogadorComEstaCorException
-	 * @author Amanda
-	 */
-	private void verificaSeExisteJogadorComEstaCor(String cor) throws ExisteJogadorComEstaCorException {
-		for (Jogador j : this.listaJogadores) {
-			if (j.getCor().equals(cor)) {
-				throw new ExisteJogadorComEstaCorException(
-						"Já existe um jogador utilizando esta cor. Tente novamente!");
-			}
-		}
-	}
-
-	/**
-	 * @param String cor
-	 * @return true if the color passed as a parameter is within expected colors
-	 * @throws CorValidaException
-	 * @author Amanda 
-	 */
-	private boolean verificaSeAhCorEhValida(String cor) throws CorValidaException {
-		if (cor.equals("preto") || cor.equals("branco") || cor.equals("vermelho") || cor.equals("verde")
-				|| cor.equals("azul") || cor.equals("amarelo") || cor.equals("laranja") || cor.equals("rosa")) {
-			return true;
-		}
-		throw new CorValidaException("Esta cor não é válida. Tente novamente uma cor disponível!");
-	}
-
-	/**
+	 * <p>
 	 * Method that shows the options available to the player.
+	 * </p>
 	 * 
-	 * @author Joyce
 	 * @param j Jogador
 	 */
 	private void opcoes(Jogador j) {
-		System.out.print("Comandos disponíveis: [jogar][status][sair]\nEntre com um comando: ");
-		String opcao = input.nextLine().toLowerCase();
-		switch (opcao) {
-		case "jogar":
-			j.jogada(this.dado, this.tabuleiro);
-			break;
-		case "status":
-			j.status(this.tabuleiro);
+		if (jogo.verificarSeTaNaPrisao(j)) {
+			opcoesPrisao();
+		} else if(jogo.podeConstruir() == true && this.inicioDaPartida == true) {
+			opcoesConstruir();
+		} else if(jogo.podeVender()) {
+			opcoesVender();
+			
+		}
+		else {
+			opcoesNormal();
+		}
+		String opcao = jogo.input();
+		boolean deuCerto = jogo.getFabrica().escolheOpcao(opcao, this.jogo);
+		boolean jogar = false;
+		if (deuCerto) {
+			jogar = jogo.getFabrica().executarOpcao(this.jogo);
+			this.inicioDaPartida = false;
 
-			this.opcoes(j);
-			break;
-		case "sair":
-			System.out.print("Você realmente quer sair (Sim/Nao)? ");
-			String sair = input.nextLine().toLowerCase();
-			if (sair.startsWith("s")) {
-				if (this.numeroDeJogadores > 2) {
-					this.numeroDeJogadores -= 1;
-					listaJogadores.remove(this.jogadorAtual);
-					partida();
-					break;
-				} else {
-					System.out.println("Jogo encerrado.");
-					System.exit(0);
-				}
-			}
-		default:
+		}
+		if ((jogar == false) || (!(opcao.equals("jogar") | opcao.equals("carta") | opcao.equals("pagar")))) {
 			opcoes(j);
-
 		}
 	}
 
+	private void opcoesConstruir() {
+		System.out.print("Comandos disponíveis:[construir][vender][jogar][status][sair]\nEntre com um comando: ");
+		
+	}
+
 	/**
-	 * The match
+	 * <p>
+	 * Shows the options available for each player.
+	 * </p>
 	 * 
-	 * @author Joyce
+	 */
+	private void opcoesNormal() {
+		System.out.print("Comandos disponíveis:[jogar][status][sair]\nEntre com um comando: ");
+	}
+
+	/**
+	 * <p>
+	 * Shows the options available for the player who is in the prison.
+	 * </p>
+	 * 
+	 */
+	private void opcoesPrisao() {
+		System.out.print("Comandos disponíveis:[pagar][carta][jogar][status][sair]\nEntre com um comando: ");
+	}
+	
+	private void opcoesVender() {
+		System.out.println("Comandos disponíveis:[Vender][jogar][status][sair]\nEntre com um comando: ");
+	}
+
+	/**
+	 * <p>
+	 * Starts the match.
+	 * </p>
+	 * 
 	 */
 	private void partida() {
-		// To-do
-		// Chama as opÃ§Ãµes do jogador e depois troca o jogador atual
-		while (this.jogadorAtual < this.numeroDeJogadores) {
-			Jogador jAtual = this.listaJogadores.get(jogadorAtual);
-			System.out.println("A jogada de " + jAtual.toString() + "comeÃ§ou:");
-			opcoes(listaJogadores.get(this.jogadorAtual));
-			tabuleiro.getPosicoeDoTabuleiro(jAtual.getPosicao()).evento(jAtual);
-			jogadorAtual += 1;
+		if (jogo.verificarSeTaNaPrisao(jogo.JogadorAtual())) {
+			jogo.setPrisao();
+		} else if(jogo.podeConstruir() == true) {
+			jogo.setConstruir();
+		} else if(jogo.podeVender() == true) {
+			jogo.setVender();
 		}
-		this.jogadorAtual = 0;
+		else {
+			jogo.setFabrica();
+		}
+		System.out.println("A jogada de " + jogo.JogadorAtual().toString() + "começou:");
+		opcoes(jogo.JogadorAtual());
+		
+		this.jogo.pollJogador();
+		this.inicioDaPartida = true;
 		partida();
-
 	}
 
 }

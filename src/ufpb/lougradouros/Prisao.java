@@ -1,44 +1,59 @@
- package ufpb.lougradouros;
+package ufpb.lougradouros;
 
-import ufpb.jogo.Jogador;
+import ufpb.jogo.JogoFacade;
 
+/**
+ * <p>
+ * Represents the position of "Prison" on the board.
+ * </p>
+ *
+ */
 public class Prisao implements Posicao {
+
 	private int posicao;
 	private String nome;
+
 	/**
-	 * Constructor from class Prisao, enables initialization of name and position attribute. 
-	 *@author Clebson
-	 *@param string nome - the name
-	 *@param int posicao - the position
+	 * <p>
+	 * Constructor from class Prisao, enables initialization of name and position
+	 * attribute.
+	 * </p>
+	 * 
+	 * @author Clebson
+	 * @param string nome - the name
+	 * @param int    posicao - the position
 	 **/
-	public Prisao(int posicao, String nome) {	
+	public Prisao(int posicao, String nome) {
 		this.nome = nome;
 		this.posicao = posicao;
 	}
 
 	/**
-	 * Method that enables the access to position number attribute. 
-	 * @author Clebson
-	 * @return int - position number attribute value
+	 * <p>
+	 * An event that the player in prison pass his/her turn.
+	 * </p>
 	 */
+	@Override
+	public void evento(JogoFacade jogo) {
+		if (this.posicao == 30) {
+			jogo.JogadorAtual().vaiParaPrisao();
+		}
+		System.out.println("Passou a vez");
+
+	}
+
 	@Override
 	public int getNumeroDePosicao() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.posicao;
 	}
-	
-	/**
-	 * @author Clebson
-	 * @return String - the position
-	 */
+
 	@Override
 	public String toString() {
-		return this.posicao+" - "+this.nome;
+		return this.posicao + " - " + this.nome;
 	}
 
 	@Override
-	public void evento(Jogador j) {
-		System.out.println("Nada Aconteceu.");
+	public String getTipo() {
+		return "Prisão";
 	}
 }
-

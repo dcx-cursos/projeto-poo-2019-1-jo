@@ -1,42 +1,67 @@
 package ufpb.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
+import org.junit.Before;
+import org.junit.Test;
 
 import ufpb.exceptions.LimiteExcedidoException;
 import ufpb.exceptions.ValorInvalidoException;
 import ufpb.jogo.Conta;
 
-class ContaTest {
-	private Conta conta;	
+public class ContaTest {
 	
-	@BeforeEach
+	/**
+	 * 
+	 *attribute to test on account
+	 * @author joana
+	 */
+
+	private Conta conta;
+
+	/**
+	 * 
+	 *method that initializes the attributes to be tested on account
+	 * @author joana
+	 */
+	@Before
 	public void setUp() {
 		this.conta = new Conta();
 	}
 	
+	/**
+	 * 
+	 *method to test account deposit
+	 * @author joana
+	 */
+
 	@Test
-	void testDepositar() {
-		assertEquals(1500,this.conta.getSaldo(),"Teste saldo inicial");
+	public void testDepositar() {
+		assertEquals(1500, this.conta.getSaldo());
 		try {
 			this.conta.deposita(100);
 		} catch (ValorInvalidoException e) {
 			fail("Deveria ter dado certo");
 		}
-		assertEquals(1600,this.conta.getSaldo(),"Testando saldo apos depositar");
+		assertEquals("Testando saldo apos depositar", 1600, this.conta.getSaldo());
 		try {
 			this.conta.deposita(-100);
 			fail("Deveria lançar exceção");
-		} catch (ValorInvalidoException e) {}
-		assertEquals(1600,this.conta.getSaldo(),"Testando saldo apos exceção");
+		} catch (ValorInvalidoException e) {
+		}
+		assertEquals("Testando saldo apos exceção",1600, this.conta.getSaldo() );
 	}
+
 	
+	/**
+	 * 
+	 *method to test account debit
+	 * @author joana
+	 */
 	@Test
-	void testDebitar() {
-		assertEquals(1500,this.conta.getSaldo(),"Teste saldo inicial");
+	public void testDebitar() {
+		assertEquals(1500, this.conta.getSaldo());
 		try {
 			this.conta.debita(1800);
 			fail("Cadê a exceção?");
@@ -44,15 +69,15 @@ class ContaTest {
 			// TODO Auto-generated catch block
 			fail("Exceção errada");
 		} catch (LimiteExcedidoException e) {
-		}	
-		assertEquals(1500,this.conta.getSaldo(),"Teste depois do thwros");			
+		}
+		assertEquals("Teste depois do thwros",1500, this.conta.getSaldo() );
 		try {
 			this.conta.debita(100);
 		} catch (ValorInvalidoException | LimiteExcedidoException e) {
 			// TODO Auto-generated catch block
 			fail("Não era pra lançar exceção");
 		}
-		assertEquals(1400,this.conta.getSaldo(),"Teste depois de debitar 100");
+		assertEquals("Teste depois de debitar 100", 1400, this.conta.getSaldo());
 		try {
 			this.conta.debita(-100);
 			fail("Era pra lançar exceção");
@@ -62,10 +87,6 @@ class ContaTest {
 		} catch (LimiteExcedidoException e) {
 			fail("Exceção errada");
 
-			
-			
-			
-		}	
-	}	
-
+		}
+	}
 }

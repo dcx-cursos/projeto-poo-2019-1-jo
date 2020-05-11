@@ -1,90 +1,62 @@
 package ufpb.jogo;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import ufpb.exceptions.LimiteExcedidoException;
+import ufpb.exceptions.NaoTemTerrenosException;
 import ufpb.exceptions.ValorInvalidoException;
 import ufpb.lougradouros.Terreno;
-import ufpb.lougradouros.Titulo;
+import ufpb.lougradouros.TituloStrategy;
 
 /**
- * Representing the player
+ * <p>
+ * Representing a player. </br>
+ * In this class, a player is considered to have a name, a pawn color, a
+ * position on the board, an account, a list of titles, and if he has a Habeas
+ * Corpus card.
+ * </p>
  * 
- * @author Joana
  */
 public class Jogador {
+
 	private String nome;
 	private String cor;
 	private int posicao;
 	private Conta conta;
-	private LinkedList<Titulo> titulos;
+	private LinkedList<TituloStrategy> titulos;
+	private boolean carta;
 
-	
 	/**
-	 * Constructor from class Jogador, enables initialization of name and color
-	 * attributes.
-	 * 
-	 * @author Joana
+	 * <p>
+	 * Constructor method of class Jogador,enables initialization of name and color
+	 * attributes. In addition, the player is started with an empty title list, an
+	 * account and no Habeas Corpus card.
+	 * </p>
 	 * @param String nome - player's name
 	 * @param String cor - player's pawn color
-	 * @param        int posicao - the player's position
 	 */
 	public Jogador(String nome, String cor) {
 		this.nome = nome;
 		this.cor = cor;
-		this.titulos = new LinkedList<Titulo>();
+		this.titulos = new LinkedList<TituloStrategy>();
 		this.conta = new Conta();
+		this.carta = false;
+		this.posicao = 0;
 	}
 	
-	public void receber(int valor) {
-		try {
-			this.conta.deposita(valor);
-		} catch (ValorInvalidoException e) {
-			// TODO Auto-generated catch block
-		}
+	public int lancaDado() {
+		return JogoFacade.getInstance().getDado().lancaDado();
 	}
-	
-	public void pagar(Jogador j, int valor) {
-		try {
-			this.conta.debita(valor);
-			j.conta.deposita(valor);
-		} catch (ValorInvalidoException e) {
-			
-		} catch (LimiteExcedidoException e) {
-			if(this.titulos.size() == 0) {
-				System.out.println("Falencia");	
-			}else {
-				this.titulos.getLast().venderAoBanco(j);;
-				pagar(j,valor);
-			}
-		}
-	}
-	/**
-	 * Method that enables the access to name attribute.
-	 * 
-	 * @author Joana
-	 * @return String - name attribute value
-	 */
+
 	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * Method that enables the access to color attribute
-	 * 
-	 * @author Joana
-	 * @return String - color attribute value
-	 */
 	public String getCor() {
 		return this.cor;
 	}
 
-	/**
-	 * Method that enables the access to positon attribute
-	 * 
-	 * @author Joana
-	 * @return int - position attribute value
-	 */
 	public int getPosicao() {
 		return this.posicao;
 	}
@@ -92,17 +64,94 @@ public class Jogador {
 	public int getSaldo() {
 		return this.conta.getSaldo();
 	}
-	
+
+	public LinkedList<TituloStrategy> getTitulos() {
+		return titulos;
+	}
+
+	@Override
+	public String toString() {
+		return this.nome + "(" + this.cor + ")";
+	}
+
 	/**
-	 * Metodo para jogador comprar terreno
+	 * <p>
+	 * Deposits a value into the player's account.
+	 * </p>
 	 * 
-	 * @author joana
+	 * @param valor - An integer number representing the value that will be received
+	 *              for the player.
+	 * 
+	 */
+	public void receber(int valor) {
+		try {
+			this.conta.deposita(valor);
+		} catch (ValorInvalidoException e) {
+		}
+	}
+
+	/**
+	 * <p>
+	 * Pays a certain valeu to the other player.
+	 * </p>
+	 * 
+	 * @param jogador - 
+	 * @param valor - An integer representing the amount that will be paid to the other player.
+	 */
+	public void pagar(Jogador jogador, int valor) {
+		try {
+			this.conta.debita(valor);
+			jogador.conta.deposita(valor);
+		} catch (ValorInvalidoException e) {
+
+		} catch (LimiteExcedidoException e) {
+			if (this.titulos.size() == 0) {
+				System.out.println("Falencia");
+			} else {
+				this.titulos.getLast().venderAoBanco(this);
+				pagar(jogador, valor);
+			}
+		}
+	}
+
+	/**
+	 * <p>
+	 * Pays a certain valeu to the other player.
+	 * </p>
+	 * 
+	 * @param jogo - 
+	 * @param valor - An integer representing the amount that will be paid to the other player.
+	 */
+	public boolean pagar(int valor) {
+		try {
+			this.conta.debita(valor);
+			return true;
+		} catch (ValorInvalidoException e) {
+			return false;
+		} catch (LimiteExcedidoException e) {
+			if (this.titulos.size() == 0) {
+				System.out.println("Falência!");
+				JogoFacade.getInstance().removeJogador();
+				return false;
+			} else {
+				this.titulos.getLast().venderAoBanco(this);
+				pagar(valor);
+			}
+		}return false;
+	}
+
+	/**
+	 * <p>
+	 * 
+	 * </p>
+	 * Method for the player buys a land.
+	 * 
 	 * @param valor
 	 * @param t
-	 * @throws ValorInvalidoException, LimiteExcedidoException
+	 * 
 	 */
 
-	public void comprarTerreno(int valor, Terreno t) {
+	public void comprarTitulo(int valor, TituloStrategy t) {
 		try {
 			this.conta.debita(valor);
 			System.out.println("Compra efetuada com sucesso!");
@@ -115,54 +164,130 @@ public class Jogador {
 	}
 
 	/**
-	 * @author joana
-	 * @return String - the player's name and pawn color
-	 */
-	@Override
-	public String toString() {
-		return this.nome + "(" + this.cor + ")";
-	}
-
-	/**
-	 * Metodo para efetuar a Jogada
+	 * <p>
+	 * Method that makes the move.
+	 * </p>
 	 * 
-	 * @author joana
 	 * @param d Dado utilizado no jogo
 	 * @param t Tabuleiro utilizado no jogo
 	 * 
 	 */
 	// JOGADOR USA DADO, PORTANTO, DADO É UM PARAMETRO DO METODO JOGADA
-	public void jogada(Dado d, Tabuleiro t) {
-		int dado1 = d.lancaDado();
-		int dado2 = d.lancaDado();
+	public void jogada(int dado1, int dado2, JogoFacade jogo) {
+		avancarCasas(dado1, dado2);
+		System.out.println(
+				this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou " + jogo.getPosicaoAtual());
+	}
+
+	/**
+	 * <p>
+	 * Method that advances to the next posicion.
+	 * </p>
+	 * 
+	 * 
+	 * @param dado1 int
+	 * @param dado2 int
+	 */
+	public void avancarCasas(int dado1, int dado2) {
 		this.posicao += dado1 + dado2;
 		if (this.posicao > 39) {
 			this.posicao -= 39;
 		}
-		System.out.println(this.toString() + "tirou " + dado1 + "," + dado2 + " e o peão avançou "
-				+ t.getPosicoeDoTabuleiro(this.getPosicao()));
 	}
 
 	/**
-	 * Metodo para indicar o status do jogador
+	 * <p>
+	 * Removes the title from the player.
+	 * </p>
 	 * 
-	 * @author clebson
-	 * @param t Tabuleiro
-	 * 
+	 * @param tituloFactory
 	 */
-
-	public void status(Tabuleiro t) {
-		System.out.println("O status de " + this.toString() + " é o seguinte:");
-		System.out.println("Situado na posição " + t.getPosicoeDoTabuleiro(this.getPosicao()));
-		System.out.println("Titulos:");
-		for (Titulo c : titulos) {
-			System.out.println(c);
+	public void removeTitulo(TituloStrategy tituloFactory) {
+		for (int k = 0; k < this.titulos.size(); k++) {
+			if (titulos.get(k).equals(tituloFactory)) {
+				System.out.println(titulos.get(k) + " foi vendido.");
+				titulos.remove(k);
+			}
 		}
 	}
 
-	public void sair() {
-		// SAIR DA APLICAÇÃO
-		System.exit(0);
+	/**
+	 * <p>
+	 * Checks if there is any cards.
+	 * </p>
+	 * 
+	 * @return
+	 * 
+	 */
+	public boolean temCarta() {
+		if (this.carta == true) {
+			return true;
+		}
+		return false;
 	}
 
+	/**
+	 * <p>
+	 * Removes the card.
+	 * </p>
+	 * 
+	 */
+	public void removeCarta() {
+		this.carta = false;
+	}
+
+	/**
+	 * <p>
+	 * adds a card.
+	 * </p>
+	 * 
+	 */
+	public void addCarta() {
+		this.carta = true;
+	}
+
+	/**
+	 * <p>
+	 * Makes the player go to the prison if he/she is on the posicion 30 on the board.
+	 * </p>
+	 * 
+	 */
+	public void vaiParaPrisao() {
+		this.posicao = 30;
+	}
+
+	public void mostrarTerrenos() {
+		String texto = "";
+		int cont = 1;
+		for(TituloStrategy e: this.titulos) {
+			if(e.hasTerreno() ){
+				Terreno t = ((Terreno) e);
+				texto = Integer.toString(cont) +" - "+ e.getNome()+" tem "+ t.getNumeroDeCasas()+" casa(s) construídas, casa custa $ "+ t.getValorDaConstrucao();
+				cont += 1;
+				System.out.println(texto);
+			}
+		}  
+	}
+	
+	public int getNumeroDeTerrenos() {
+		int cont = 0;
+		for(TituloStrategy e: this.titulos) {
+			if(e.hasTerreno() ){
+				cont += 1;
+			}
+		}  return cont;
+	}
+	
+	public Terreno escolheTerreno(int n) throws NaoTemTerrenosException {
+		ArrayList<Terreno> terrenos = new ArrayList<Terreno>();
+		for(TituloStrategy e: this.titulos) {
+			if(e.hasTerreno()){
+				terrenos.add((Terreno) e);
+			}
+		} if(terrenos.size() > 0) {
+			return terrenos.get(n-1);
+		} throw new NaoTemTerrenosException("Você não tem Terrenos.");
+	}
+	
 }
+

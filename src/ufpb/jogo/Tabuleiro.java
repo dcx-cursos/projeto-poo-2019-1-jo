@@ -3,34 +3,38 @@ package ufpb.jogo;
 import ufpb.recuperaDados.RecuperaDadosDoTXT;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
-import ufpb.cartasEspeciais.SorteOuReves;
-import ufpb.lougradouros.Companhia;
-import ufpb.lougradouros.ImpostoDeRenda;
-import ufpb.lougradouros.LucroEDividendo;
-import ufpb.lougradouros.ParadaLivre;
-import ufpb.lougradouros.PontoDePartida;
-import ufpb.lougradouros.Posicao;
-import ufpb.lougradouros.Prisao;
-import ufpb.lougradouros.Terreno;
+import ufpb.cartas.SorteOuReves;
+import ufpb.lougradouros.*;
 
+/**
+ * <p>
+ * Represents the board.
+ * </p>
+ * 
+ *
+ */
 public class Tabuleiro {
 
 	private Posicao[] posicoeDoTabuleiro;
 	private RecuperaDadosDoTXT recupera = new RecuperaDadosDoTXT();
+	private LinkedList<SorteOuReves> baralho;
 
 	private static final String ARQUIVO_POSICOES_ESPECIAIS = "./Arquivos/posicoesEspeciais.txt";
 	private static final String ARQUIVO_COMPANHIAS = "./Arquivos/companhias.txt";
 	private static final String ARQUIVO_PRISAO = "./Arquivos/prisao.txt";
 	private static final String ARQUIVO_TERRENOS = "./Arquivos/terrenos.txt";
 	private static final String ARQUIVO_POSICOES_DE_SORTE_OU_REVES = "./Arquivos/posicaoDeSorteOuReves.txt";
+	private static final String ARQUIVO_SORTE_OU_REVES = "./Arquivos/cartasDeSorteOuReves.txt";
 
 	/**
-	 * Constructor from class Tabuleiro, enables initialization of position on the
+	 * <p>
+	 *  Constructor from class Tabuleiro, enables initialization of position on the
 	 * board attribute.
+	 * </p>
+	 *.
 	 * 
-	 * @author Clebson
-	 * @param int posicoeDoTabuleiro - the player's position on the board
 	 */
 	public Tabuleiro() {
 		this.posicoeDoTabuleiro = new Posicao[41];
@@ -39,13 +43,24 @@ public class Tabuleiro {
 		recuperaPrisao();
 		recuperaTerrenos();
 		recuperaPosicoesDeSorteOuReves();
+		try {
+			this.baralho = recupera.recuperaCartas(ARQUIVO_SORTE_OU_REVES);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
+	public Posicao getPosicoeDoTabuleiro(int indice) {
+		return this.posicoeDoTabuleiro[indice];
+	}
+
 	/**
+	 * <p>
 	 * Method to recover companies file.
+	 * </p>
 	 * 
-	 * @author Clebson
 	 */
 	public void recuperaCompanhias() {
 
@@ -57,10 +72,9 @@ public class Tabuleiro {
 				int posicao = Integer.parseInt(linha[0]);
 				String nome = linha[1];
 				int preco = Integer.parseInt(linha[2]);
-				String dono = "banco";
 				int multiplicador = Integer.parseInt(linha[3]);
 
-				Companhia c = new Companhia(posicao, nome, preco, dono, multiplicador);
+				Companhia c = new Companhia(posicao, nome, preco, multiplicador);
 
 				this.posicoeDoTabuleiro[posicao] = c;
 
@@ -71,9 +85,10 @@ public class Tabuleiro {
 	}
 
 	/**
-	 * Method to recover the especial positions file
+	 * <p>
+	 * Method to recover the especial positions file.
+	 * </p>
 	 * 
-	 * @author Amanda
 	 */
 	public void recuperaPosicoesEspeciais() {
 		try {
@@ -104,9 +119,10 @@ public class Tabuleiro {
 	}
 
 	/**
-	 * Method to recover prison file
+	 * <p>
+	 * Method to recover prison file.
+	 * </p>
 	 * 
-	 * @author Joyce
 	 */
 	public void recuperaPrisao() {
 		try {
@@ -126,9 +142,10 @@ public class Tabuleiro {
 	}
 
 	/**
-	 * Method to recover lands file
+	 * <p>
+	 * Method to recover lands file.
+	 * </p>
 	 * 
-	 * @author Joana
 	 */
 	public void recuperaTerrenos() {
 
@@ -162,17 +179,17 @@ public class Tabuleiro {
 	}
 
 	/**
+	 * <p>
 	 * Method to recover luck or mischance file
+	 * </p>
 	 * 
-	 * @author Clebson
 	 */
 	public void recuperaPosicoesDeSorteOuReves() {
 		try {
 			for (String s : recupera.recuperaTextoDeArquivo(ARQUIVO_POSICOES_DE_SORTE_OU_REVES)) {
 
 				int posicao = Integer.parseInt(s);
-				SorteOuReves r = new SorteOuReves(posicao);
-
+				PosicaoSorteOuReves r = new PosicaoSorteOuReves(posicao);
 				this.posicoeDoTabuleiro[posicao] = r;
 
 			}
@@ -183,12 +200,16 @@ public class Tabuleiro {
 	}
 
 	/**
-	 * Method to get the position on the board
+	 * <p>
+	 * Method to gets "Sorte ou Revés".
+	 * </p> 
+	 * @return
 	 * 
-	 * @author Clebson
 	 */
-	public Posicao getPosicoeDoTabuleiro(int indice) {
-		return this.posicoeDoTabuleiro[indice];
+	public SorteOuReves getSorteOuReves() {
+		SorteOuReves carta = this.baralho.pollFirst();
+		this.baralho.add(carta);
+		return carta;
 	}
 
 }
